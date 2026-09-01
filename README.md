@@ -67,4 +67,27 @@ Arabic is hand-authored (not machine-translated) for: the entire interface, all 
 titles, the captions for posts 01–03, the About section, all five headlines and the
 experience bullets. Remaining captions translate on demand and are cached.
 
+### On a phone
+
+- Header collapses to two compact rows: title, then a horizontally scrollable tab
+  strip. 115px on a 390px screen, down from 174px.
+- The two three-way switches become single cycling buttons with an icon and the
+  current value — tap to advance EN → AR → BOTH, or AUTO → LIGHT → DARK.
+- Touch sizing keys off `pointer: coarse`, not viewport width, so a 1024px iPad gets
+  44px targets while a 1024px laptop keeps compact ones.
+- All text inputs are 16px, below which iOS zooms the whole page on focus.
+- Safe-area insets respected on notched phones. No horizontal scroll at any width.
+
+### Sharing
+
+The artifact is private by default. To give it a public link, open it and use the
+share menu on the page — that control belongs to the account owner, not to Claude.
+
+Before you do: once the `[[PLACEHOLDERS]]` are filled with real Ecosine figures,
+a public link publishes those figures to anyone who has it.
+
+The database is declared read-only for viewers (`read: interact, write: admin`), so
+someone opening a shared link cannot overwrite your calendar state — their own ticks
+and edits stay in their browser only.
+
 To update it: edit `board/dispatch-board.html` and republish to the same URL.

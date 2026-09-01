@@ -43,11 +43,11 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 /* ---------- shell ---------- */
 .wrap{max-width:1220px;margin:0 auto;padding:0 24px 96px}
 .top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.top-in{max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.brand{display:flex;align-items:baseline;gap:10px;margin-inline-end:auto}
+.top-in{max-width:1220px;margin:0 auto;padding:12px 24px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+.brand{display:flex;align-items:baseline;gap:10px;min-width:0}
 .brand b{font-family:var(--display);font-size:17px;letter-spacing:-.02em}
 .brand span{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
-.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tabs{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end}
 .tab{font-size:13px;font-weight:500;padding:6px 11px;border-radius:6px;color:var(--ink-2)}
 .tab:hover{background:var(--surface-2)}
 .tab[aria-selected="true"]{background:var(--accent);color:var(--surface)}
@@ -169,6 +169,63 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 .dot-pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pl 1s infinite}
 @keyframes pl{0%,100%{opacity:.3}50%{opacity:1}}
 .edited{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
+.sw{display:flex;gap:6px;align-items:center}
+.cyc{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:0 12px;min-height:40px;border:1px solid var(--line-2);border-radius:7px;color:var(--ink-2);display:inline-flex;align-items:center;gap:6px}
+.cyc:active{background:var(--surface-2)}
+@media (min-width:981px){.only-narrow{display:none!important}}
+
+/* Touch comfort is a property of the input device, not the viewport width:
+   a 1024px iPad needs big targets, a 1024px laptop does not. */
+@media (pointer:coarse){
+  .btn,.chip,.tab,.cyc,.lang button{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+  input[type=date]{font-size:16px;min-height:44px}
+  .check{padding:11px 0}
+  .check input{width:18px;height:18px}
+}
+
+/* ---------- phone + tablet ---------- */
+@media (max-width:980px){
+  .only-wide{display:none!important}
+  .wrap{padding-inline:max(14px,env(safe-area-inset-left));padding-bottom:calc(80px + env(safe-area-inset-bottom))}
+  .top-in{grid-template-columns:1fr auto;gap:9px 10px;padding:10px max(14px,env(safe-area-inset-left)) 0}
+  .brand{grid-column:1;grid-row:1}
+  .brand b{font-size:15px}
+  .brand span{font-size:10px}
+  #switches{grid-column:2;grid-row:1;justify-self:end}
+  .tabs{grid-column:1/-1;grid-row:2;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;
+        justify-content:flex-start;padding:0 max(14px,env(safe-area-inset-left)) 8px;
+        margin-inline:calc(-1 * max(14px,env(safe-area-inset-left)));scroll-snap-type:x proximity}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:none;scroll-snap-align:start;padding:9px 13px;font-size:13.5px;min-height:40px;display:inline-flex;align-items:center}
+  .sec{padding-top:22px}
+  .sec-head{gap:4px;margin-bottom:14px}
+  .sec-head h2{font-size:20px}
+  .sec-head p{font-size:13.5px}
+  .hero{padding:20px 18px}
+  .hero h3{font-size:22px;margin:8px 0 10px}
+  .metric{padding:13px 15px}
+  .metric .v{font-size:24px}
+  .metrics{gap:10px}
+  .board{grid-template-columns:1fr;gap:10px}
+  .post{padding:14px 15px}
+  .post h4{font-size:15px}
+  .detail{padding:18px 16px}
+  .detail h3{font-size:19px}
+  .pad{padding:17px 18px}
+  .copyblock,.ed{padding:15px 16px;font-size:16px}
+  .ed.short{font-size:16px;min-height:120px}
+  .btn,.chip{min-height:40px;display:inline-flex;align-items:center;justify-content:center}
+  .btn{padding:9px 15px}
+  input[type=date]{font-size:16px;min-height:40px;width:100%}
+  .setup{padding:14px 16px;flex-direction:column;align-items:stretch;gap:8px}
+  .kv{grid-template-columns:1fr;gap:0}
+  .kv dt{padding-top:11px}
+  .kv dd{padding-bottom:3px}
+  .tl{grid-template-columns:62px 1fr;gap:0 12px}
+  .toast{bottom:calc(20px + env(safe-area-inset-bottom));width:calc(100% - 32px);text-align:center}
+  .check{padding:11px 0}
+  .check input{width:18px;height:18px}
+}
 
 /* Arabic is cursive: letter-spacing severs the joins, and the mono/display
    faces carry no Arabic glyphs. Both must be undone wherever the text is Arabic. */
@@ -177,7 +234,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 [dir="rtl"] .post-meta,[dir="rtl"] .post-day,[dir="rtl"] .chip,[dir="rtl"] .lang button,
 [dir="rtl"] .pane-label,[dir="rtl"] .kv dt,[dir="rtl"] th,[dir="rtl"] .day-badge,
 [dir="rtl"] .gaps,[dir="rtl"] .edited,[dir="rtl"] .count,[dir="rtl"] .tr,
-[dir="rtl"] .brand span,[dir="rtl"] .brand b,[dir="rtl"] .tab,
+[dir="rtl"] .brand span,[dir="rtl"] .brand b,[dir="rtl"] .tab,[dir="rtl"] .cyc,
 .pane[dir="rtl"] *,.ar{font-family:var(--ui-ar);letter-spacing:0}
 [dir="rtl"] .post-n{font-family:var(--mono)}
 [dir="rtl"] .sec-head h2{letter-spacing:0}
@@ -186,6 +243,7 @@ td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:now
 <div class="top"><div class="top-in">
   <div class="brand"><b id="brandname">Dispatch Board</b><span id="cadence">30 posts · 60 days</span></div>
   <nav class="tabs" role="tablist" id="tabs"></nav>
+  <div id="switches"></div>
 </div></div>
 <main class="wrap" id="app"></main>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -582,6 +640,13 @@ let SAMPLE, SAMPLE_TRIED=false;
 async function getSample(){ if(SAMPLE_TRIED)return SAMPLE; SAMPLE_TRIED=true; try{SAMPLE=await claude.use("sample");}catch(e){SAMPLE=null;} return SAMPLE; }
 
 /* ---------- language + theme ---------- */
+const LANGS=["en","ar","both"], THEMES=["auto","light","dark"];
+const LANGL={en:"langEn",ar:"langAr",both:"langBoth"}, THL={auto:"themeAuto",light:"themeLight",dark:"themeDark"};
+const ico=d=>'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+d+"</svg>";
+const GLOBE=ico('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18"/>');
+const SUN=ico('<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>');
+const MOON=ico('<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/>');
+const AUTOI=ico('<circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor" stroke="none"/>');
 const CL=()=>S.lang==="ar"?1:0;
 const t=k=>{const v=T[k];return v?v[CL()]:k;};
 const pil=p=>T.pillars[p][CL()];
@@ -589,7 +654,7 @@ const AR_FMT={"Long-form POV":"مقال رأي مطوّل","Project spotlight":"
 function fmt(f){ if(CL()===0)return f; const m=f.match(/^Carousel · (\d+) slides$/); if(m){const k=+m[1];return "عرض متسلسل · "+k+(k>=3&&k<=10?" شرائح":" شريحة");} return AR_FMT[f]||f; }
 /* Arabic pluralises differently from English; "1 فراغات" is simply wrong. */
 const gapLabel=g=>CL()===0?(g+" "+t("gaps")):(g===1?"فراغ واحد":g===2?"فراغان":g+" فراغات");
-const phLabel=g=>CL()===0?(g+" "+t("phLeft")):(g===1?"فراغ واحد متبقٍ":g===2?"فراغان متبقيان":g+" فراغات متبقية");
+const phLabel=g=>CL()===0?(g===1?"1 placeholder left to fill":g+" placeholders left to fill"):(g===1?"فراغ واحد متبقٍ":g===2?"فراغان متبقيان":g+" فراغات متبقية");
 const aud=a=>T.auds[a][CL()];
 function applyChrome(){
   document.documentElement.dir=S.lang==="ar"?"rtl":"ltr";
@@ -810,18 +875,25 @@ const VIEWS={today:["today",vToday],calendar:["calendar",vCalendar],drafts:["dra
 function render(){
   applyChrome();
   $("#brandname").textContent=t("board");
-  $("#tabs").innerHTML=Object.keys(VIEWS).map(k=>'<button class="tab" role="tab" data-tab="'+k+'" aria-selected="'+(TAB===k)+'">'+t(VIEWS[k][0])+"</button>").join("")
-   +'<div class="lang" role="group">'+[["en","langEn"],["ar","langAr"],["both","langBoth"]].map(l=>'<button data-lang="'+l[0]+'" aria-pressed="'+(S.lang===l[0])+'">'+t(l[1])+"</button>").join("")+"</div>"
-   +'<div class="lang" role="group">'+[["auto","themeAuto"],["light","themeLight"],["dark","themeDark"]].map(l=>'<button data-th="'+l[0]+'" aria-pressed="'+((S.theme||"auto")===l[0])+'">'+t(l[1])+"</button>").join("")+"</div>";
+  $("#tabs").innerHTML=Object.keys(VIEWS).map(k=>'<button class="tab" role="tab" data-tab="'+k+'" aria-selected="'+(TAB===k)+'">'+t(VIEWS[k][0])+"</button>").join("");
+  const th=S.theme||"auto";
+  $("#switches").innerHTML='<div class="sw only-wide">'
+   +'<div class="lang" role="group" aria-label="Language">'+LANGS.map(l=>'<button data-lang="'+l+'" aria-pressed="'+(S.lang===l)+'">'+t(LANGL[l])+"</button>").join("")+"</div>"
+   +'<div class="lang" role="group" aria-label="Theme">'+THEMES.map(l=>'<button data-th="'+l+'" aria-pressed="'+(th===l)+'">'+t(THL[l])+"</button>").join("")+"</div></div>"
+   +'<div class="sw only-narrow">'
+   +'<button class="cyc" data-langcycle="1" aria-label="Language">'+GLOBE+t(LANGL[S.lang])+"</button>"
+   +'<button class="cyc" data-thcycle="1" aria-label="Theme">'+(th==="dark"?MOON:th==="light"?SUN:AUTOI)+t(THL[th])+"</button></div>";
   $("#app").innerHTML=VIEWS[TAB][1]();
   const day=dayNow();
   $("#cadence").textContent=day===null?t("posts60"):t("day")+" "+Math.max(0,day)+" · "+POSTS.filter(p=>S.pub[p.n]).length+"/30";
 }
 document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-tab],[data-lang],[data-th],[data-open],[data-close],[data-filt],[data-hide],[data-copykey],[data-pub],[data-reset],[data-edit],[data-save],[data-canceledit],[data-tr]");
+  const b=e.target.closest("[data-tab],[data-lang],[data-th],[data-langcycle],[data-thcycle],[data-open],[data-close],[data-filt],[data-hide],[data-copykey],[data-pub],[data-reset],[data-edit],[data-save],[data-canceledit],[data-tr]");
   if(!b)return; const d=b.dataset;
   if(d.tab){TAB=d.tab;SEL=null;EDIT=null;render();window.scrollTo({top:0,behavior:"smooth"});return;}
   if(d.lang){S.lang=d.lang;EDIT=null;save();render();return;}
+  if(d.langcycle){S.lang=LANGS[(LANGS.indexOf(S.lang)+1)%3];EDIT=null;save();render();return;}
+  if(d.thcycle){S.theme=THEMES[(THEMES.indexOf(S.theme||"auto")+1)%3];save();render();return;}
   if(d.th){S.theme=d.th;save();render();return;}
   if(d.open){SEL=+d.open;TAB="calendar";EDIT=null;render();const el=$(".detail");if(el)el.scrollIntoView({block:"start",behavior:"smooth"});return;}
   if(d.close){SEL=null;render();return;}
