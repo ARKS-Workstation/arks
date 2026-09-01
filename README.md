@@ -91,3 +91,19 @@ someone opening a shared link cannot overwrite your calendar state — their own
 and edits stay in their browser only.
 
 To update it: edit `board/dispatch-board.html` and republish to the same URL.
+
+### Two builds
+
+| File | Artifact | Capabilities | Purpose |
+|---|---|---|---|
+| `board/dispatch-board.html` | private working board | `db`, `sample` | Yours. Auto-translation on edit, state synced across your devices. |
+| `board/dispatch-board-public.html` | share-safe copy | none | For a public link. Identical content; no capability the platform can object to. |
+
+`dispatch-board-public.html` is a byte-for-byte copy of `dispatch-board.html` —
+regenerate it with `cp board/dispatch-board.html board/dispatch-board-public.html`
+after any edit. The difference is entirely in what is declared at publish time.
+
+With no capabilities the page detects their absence and hides the translate
+affordances rather than offering an action that fails. Editing still works and
+persists in the viewer's own browser via localStorage; nothing they do reaches
+anyone else, and nothing they do can touch your copy.
