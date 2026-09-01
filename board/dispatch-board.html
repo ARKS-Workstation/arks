@@ -1,6 +1,6 @@
 <title>Frontline Dispatch Board</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Noto+Naskh+Arabic:wght@400;500&display=swap">
 <style>
 :root{
   --ground:#EEF2F0; --surface:#FFF; --surface-2:#E4EAE8; --sunk:#F6F8F7;
@@ -13,6 +13,8 @@
   --ui:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
   --read:"Newsreader",Georgia,"Times New Roman",serif;
+  --ui-ar:"IBM Plex Sans Arabic","Segoe UI",system-ui,sans-serif;
+  --read-ar:"Noto Naskh Arabic","Times New Roman",serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ground:#0B1417; --surface:#131F23; --surface-2:#1A272C; --sunk:#0F1A1E;
@@ -42,7 +44,7 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .wrap{max-width:1220px;margin:0 auto;padding:0 24px 96px}
 .top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
 .top-in{max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand{display:flex;align-items:baseline;gap:10px;margin-inline-end:auto}
 .brand b{font-family:var(--display);font-size:17px;letter-spacing:-.02em}
 .brand span{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
 .tabs{display:flex;gap:2px;flex-wrap:wrap}
@@ -88,20 +90,20 @@ input[type=date]{font:inherit;font-family:var(--mono);font-size:13px;padding:7px
 .chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line-2);border-radius:20px;color:var(--ink-2)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
 .board{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-items:start}
-.post{border-left:3px solid var(--pc);padding:14px 16px;text-align:left;width:100%;display:block;transition:border-color .15s,transform .12s}
+.post{border-inline-start:3px solid var(--pc);padding:14px 16px;text-align:left;width:100%;display:block;transition:border-color .15s,transform .12s}
 .post:hover{transform:translateY(-1px)}
 .post.done{opacity:.62}
 .post-top{display:flex;gap:10px;align-items:baseline;margin-bottom:7px}
 .post-n{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--pc);font-variant-numeric:tabular-nums}
-.post-day{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-left:auto}
+.post-day{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-inline-start:auto}
 .post h4{font-size:15.5px;line-height:1.3;letter-spacing:-.012em;margin-bottom:9px}
 .post-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
 .dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
-.gaps{margin-left:auto;padding:2px 7px;border-radius:4px;font-family:var(--mono);font-size:10.5px;background:var(--accent-soft);color:var(--accent-ink)}
+.gaps{margin-inline-start:auto;padding:2px 7px;border-radius:4px;font-family:var(--mono);font-size:10.5px;background:var(--accent-soft);color:var(--accent-ink)}
 .gaps.zero{background:transparent;color:var(--good)}
 
 /* ---------- detail ---------- */
-.detail{padding:22px 24px;margin-bottom:14px;border-left:3px solid var(--pc)}
+.detail{padding:22px 24px;margin-bottom:14px;border-inline-start:3px solid var(--pc)}
 .detail-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
 .detail h3{font-size:21px;line-height:1.22;flex:1}
 .copyblock{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:18px 20px;font-family:var(--read);font-size:16.5px;line-height:1.62;white-space:pre-wrap;color:var(--ink)}
@@ -114,11 +116,12 @@ input[type=date]{font:inherit;font-family:var(--mono);font-size:13px;padding:7px
 @media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
 .btn.primary:hover{opacity:.88;color:var(--surface)}
 :root[data-theme="dark"] .btn.primary:hover{color:#0B1417}
-.count{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-left:auto}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-inline-start:auto}
 .count.warn{color:var(--warn)}.count.over{color:var(--crit);font-weight:500}
 .kv{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;margin-top:14px;font-size:13.5px;align-items:start}
 .kv dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
 .kv dd{margin:0;color:var(--ink-2)}
+.tl dt{text-align:start}
 .tag{font-family:var(--mono);font-size:12px;color:var(--accent-ink)}
 .toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--ground);padding:9px 18px;border-radius:7px;font-size:13.5px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:90}
 .toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
@@ -132,21 +135,56 @@ input[type=date]{font:inherit;font-family:var(--mono);font-size:13px;padding:7px
 .pad{padding:20px 22px}
 .pad h4{font-size:16px;margin-bottom:12px}
 table{width:100%;border-collapse:collapse;font-size:13.5px}
-th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th,td{text-align:start;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 th{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
 td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
 .scroll{overflow-x:auto}
-.note{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:7px;padding:12px 15px;border-left:3px solid var(--accent)}
+.note{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:7px;padding:12px 15px;border-inline-start:3px solid var(--accent)}
 .rationale{font-size:13.5px;color:var(--ink-2);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 .rationale b{color:var(--ink);font-weight:600}
 .tl{display:grid;grid-template-columns:74px 1fr;gap:0 16px}
 .tl dt{font-family:var(--mono);font-size:12px;color:var(--accent-ink);padding:9px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
 .tl dd{margin:0;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
 .tl dt:first-of-type,.tl dd:first-of-type{border-top:0}
+
+/* ---------- bilingual + editing ---------- */
+:root[dir=rtl] body{font-family:var(--ui-ar)}
+[dir=rtl] .copyblock,[dir=rtl] .ed{font-family:var(--read-ar);line-height:1.85}
+.ar{font-family:var(--ui-ar)}
+.lang{display:flex;gap:2px;border:1px solid var(--line-2);border-radius:7px;padding:2px}
+.lang button{font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;padding:4px 10px;border-radius:5px;color:var(--ink-2)}
+.lang button[aria-pressed=true]{background:var(--accent);color:var(--surface)}
+:root[data-theme=dark] .lang button[aria-pressed=true],:root:not([data-theme=light]) .lang button[aria-pressed=true]{color:#0B1417}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]) .lang button[aria-pressed=true]{color:#fff}}
+.bi{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+@media(max-width:800px){.bi{grid-template-columns:1fr}}
+.pane{min-width:0}
+.pane-label{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+.pane-label b{color:var(--accent-ink);font-weight:500}
+.ed{display:block;width:100%;min-height:260px;font-family:var(--read);font-size:16.5px;line-height:1.62;padding:17px 19px;border:1px solid var(--accent);border-radius:8px;background:var(--surface);color:var(--ink);resize:vertical}
+.ed.short{min-height:88px;font-family:var(--ui);font-size:14.5px}
+.empty{background:var(--sunk);border:1px dashed var(--line-2);border-radius:8px;padding:22px 20px;text-align:center;color:var(--ink-3);font-size:13.5px}
+.tr{font-family:var(--mono);font-size:11.5px;color:var(--accent-ink)}
+.tr.bad{color:var(--crit)}
+.dot-pulse{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pl 1s infinite}
+@keyframes pl{0%,100%{opacity:.3}50%{opacity:1}}
+.edited{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--good)}
+
+/* Arabic is cursive: letter-spacing severs the joins, and the mono/display
+   faces carry no Arabic glyphs. Both must be undone wherever the text is Arabic. */
+[dir="rtl"] h1,[dir="rtl"] h2,[dir="rtl"] h3,[dir="rtl"] h4,
+[dir="rtl"] .eyebrow,[dir="rtl"] .metric .k,[dir="rtl"] .metric .v span,
+[dir="rtl"] .post-meta,[dir="rtl"] .post-day,[dir="rtl"] .chip,[dir="rtl"] .lang button,
+[dir="rtl"] .pane-label,[dir="rtl"] .kv dt,[dir="rtl"] th,[dir="rtl"] .day-badge,
+[dir="rtl"] .gaps,[dir="rtl"] .edited,[dir="rtl"] .count,[dir="rtl"] .tr,
+[dir="rtl"] .brand span,[dir="rtl"] .brand b,[dir="rtl"] .tab,
+.pane[dir="rtl"] *,.ar{font-family:var(--ui-ar);letter-spacing:0}
+[dir="rtl"] .post-n{font-family:var(--mono)}
+[dir="rtl"] .sec-head h2{letter-spacing:0}
 </style>
 
 <div class="top"><div class="top-in">
-  <div class="brand"><b>Dispatch Board</b><span id="cadence">30 posts · 60 days</span></div>
+  <div class="brand"><b id="brandname">Dispatch Board</b><span id="cadence">30 posts · 60 days</span></div>
   <nav class="tabs" role="tablist" id="tabs"></nav>
 </div></div>
 <main class="wrap" id="app"></main>
@@ -309,216 +347,502 @@ const METRICS=[["Profile views from target titles","Steady week-on-week rise","T
 ["Any single post","—","Judge in blocks of ten. Individual post variance is enormous and mostly noise.",0]];
 </script>
 <script>
+/* Hand-authored Arabic. Written as native LinkedIn copy for a Gulf audience,
+   not as a literal gloss of the English. [[PLACEHOLDERS]] stay in Latin script. */
+const T={
+ board:["Dispatch Board","لوحة النشر"], today:["Today","اليوم"], calendar:["Calendar","التقويم"],
+ drafts:["Drafts","المسودات"], profile:["Profile","الملف الشخصي"], templates:["Templates","القوالب"],
+ workflow:["Workflow","سير العمل"], posts60:["30 posts · 60 days","٣٠ منشورًا · ٦٠ يومًا"],
+ day:["Day","اليوم"], published:["Published","منشور"], of:["of","من"], post:["Post","منشور"],
+ dueToday:["Due today","مستحق اليوم"], nextUp:["Next up","التالي"], notStarted:["Not started","لم يبدأ بعد"],
+ setStart:["Set your start date to arm the board","حدّد تاريخ البدء لتشغيل اللوحة"],
+ setStartBody:["Pick the day Post 01 goes live. Everything else — which post is due, how many days remain, what still needs filling in — is computed from it.","اختر يوم نشر المنشور الأول. كل ما عداه — أي منشور مستحق، وكم يومًا بقي، وما الذي ما زال يحتاج إلى تعبئة — يُحتسب منه."],
+ startDate:["Start date (Post 01 goes live)","تاريخ البدء (نشر المنشور الأول)"],
+ openPost:["Open this post","افتح هذا المنشور"], markPub:["Mark published","تعليم كمنشور"], markUnpub:["Mark unpublished","إلغاء تعليم النشر"],
+ copyPost:["Copy post","انسخ المنشور"], close:["Close","إغلاق"], edit:["Edit","تحرير"], cancel:["Cancel","إلغاء"],
+ save:["Save","حفظ"], saveTr:["Save & translate","حفظ وترجمة"], translating:["Translating","جارٍ الترجمة"],
+ trTo:["Translate","ترجم"], gaps:["gaps","فراغات"], ready:["ready","جاهز"],
+ readyPub:["Ready to publish","جاهز للنشر"], phLeft:["placeholder(s) left to fill","فراغ متبقٍ للتعبئة"],
+ phMust:["must be filled before this goes out","يجب تعبئتها قبل النشر"],
+ postGaps:["Post gaps","فراغات المنشورات"], cadence:["Cadence","الوتيرة"], hrs:["hrs","ساعة"],
+ all30:["All 30","الكل ٣٠"], hidePub:["Hide published","إخفاء المنشور"], noMatch:["Nothing matches this filter.","لا شيء يطابق هذه التصفية."],
+ hashtags:["Hashtags","الوسوم"], media:["Media","الوسائط"], cta:["Call to action","دعوة لاتخاذ إجراء"],
+ chars:["chars","حرفًا"], why:["Why it is built this way.","لماذا بُني بهذه الطريقة."],
+ disclosure:["Disclosure check before publishing.","تحقق من الإفصاح قبل النشر."],
+ allDone:["All 30 posts dispatched.","تم نشر الثلاثين منشورًا."],
+ allDoneBody:["Rebuild the next calendar from your top five posts by <b>saves</b>, not by reach.","ابنِ التقويم التالي انطلاقًا من أفضل خمسة منشورات بعدد <b>الحفظ</b>، لا بمدى الوصول."],
+ oneRule:["The one rule:","القاعدة الوحيدة:"],
+ oneRuleBody:["nothing on this board contains an invented statistic. Every [[BRACKET]] is a slot for a real figure from your operation. Copying one out to LinkedIn is the only way this system can hurt you — so the copy button warns you first.","لا يحتوي أي شيء في هذه اللوحة على إحصاء مُختلق. كل [[BRACKET]] هو خانة لرقم حقيقي من عملياتك. نسخ أحدها إلى لينكدإن هو الطريقة الوحيدة التي قد يؤذيك بها هذا النظام — لذلك يحذّرك زر النسخ أولًا."],
+ calBlurb:["Every other day for 60 days. No pillar or format repeats back-to-back — that variety is what keeps three audiences reading one profile.","كل يومين على مدى ستين يومًا. لا يتكرر محور أو صيغة مرتين متتاليتين — هذا التنوّع هو ما يُبقي ثلاثة جماهير تقرأ ملفًا واحدًا."],
+ draftsH:["Ready to publish","جاهز للنشر"],
+ draftsBlurb:["The first three posts in full, with the reasoning behind every structural choice. Fill the placeholders, copy, publish.","المنشورات الثلاثة الأولى كاملة، مع المنطق وراء كل اختيار بنيوي. عبّئ الفراغات، انسخ، انشر."],
+ profBlurb:["Ordered by leverage. The headline is the highest-value field on LinkedIn — it appears in the feed, in search, in comments and on every connection request.","مرتَّب حسب الأثر. العنوان هو أعلى حقول لينكدإن قيمة — يظهر في الموجز، وفي البحث، وفي التعليقات، ومع كل طلب تواصل."],
+ headlines:["Headline — five options","العنوان — خمسة خيارات"], option:["Option","الخيار"], recommended:["recommended","موصى به"],
+ copyHl:["Copy headline","انسخ العنوان"], aboutH:["About section","قسم «نبذة»"], copyAbout:["Copy About","انسخ النبذة"],
+ aboutNote:["Mobile truncates at roughly 250 characters behind a “…see more”. The first three lines are the only part most readers will see — they carry the whole strategy.","يقتطع الهاتف عند نحو ٢٥٠ حرفًا خلف «…عرض المزيد». الأسطر الثلاثة الأولى هي كل ما سيراه معظم القرّاء — وهي تحمل الاستراتيجية كاملة."],
+ bulletsH:["Experience bullets","نقاط الخبرة"], copyBullets:["Copy bullets","انسخ النقاط"],
+ bulletsNote:["Seven is the ceiling — past that nobody reads. Order is deliberate: AI first (your differentiator), HR second (your category), fleet third (your proof), cost last (what an executive reader is scanning for).","سبع نقاط هي الحد الأقصى — بعدها لا يقرأ أحد. الترتيب مقصود: الذكاء الاصطناعي أولًا (ما يميّزك)، الموارد البشرية ثانيًا (فئتك)، الأسطول ثالثًا (دليلك)، والتكلفة أخيرًا (ما يبحث عنه القارئ التنفيذي)."],
+ restH:["Everything else, ranked by leverage","كل ما تبقّى، مرتَّبًا حسب الأثر"],
+ element:["Element","العنصر"], action:["Action","الإجراء"], whyMatters:["Why it matters","لماذا يهم"],
+ verdict:["Verdict:","الخلاصة:"],
+ verdictBody:["run Option 1 for the first 30 days while you build a body of work, then switch to Option 5 once you have ten posts of evidence behind it.","اعتمد الخيار الأول في الثلاثين يومًا الأولى بينما تبني رصيدًا من العمل، ثم انتقل إلى الخيار الخامس حين يصبح خلفك عشرة منشورات كدليل."],
+ stageNote:["Do not change everything at once.","لا تغيّر كل شيء دفعة واحدة."],
+ stageBody:["LinkedIn briefly suppresses reach on profiles with simultaneous large edits, and you lose the ability to attribute what worked. Day 0: headline, About, URL, photo, banner. Day 7: experience and skills. Day 14: Featured. Day 21: recommendations and services. Day 30: review the headline switch.","يخفض لينكدإن الوصول مؤقتًا للملفات التي تُجرى عليها تعديلات كبيرة متزامنة، وتفقد القدرة على معرفة ما الذي نجح. اليوم ٠: العنوان والنبذة والرابط والصورة والغلاف. اليوم ٧: الخبرة والمهارات. اليوم ١٤: المميّز. اليوم ٢١: التوصيات والخدمات. اليوم ٣٠: مراجعة تبديل العنوان."],
+ tplBlurb:["Four frameworks in your register. Each is a shape, not a script.","أربعة أطر بنبرتك. كل واحد منها قالب، لا نص جاهز."],
+ tplRules:["Rules that apply to all four.","قواعد تنطبق على الأربعة."],
+ tplRulesBody:["The first 210 characters are the entire post · one idea per post · single-line paragraphs · never open with a greeting · no external links in the body (first comment instead) · close with a question you actually want answered · numbers over adjectives.","الأحرف الـ٢١٠ الأولى هي المنشور كله · فكرة واحدة لكل منشور · فقرات من سطر واحد · لا تبدأ أبدًا بتحية · لا روابط خارجية في المتن (ضعها في أول تعليق) · اختم بسؤال تريد إجابته فعلًا · الأرقام قبل الصفات."],
+ copySkel:["Copy skeleton","انسخ الهيكل"], hookBank:["Hook bank","بنك المطالع"], shape:["Shape","الصيغة"], opening:["Opening","المطلع"],
+ wfBlurb:["About 2.5 hours a week, concentrated into one batching session plus short daily engagement windows.","نحو ساعتين ونصف أسبوعيًا، مركّزة في جلسة تجهيز واحدة إضافة إلى نوافذ تفاعل يومية قصيرة."],
+ batch:["Batch on Sunday, 90 minutes.","جهّز دفعتك يوم الأحد، تسعون دقيقة."],
+ batchBody:["Pull the real numbers from your systems <i>first</i>, before writing — writing around a number you haven't checked produces a post you can't publish. Never write a post the morning it publishes; same-day writing is where the placeholder mistakes happen.","استخرج الأرقام الحقيقية من أنظمتك <i>أولًا</i>، قبل الكتابة — الكتابة حول رقم لم تتحقق منه تنتج منشورًا لا تستطيع نشره. لا تكتب منشورًا صباح نشره أبدًا؛ الكتابة في اليوم نفسه هي مصدر أخطاء الفراغات."],
+ checklist:["Pre-publish checklist","قائمة ما قبل النشر"], ticked:["ticked","مُعلَّم"], reset:["Reset checklist","إعادة ضبط القائمة"],
+ pubDay:["Publish day","يوم النشر"], golden:["The golden hour is non-negotiable.","الساعة الذهبية غير قابلة للتفاوض."],
+ goldenBody:["LinkedIn tests a post with a small audience in the first 60–90 minutes and expands distribution based on the engagement rate it observes. A post with ten comments in hour one and forty on day two reaches a fraction of the same post with those numbers reversed. If you cannot be present for the hour after publishing, publish on a different day.","يختبر لينكدإن المنشور على جمهور صغير في أول ٦٠–٩٠ دقيقة ثم يوسّع التوزيع بناءً على معدل التفاعل الذي يرصده. منشور بعشرة تعليقات في الساعة الأولى وأربعين في اليوم الثاني يصل إلى جزء يسير مما يصل إليه المنشور نفسه لو انعكس الرقمان. إن لم تستطع التواجد في الساعة التالية للنشر، فانشر في يوم آخر."],
+ dailyH:["Daily engagement — 20 minutes","التفاعل اليومي — عشرون دقيقة"],
+ dailyBody:["Roughly 40% of your growth comes from comments left on <i>other</i> people's posts — that is where a new audience discovers you.","نحو ٤٠٪ من نموّك يأتي من تعليقات تتركها على منشورات <i>الآخرين</i> — هناك يكتشفك جمهور جديد."],
+ headlineNote:["Your headline is doing marketing on every one of these comments. That is why the headline field matters more than it looks.","عنوانك يقوم بالتسويق في كل واحد من هذه التعليقات. لهذا يهم حقل العنوان أكثر مما يبدو."],
+ analytics:["Analytics","التحليلات"], metric:["Metric","المؤشر"], target60:["Target by day 60","المستهدف عند اليوم ٦٠"],
+ whyCol:["Why","لماذا"], ignore:["ignore","تجاهله"],
+ judge:["Judge in blocks of ten, never one post at a time.","احكم على دفعات من عشرة، لا على منشور واحد."],
+ judgeBody:["Weekly: which post got the most saves — write more in that shape. Every ten posts: which pillar is landing, and reweight what remains toward it. Day 30: full audit and the headline switch. Day 60: rebuild the next calendar from your top five by saves, not by reach.","أسبوعيًا: أي منشور نال أكثر عمليات حفظ — اكتب المزيد على شاكلته. كل عشرة منشورات: أي محور ينجح، وأعد ترجيح ما تبقّى نحوه. اليوم ٣٠: تدقيق كامل وتبديل العنوان. اليوم ٦٠: ابنِ التقويم التالي من أفضل خمسة بعدد الحفظ، لا بمدى الوصول."],
+ langEn:["EN","إنجليزي"], langAr:["AR","عربي"], langBoth:["BOTH","الاثنان"],
+ themeAuto:["AUTO","تلقائي"], themeLight:["LIGHT","فاتح"], themeDark:["DARK","داكن"],
+ english:["English","الإنجليزية"], arabic:["Arabic","العربية"],
+ noAr:["No Arabic version yet.","لا توجد نسخة عربية بعد."], noEn:["No English version yet.","لا توجد نسخة إنجليزية بعد."],
+ trThis:["Translate this","ترجم هذا"], edited:["edited","مُعدَّل"],
+ trUnavail:["Translation is unavailable in this view — edit each language directly.","الترجمة غير متاحة في هذا العرض — حرّر كل لغة مباشرة."],
+ trFail:["Translation failed. Your edit was saved.","تعذّرت الترجمة. حُفظ تعديلك."],
+ phWarn:["Translation changed the placeholders — check it before publishing.","غيّرت الترجمة الفراغات — راجعها قبل النشر."],
+ saved:["Saved","حُفظ"], trDone:["Translated","تُرجم"],
+ pillars:{P1:["Frontline AI","ذكاء اصطناعي ميداني"],P2:["Electric Fleet","الأسطول الكهربائي"],P3:["Build Notes","ملاحظات البناء"],P4:["Operator's Desk","مكتب المشغّل"]},
+ auds:{A:["HR & People","الموارد البشرية"],B:["Fleet & Mobility","الأساطيل والتنقل"],C:["Founders & Ops","المؤسسون والعمليات"],X:["Cross-cutting","محور عام"]}
+};
+const AR_TITLES=["الـ٩٠٪ الذين لا يبني أحد لهم ذكاءً اصطناعيًا","تعرّف على «ماكس» — مدرّب الذكاء الاصطناعي الذي بنيناه لمن لا يقرأون الأدلة","ما يكلّفه فعلًا تشغيل أسطول كهربائي عامًا كاملًا في ٤٥ درجة","التأهيل رافعة استبقاء متنكّرة في هيئة عمل إداري","ما الذي يعيق الذكاء الاصطناعي فعلًا في إدارة مواردك البشرية؟","علّمنا «يوليسا» التصعيد قبل أن نعلّمها الإجابة","خارطة التأهيل بسبع مراحل لقوة عاملة خارج المكاتب","قلق المدى مشكلة إدارية لا مشكلة بطارية","«هل يحل الذكاء الاصطناعي محل المُوظِّفين؟» أقل أسئلة الموارد البشرية إثارة للاهتمام","شغّلنا «ماكس» في مواجهة مدرّب بشري لثلاثين يومًا","السائق الذي علّمني عن تبنّي الذكاء الاصطناعي أكثر من أي عرض تجاري","بنود التكلفة التسعة التي لا يضعها أحد في نموذج الأسطول الكهربائي","سياستك للذكاء الاصطناعي غير مقروءة لمعظم قوتك العاملة","خمس عمليات موارد بشرية أتمتناها — وثلاث رفضنا أتمتتها عمدًا","منحنا الذكاء الاصطناعي إذنًا بأن يقول «لا أعرف»","تحوّل دبي الكهربائي سيُحسم في المستودع لا في صالة العرض","فجوة الكفاءة التي لا تراها في السيرة الذاتية","كيف تقيس مؤسستك التدريب الميداني فعلًا؟","ما يكلّفه فعلًا إبقاء مساعد ذكاء اصطناعي حيًّا في التشغيل","سلوك السائق يحرّك الكفاءة أكثر من مواصفات المركبة","تدقيق الجاهزية للذكاء الاصطناعي الميداني — اثنا عشر سؤالًا","شغّلنا التدريب نفسه بأربع لغات. نسخة واحدة فقط نجحت.","البنية التحتية للشحن مشكلة جدولة","سير العمل خلف «ماكس» و«يوليسا»","نظام تشغيل الموارد البشرية لدينا — ستة أنظمة، لوحة واحدة","تقارير استدامة يستطيع مدير الأسطول إنتاجها فعلًا","التكلفة الكاملة لتعيين ميداني خاطئ","ضريبة الحرارة على أسطول كهربائي","توقّف عن التوظيف بحثًا عن «إجادة الذكاء الاصطناعي». وظّف من يفهم العمليات.","ثلاثون منشورًا، ستون يومًا — وما الذي تغيّر"];
+const AR_CAPS={
+1:`معظم المؤسسات تُجري تجربتها الأولى مع الذكاء الاصطناعي في قسم المالية.
+
+وهذا منطقي. فقسم المالية لديه حواسيب، وبريد إلكتروني مؤسسي، ولغة عمل واحدة، ومدير قادر على استيعاب مُخرَج خاطئ دون أن يتأذى أحد. إنه أسهل مكان ممكن للنجاح.
+
+وهو أيضًا نحو عشرة بالمئة من عالم العمل.
+
+أما التسعون بالمئة الأخرى فهم في أرض مصنع، أو في مستودع، أو في جناح مستشفى — أو، في حالتي، خلف المقود. لا بريد مؤسسي. لغات أُم متعددة. ونظام مناوبات لا يتّسع لندوة تدريبية من ساعتين. وعواقب مادية، لا عواقب تمسّ السمعة.
+
+أقود عمليات الموارد البشرية والأسطول في «إيكوساين ترانسبورت» في دبي. قوتنا العاملة [[HEADCOUNT]] سائقًا محترفًا يشغّلون [[FLEET SIZE]] مركبة كهربائية. وعلى مدى [[TIMEFRAME]] الماضية أدخلنا مساعدَين بالذكاء الاصطناعي إلى التشغيل الفعلي معهم. ليست تجربة. تشغيل حقيقي، بعواقب حقيقية حين يخطئ.
+
+ثلاثة أمور علّمتني إياها تلك البيئة، ولا يذكرها أي عرض تقديمي من مورّد:
+
+← لم يكن النموذج هو الجزء الصعب يومًا. إعادة صياغة [[TIMEFRAME]] من المعرفة التشغيلية المتراكمة إلى صورة يستطيع النظام أن يفكّر فيها استغرقت [[PROPORTION]] من زمن البناء نفسه.
+
+← التبنّي مشكلة ثقة لا مشكلة تدريب. ارتفع استخدامنا بعد أن جعلنا المساعد أقل قدرة — لأننا منحناه إذنًا بأن يقول «لا أعرف» ويحوّل السؤال إلى إنسان.
+
+← الإجابة الخاطئة الواثقة لشخص يقود مركبة ليست بلاغ خلل برمجي. صمّمنا مسار التصعيد قبل أن نصمّم إجابة واحدة.
+
+لا شيء من هذا نظري بالنسبة لي. هذا ما يتكوّن منه أسبوعي.
+
+لذلك، ابتداءً من اليوم، سأنشر هذا — كل يومين، على مدى الستين يومًا القادمة. ما نجح، وما كلّف، والأجزاء التي فشلت مرتين قبل أن تنجح مرة.
+
+إن كنت تنشر الذكاء الاصطناعي على قوة عاملة لا تجلس خلف مكتب، فأودّ فعلًا أن أعرف ما الذي انكسر أولًا لديك.
+
+لأنني أعِدك أنه لم يكن النموذج.`,
+2:`سُلّم سائقونا دليل عمليات من [[PAGE COUNT]] صفحة في يومهم الأول.
+
+لم يقرأه أحد. وأنا نفسي ما كنت لأقرأه.
+
+فبنينا «ماكس» — مساعد ذكاء اصطناعي يقدّم المادة نفسها في صورة محادثة، بلغة السائق، على الهاتف الذي في جيبه أصلًا، في العشر دقائق التي تفصل بين رحلتين.
+
+انتقل التأهيل من [[BEFORE]] إلى [[AFTER]].
+
+هذا هو العنوان. وإليك ما يهم فعلًا إن كنت تفكّر في بناء شيء مشابه.
+
+النموذج كان الجزء السهل.
+
+قبل أن يصبح «ماكس» مفيدًا لأحد، كان علينا إعادة كتابة كل مادة مصدرية يستند إليها. كُتب دليلنا على مدى [[TIMEFRAME]] بأيدي [[NUMBER]] أشخاص مختلفين، بتناقضات لم يوفّق بينها أحد يومًا — لأن أي مدرّب بشري لم يقرأه كاملًا هو الآخر. كانوا ببساطة يعرفون أي الأجزاء يتجاهلونها.
+
+«ماكس» لم يكن يعرف أي الأجزاء يتجاهل. كان يجيب من كلها، بالثقة نفسها.
+
+استهلكت إعادة الكتابة تلك [[PROPORTION]] من مجمل الجهد. وهي لا ترد في أي خطة تنفيذ رأيتها.
+
+ما الذي أخطأنا فيه.
+
+[[SPECIFIC FAILURE — ماذا قال «ماكس»، وكم كان بعيدًا عن الصواب]]
+
+[[HOW YOU CAUGHT IT — كن صريحًا إن كان الأمر محض حظ]]
+
+عندها بنينا [[WHAT YOU BUILT AS A RESULT]].
+
+الدرس، إن أخذت شيئًا واحدًا:
+
+مساعد الذكاء الاصطناعي لا يصلح مشكلة توثيق. بل يكشفها — فورًا، وعلى نطاق واسع، أمام أقل الناس قدرة على رصد الخطأ.
+
+أصلح المادة المصدرية أولًا. المساعد هو الخطوة الأخيرة، لا الأولى.
+
+إن كنت تبني مساعدًا داخليًا: ماذا اكتشفت عن توثيقك أنت حين بدأ نظام يقرأه؟`,
+3:`تُبنى الجدوى الاقتصادية لكهربة الأساطيل عادةً في جدول بيانات، على يد شخص لم يقف يومًا في مستودع بدبي في أغسطس.
+
+وجدوانا كانت كذلك.
+
+إليك [[TIMEFRAME]] من بيانات التشغيل الحقيقية لـ[[FLEET SIZE]] مركبة كهربائية — بما فيها البنود الثلاثة التي أخفقنا تمامًا في توقّعها.
+
+باختصار:
+
+← تكلفة الطاقة لكل كيلومتر جاءت [[FIGURE]] مقارنةً بنموذجنا
+← الصيانة مقابل أسطولنا السابق العامل بالوقود: [[FIGURE]]
+← غرامة الحرارة على المدى الفعلي في ذروة الصيف: [[FIGURE]]
+← البند الذي لم ندرجه في النموذج إطلاقًا: [[LINE ITEM]]
+
+اثنتان من هذه المفاجآت كانتا أكبر من كامل وفر الصيانة المتوقَّع.
+
+والنقطة الأوسع لكل من يخطّط لتحوّل في هذه المنطقة: النماذج المتداولة في السوق بُنيت على بيانات تشغيل أوروبية وأمريكية شمالية. الفيزياء لا تنتقل. فدرجة الحرارة المحيطة تؤثر في المدى، وكفاءة الشحن، وإدارة حرارة البطارية في آنٍ واحد — ولا يسعّر أي من النماذج المستوردة الثلاثة معًا.
+
+ابنِ خط أساسك الخاص، في مناخك أنت، قبل أن ترصد رأس المال.
+
+التفصيل الكامل في العرض المتسلسل.
+
+إن كنت تضع نموذجًا لتحوّل أسطول في الخليج وتريد اختبار افتراضاتك أمام أرقام تشغيل حقيقية — رسائلي مفتوحة.`};
+const AR_ABOUT=`معظم المؤسسات تُجري تجاربها مع الذكاء الاصطناعي لأجل العشرة بالمئة من قوتها العاملة الذين يجلسون خلف مكاتب.
+
+أنا أعمل على التسعين بالمئة الآخرين.
+
+أقود عمليات الموارد البشرية والأسطول في «إيكوساين ترانسبورت» بدبي، حيث تتكوّن قوتنا العاملة من [[HEADCOUNT]] سائقًا محترفًا يشغّلون أسطولًا من [[FLEET SIZE]] مركبة كهربائية. لا يملكون بريدًا مؤسسيًا. يعملون عبر [[NUMBER]] لغات. ويشتغلون في حرارة تبلغ ٤٥ درجة وفق جداول لا تكون فيها الإجابة الخاطئة إزعاجًا — بل حادثة سلامة.
+
+تلك البيئة لا تحتمل استعراض الذكاء الاصطناعي. ولهذا وجب أن تكون الأنظمة التي نبنيها جيدة فعلًا.
+
+على مدى [[TIMEFRAME]] الماضية صمّمتُ ونشرتُ مساعدَين بالذكاء الاصطناعي في التشغيل الفعلي:
+
+← «ماكس» — لتدريب السائقين وتنمية الكفاءة. انتقل زمن التأهيل من [[BEFORE]] إلى [[AFTER]]، وتحسّن [[METRIC]] بنسبة [[FIGURE]].
+
+← «يوليسا» — للدعم التشغيلي اللحظي للسائقين وغرفة العمليات. تعالج الآن [[VOLUME]] استفسارًا لكل [[PERIOD]]، مع مسار تصعيد مقصود إلى إنسان في كل ما يمسّ السلامة.
+
+وإلى جانب ذلك أدير الجانب التشغيلي لأسطول كهربائي: استراتيجية الشحن، وتحسين المسارات والجداول، وبرامج سلوك السائقين، وتقارير الاستدامة المرتبطة بها. وعلى مدى [[TIMEFRAME]] حرّكنا [[CORE METRIC]] بمقدار [[FIGURE]].
+
+ما أكتب عنه هنا
+
+▪ نشر الذكاء الاصطناعي على قوى عاملة ميدانية متعددة اللغات خارج المكاتب — بما في ذلك ما يفشل منه
+▪ الاقتصاديات الحقيقية لتشغيل أسطول كهربائي في الخليج
+▪ بناء مساعدين بالذكاء الاصطناعي يصمدون أمام التشغيل الحقيقي
+▪ بناء أنظمة موارد بشرية تستخدمها فرق العمليات فعلًا
+
+أنشر كل يومين. وكل ما أشاركه يأتي من أنظمة شغّلتها بنفسي، بتكاليفها كاملة — لا من عرض تقديمي لمورّد.
+
+إن كنت تنشر الذكاء الاصطناعي على قوة عاملة ميدانية، أو تكهرب أسطولًا في المنطقة، أو تبني ذكاءً اصطناعيًا تشغيليًا وتريد تبادل الخبرات حول ما ينكسر — رسائلي مفتوحة.
+
+[[EMAIL]] · دبي، الإمارات`;
+const AR_HEADLINES=[
+"رئيس الموارد البشرية والعمليات في إيكوساين ترانسبورت | أنشر مساعدي ذكاء اصطناعي لقوة عاملة ميدانية تدير أسطولًا كهربائيًا في دبي | موارد بشرية × ذكاء اصطناعي × تنقّل مستدام",
+"أبني أنظمة ذكاء اصطناعي تدرّب السائقين وتدعمهم، لا موظفي المكاتب | الموارد البشرية وعمليات الأسطول، إيكوساين ترانسبورت | أساطيل كهربائية، دبي",
+"ذكاء اصطناعي للميدان لا للمكتب | قائد الموارد البشرية وعمليات الأسطول الكهربائي، دبي | بنيتُ «ماكس» و«يوليسا» — مساعدَي ذكاء اصطناعي لتدريب السائقين والدعم التشغيلي",
+"الموارد البشرية وعمليات الأفراد | تطبيق الذكاء الاصطناعي | إدارة الأساطيل الكهربائية | النقل المستدام | دبي، الإمارات",
+"معظم تجارب الذكاء الاصطناعي تخدم الـ١٠٪ الذين يملكون حاسوبًا. أنا أعمل على الـ٩٠٪ الآخرين. | الموارد البشرية وعمليات الأسطول، إيكوساين ترانسبورت | دبي"];
+const AR_BULLETS=`▪ صمّمتُ ونشرتُ «ماكس»، نظام تدريب وكفاءة للسائقين مدعوم بالذكاء الاصطناعي، ما خفّض زمن التأهيل من [[BEFORE]] إلى [[AFTER]] وحسّن [[RETENTION METRIC]] بنسبة [[FIGURE]].
+
+▪ بنيتُ وشغّلتُ «يوليسا»، مساعد دعم تشغيلي بالذكاء الاصطناعي يعالج [[VOLUME]] استفسارًا للسائقين وغرفة العمليات لكل [[PERIOD]]، مع تصعيد بشري محدَّد لكل الحالات الحرجة للسلامة.
+
+▪ أعدتُ بناء مسار التوظيف والتأهيل كاملًا لقوة عاملة ميدانية متعددة اللغات، فخفّضتُ زمن الوصول إلى الإنتاجية بنسبة [[FIGURE]] عبر [[NUMBER]] لغات.
+
+▪ أتولّى استراتيجية الشحن وتحسين الجداول لأسطول كهربائي من [[FLEET SIZE]] مركبة، بتحسين [[UTILISATION / COST PER KM]] بنسبة [[FIGURE]].
+
+▪ أطلقتُ برنامجًا لسلوك السائقين يربط بيانات التتبّع بالتدريب، حقّق تحسّنًا بنسبة [[FIGURE]] في [[EFFICIENCY / INCIDENT RATE]].
+
+▪ أرسيتُ خط الأساس لتقارير استدامة الأسطول، بإنتاج [[REPORT TYPE]] لصالح [[STAKEHOLDER]].
+
+▪ خفّضتُ [[COST CENTRE]] بنسبة [[FIGURE]] عبر [[LEVER]] بينما نمت أعداد الموظفين [[FIGURE]].`;
+</script>
+<script>
 const DRAFT_NOTES={
 1:"<b>Opening line</b> is a flat observation about other people's behaviour — testable against the reader's own organisation, and not \"excited to share\". <b>\"It makes sense\"</b> concedes the opposing view before dismantling it, which buys credibility in an executive register. Credentials land fourth, not first: you earn the right to speak before stating the qualification. <b>\"Not a pilot. Production.\"</b> is your most differentiating claim, so it gets its own beat. The three arrows each seed a later post. The closing punch — <i>\"Because I promise it wasn't the model\"</i> — is contestable, and contestable statements get replies where open questions get none.",
 2:"<b>\"I wouldn't have read it either\"</b> removes any hint of blaming the workforce — the difference between empathy and condescension. The metric appears early and is then explicitly set aside (<i>\"here is the part that actually matters\"</i>); refusing to dwell on your own result is a strong authority signal. <b>\"They just knew which parts to ignore\"</b> is the best line in the post: it reframes a documentation problem as an institutional-knowledge problem. The failure section is mandatory and must be specific, with the detection method — vague failures read as false modesty. The closing principle is written to stand alone as a screenshot.",
 3:"<b>\"Ours was too\"</b> on line three removes the consultant-lecturing-you reading: you made the same mistake as the reader. The caption gives the answers away before the swipe prompt — counterintuitive, but caption-as-summary out-taps caption-as-teaser, because the reader now trusts there is more. <b>\"Two of those surprises were larger than our entire projected maintenance saving\"</b> is the sentence that survives a reshare. <b>\"The physics do not travel\"</b> is a five-word version of the whole post. The DM call-to-action is the first commercial ask in the sequence — and it comes only after two posts of pure value."};
 const DISCLOSURE=["Every figure cleared for public disclosure","No client, route or contract identifiable from the data","Commercially sensitive absolutes converted to percentages or indexed to a baseline","Figures reconcile with each other — a reader will check","You can produce the underlying data if a journalist or partner asks"];
-
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const phRe=/\[\[[^\]]*\]\]/g;
-const phCount=s=>(String(s).match(phRe)||[]).length;
+const phCount=s=>(String(s||"").match(phRe)||[]).length;
+const phSet=s=>((String(s||"").match(phRe)||[]).slice().sort().join("|"));
 const mark=s=>esc(s).replace(/\[\[([^\]]*)\]\]/g,'<span class="ph">[[$1]]</span>');
-const fullText=p=>p.c+"\n\n"+p.h.join(" ");
 const LIMIT=3000, HL=220, AB=2600;
+const byN=n=>POSTS.find(p=>p.n===+n);
 
-let S={start:"",pub:{},chk:{},updatedAt:0}, TAB="today", SEL=null, FILT="all", HIDE=false, DOC=null;
-const LS="fdb.state.v1";
-try{const r=localStorage.getItem(LS); if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+let S={start:"",pub:{},chk:{},txt:{},lang:"en",theme:"auto",updatedAt:0};
+let TAB="today", SEL=null, FILT="all", HIDE=false, EDIT=null, DOC=null;
+const TRANS={};
+const LS="fdb.state.v2";
+try{const r=localStorage.getItem(LS)||localStorage.getItem("fdb.state.v1"); if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+S.txt=S.txt||{};
+const HOST_THEME=document.documentElement.getAttribute("data-theme")||"";
+
 function save(){S.updatedAt=Date.now();try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){} if(DOC)DOC.set(JSON.parse(JSON.stringify(S))).catch(()=>{});}
 (async()=>{ let db=null; try{ db=await claude.use("db"); }catch(e){}
-  if(!db) return;
-  DOC=db.doc("state/console");
+  if(!db) return; DOC=db.doc("state/console");
   try{ const snap=await DOC.get(); const rem=snap&&snap.data?snap.data():null;
-    if(rem&&(rem.updatedAt||0)>(S.updatedAt||0)){S=Object.assign(S,rem);try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){} render();}
+    if(rem&&(rem.updatedAt||0)>(S.updatedAt||0)){S=Object.assign(S,rem);S.txt=S.txt||{};try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){} render();}
     else if(S.updatedAt){ await DOC.set(JSON.parse(JSON.stringify(S))); }
   }catch(e){}
 })();
+let SAMPLE, SAMPLE_TRIED=false;
+async function getSample(){ if(SAMPLE_TRIED)return SAMPLE; SAMPLE_TRIED=true; try{SAMPLE=await claude.use("sample");}catch(e){SAMPLE=null;} return SAMPLE; }
 
-let tT; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("on"),2600);}
-async function copy(text,label){
+/* ---------- language + theme ---------- */
+const CL=()=>S.lang==="ar"?1:0;
+const t=k=>{const v=T[k];return v?v[CL()]:k;};
+const pil=p=>T.pillars[p][CL()];
+const AR_FMT={"Long-form POV":"مقال رأي مطوّل","Project spotlight":"إضاءة على مشروع","Short-form":"منشور قصير","Poll":"استطلاع","Build note":"ملاحظة بناء","Long-form":"منشور مطوّل","Contrarian short":"رأي مخالف قصير","Story":"قصة","Infographic":"إنفوغرافيك","POV":"وجهة نظر","Data post":"منشور بيانات","Contrarian":"رأي مخالف","Recap + CTA":"خلاصة + دعوة"};
+function fmt(f){ if(CL()===0)return f; const m=f.match(/^Carousel · (\d+) slides$/); if(m){const k=+m[1];return "عرض متسلسل · "+k+(k>=3&&k<=10?" شرائح":" شريحة");} return AR_FMT[f]||f; }
+/* Arabic pluralises differently from English; "1 فراغات" is simply wrong. */
+const gapLabel=g=>CL()===0?(g+" "+t("gaps")):(g===1?"فراغ واحد":g===2?"فراغان":g+" فراغات");
+const phLabel=g=>CL()===0?(g+" "+t("phLeft")):(g===1?"فراغ واحد متبقٍ":g===2?"فراغان متبقيان":g+" فراغات متبقية");
+const aud=a=>T.auds[a][CL()];
+function applyChrome(){
+  document.documentElement.dir=S.lang==="ar"?"rtl":"ltr";
+  document.documentElement.lang=S.lang==="ar"?"ar":"en";
+  const th=S.theme||"auto";
+  if(th==="auto"){ if(HOST_THEME)document.documentElement.setAttribute("data-theme",HOST_THEME); else document.documentElement.removeAttribute("data-theme"); }
+  else document.documentElement.setAttribute("data-theme",th);
+}
+function baseOf(key){
+  let m;
+  if(m=key.match(/^post:(\d+):caption$/)) return {en:byN(m[1]).c, ar:AR_CAPS[+m[1]]||null};
+  if(m=key.match(/^post:(\d+):title$/))   return {en:byN(m[1]).t, ar:AR_TITLES[+m[1]-1]||null};
+  if(key==="about")   return {en:ABOUT,   ar:AR_ABOUT};
+  if(key==="bullets") return {en:BULLETS, ar:AR_BULLETS};
+  if(m=key.match(/^headline:(\d+)$/)) return {en:HEADLINES[+m[1]].t, ar:AR_HEADLINES[+m[1]]||null};
+  if(m=key.match(/^tpl:(\d+)$/))      return {en:TEMPLATES[+m[1]].s, ar:null};
+  return {en:null,ar:null};
+}
+function txt(key,lang){ const o=S.txt[key]||{}; const v=o[lang]; return (v!=null&&v!=="")?v:baseOf(key)[lang]; }
+const isEdited=(key,lang)=>!!(S.txt[key]&&S.txt[key][lang]!=null&&S.txt[key].src===lang);
+const isTranslated=(key,lang)=>!!(S.txt[key]&&S.txt[key][lang]!=null&&S.txt[key].src&&S.txt[key].src!==lang);
+const titleOf=p=>txt("post:"+p.n+":title",S.lang==="ar"?"ar":"en")||p.t;
+const suffixOf=key=>{const m=key.match(/^post:(\d+):caption$/);return m?"\n\n"+byN(m[1]).h.join(" "):"";};
+
+/* ---------- translation ---------- */
+function trPrompt(src,from,to){
+  const F=from==="ar"?"Arabic":"English", TO=to==="ar"?"Arabic":"English";
+  return "Translate the LinkedIn copy below from "+F+" into "+TO+".\n\n"
+   +"Context: the author leads people and fleet operations in Dubai, writing about HR, deploying AI to frontline non-desk workers, and electric fleet operations. Register: polished executive thought leadership. The result must read as native LinkedIn copy in "+TO+", not a literal gloss.\n\n"
+   +"Rules:\n"
+   +"- Reproduce every [[PLACEHOLDER]] token EXACTLY as it appears, in Latin script, unchanged, in the same position.\n"
+   +"- Preserve the paragraph structure and every blank line exactly.\n"
+   +"- Bullet arrows: use → in English, ← in Arabic.\n"
+   +"- Keep proper nouns (Ecosine Transports, Max, Yulisa, LinkedIn, Dubai) correct in the target language.\n"
+   +"- Output ONLY the translated text: no preamble, no notes, no surrounding quotation marks.\n\n"
+   +"TEXT:\n<<<\n"+src+"\n>>>";
+}
+async function doTranslate(key,from,to){
+  const s=await getSample(); if(!s){toast(t("trUnavail"));return;}
+  const src=txt(key,from); if(!src)return;
+  TRANS[key+":"+to]=1; render();
+  try{
+    const out=await s(trPrompt(src,from,to),{modelTier:"default",cache:false});
+    let text=String(out&&out.text||"").trim().replace(/^<<<\s*/,"").replace(/\s*>>>$/,"");
+    if(!text) throw new Error("empty");
+    S.txt[key]=S.txt[key]||{}; S.txt[key][to]=text; S.txt[key].src=from; save();
+    delete TRANS[key+":"+to]; render();
+    toast(phSet(src)===phSet(text)?t("trDone"):t("phWarn"));
+  }catch(e){ delete TRANS[key+":"+to]; render(); toast(t("trFail")); }
+}
+
+let tT; function toast(m){const el=$("#toast");el.textContent=m;el.classList.add("on");clearTimeout(tT);tT=setTimeout(()=>el.classList.remove("on"),3200);}
+async function copyText(text,label){
   const n=phCount(text);
   if(n&&!confirm(n+" placeholder"+(n>1?"s":"")+" still unfilled in this copy.\n\nCopy anyway?"))return;
-  try{await navigator.clipboard.writeText(text);toast(label+" copied"+(n?" — "+n+" placeholder"+(n>1?"s":"")+" still in it":""));}
+  try{await navigator.clipboard.writeText(text);toast(label+" ✓"+(n?" — "+n+" "+t("phLeft"):""));}
   catch(e){toast("Copy blocked by the browser — select the text and copy manually");}
 }
-function counter(len,lim){const pct=len/lim;const cls=pct>1?"over":pct>.9?"warn":"";return '<span class="count '+cls+'">'+len.toLocaleString()+" / "+lim.toLocaleString()+" chars</span>";}
-function dayNow(){ if(!S.start)return null; const a=new Date(S.start+"T00:00:00"), b=new Date(); b.setHours(0,0,0,0);
-  return Math.floor((b-a)/86400000)+1; }
-function postFor(day){ return POSTS.find(p=>p.d===day)||null; }
-function nextPost(day){ return POSTS.find(p=>p.d>=day)||null; }
+function counter(len,lim){const p=len/lim;return '<span class="count '+(p>1?"over":p>.9?"warn":"")+'">'+len.toLocaleString()+" / "+lim.toLocaleString()+" "+t("chars")+"</span>";}
 
-/* ---------- sections ---------- */
+/* ---------- editable bilingual field ---------- */
+function pane(key,lang,o){
+  const val=txt(key,lang), editing=EDIT&&EDIT.key===key&&EDIT.lang===lang, dir=lang==="ar"?"rtl":"ltr";
+  const busy=TRANS[key+":"+lang];
+  const label='<div class="pane-label"><b>'+(lang==="ar"?t("arabic"):t("english"))+"</b>"
+    +(isEdited(key,lang)?'<span class="edited">'+t("edited")+"</span>":isTranslated(key,lang)?'<span class="edited" style="color:var(--accent-ink)">'+t("trDone")+"</span>":"")
+    +(busy?'<span class="tr"><span class="dot-pulse"></span> '+t("translating")+"…</span>":"")+"</div>";
+  if(editing) return '<div class="pane">'+label
+    +'<textarea class="ed'+(o.short?" short":"")+'" dir="'+dir+'" data-ta="'+key+"|"+lang+'">'+esc(val||"")+"</textarea>"
+    +'<div class="row"><button class="btn primary" data-save="'+key+"|"+lang+'|1">'+t("saveTr")+"</button>"
+    +'<button class="btn" data-save="'+key+"|"+lang+'|0">'+t("save")+"</button>"
+    +'<button class="btn" data-canceledit="1">'+t("cancel")+"</button></div></div>";
+  if(val==null||val==="") return '<div class="pane">'+label
+    +'<div class="empty">'+(lang==="ar"?t("noAr"):t("noEn"))
+    +'<div class="row" style="justify-content:center;margin-top:10px">'
+    +'<button class="btn" data-tr="'+key+"|"+lang+'">'+t("trThis")+"</button>"
+    +'<button class="btn" data-edit="'+key+"|"+lang+'">'+t("edit")+"</button></div></div></div>";
+  return '<div class="pane">'+label
+    +'<div class="copyblock" dir="'+dir+'"'+(o.short?' style="font-size:15px"':"")+">"+mark(val)+"</div>"
+    +'<div class="row"><button class="btn'+(o.primary?" primary":"")+'" data-copykey="'+key+"|"+lang+'">'+(o.copyLabel||t("copyPost"))+"</button>"
+    +'<button class="btn" data-edit="'+key+"|"+lang+'">'+t("edit")+"</button>"
+    +(o.limit?counter((val+suffixOf(key)).length,o.limit):"")+"</div></div>";
+}
+function field(key,o){ o=o||{};
+  return S.lang==="both" ? '<div class="bi">'+pane(key,"en",o)+pane(key,"ar",o)+"</div>" : pane(key,S.lang,o);
+}
+
+/* ---------- views ---------- */
+function dayNow(){ if(!S.start)return null; const a=new Date(S.start+"T00:00:00"),b=new Date(); b.setHours(0,0,0,0); return Math.floor((b-a)/86400000)+1; }
+const postFor=d=>POSTS.find(p=>p.d===d)||null, nextPost=d=>POSTS.find(p=>p.d>=d)||null;
+
 function vToday(){
-  const day=dayNow(), gaps=POSTS.filter(p=>!S.pub[p.n]).reduce((a,p)=>a+phCount(fullText(p)),0);
+  const day=dayNow(), gaps=POSTS.filter(p=>!S.pub[p.n]).reduce((a,p)=>a+phCount(txt("post:"+p.n+":caption","en")),0);
   const done=POSTS.filter(p=>S.pub[p.n]).length;
   let hero;
   if(day===null){
-    hero='<div class="card hero"><div class="day-badge">Not started</div><h3>Set your start date to arm the board</h3>'
-      +'<p style="color:var(--ink-2);max-width:56ch">Pick the day Post 01 goes live. Everything else — which post is due, how many days remain, what still needs filling in — is computed from it.</p></div>';
-  } else {
+    hero='<div class="card hero"><div class="day-badge">'+t("notStarted")+'</div><h3>'+t("setStart")+'</h3><p style="color:var(--ink-2);max-width:56ch">'+t("setStartBody")+"</p></div>";
+  }else{
     const p=postFor(day), np=nextPost(day), show=p||np;
-    if(!show){ hero='<div class="card hero"><div class="day-badge">Day '+day+' · complete</div><h3>All 30 posts dispatched.</h3><p style="color:var(--ink-2)">Rebuild the next calendar from your top five posts by <b>saves</b>, not by reach.</p></div>'; }
+    if(!show) hero='<div class="card hero"><div class="day-badge">'+t("day")+" "+day+'</div><h3>'+t("allDone")+'</h3><p style="color:var(--ink-2)">'+t("allDoneBody")+"</p></div>";
     else{
-      const g=phCount(fullText(show));
-      const bar=g?`<div class="ticks">${Array.from({length:Math.min(g,26)},()=>"<i></i>").join("")}</div>`:`<div class="meter"><i style="width:100%"></i></div>`;
-      hero='<div class="card hero" style="--pc:'+PILLARS[show.p].c+';border-left:3px solid '+PILLARS[show.p].c+'">'
-        +'<div class="day-badge">'+(p?"Due today":"Next up")+' · Day '+show.d+' of 60 · Post '+String(show.n).padStart(2,"0")+'</div>'
-        +'<h3>'+esc(show.t)+'</h3>'
-        +'<div class="post-meta"><span>'+PILLARS[show.p].n+'</span><i class="dot"></i><span>'+AUD[show.a]+'</span><i class="dot"></i><span>'+esc(show.f)+'</span></div>'
-        +'<div class="meterbox">'+bar
-        +'<div class="eyebrow" style="color:'+(g?"var(--warn)":"var(--good)")+'">'+(g?g+" placeholder"+(g>1?"s":"")+" left to fill":"Ready to publish")+'</div></div>'
-        +'<div class="row"><button class="btn primary" data-open="'+show.n+'">Open this post</button>'
-        +(p?'<button class="btn" data-pub="'+show.n+'">'+(S.pub[show.n]?"Mark unpublished":"Mark published")+'</button>':'<span class="eyebrow">publishes in '+(show.d-day)+' day'+((show.d-day)>1?"s":"")+'</span>')+'</div></div>';
+      const g=phCount(txt("post:"+show.n+":caption","en"));
+      const bar=g?'<div class="ticks">'+Array.from({length:Math.min(g,26)},()=>"<i></i>").join("")+"</div>"
+                 :'<div class="meter"><i style="width:100%"></i></div>';
+      hero='<div class="card hero" style="border-inline-start:3px solid '+PILLARS[show.p].c+'">'
+       +'<div class="day-badge">'+(p?t("dueToday"):t("nextUp"))+" · "+t("day")+" "+show.d+" "+t("of")+" 60 · "+t("post")+" "+String(show.n).padStart(2,"0")+"</div>"
+       +"<h3>"+esc(titleOf(show))+"</h3>"
+       +'<div class="post-meta"><span>'+pil(show.p)+'</span><i class="dot"></i><span>'+aud(show.a)+'</span><i class="dot"></i><span>'+esc(fmt(show.f))+"</span></div>"
+       +'<div class="meterbox">'+bar+'<div class="eyebrow" style="color:'+(g?"var(--warn)":"var(--good)")+'">'+(g?phLabel(g):t("readyPub"))+"</div></div>"
+       +'<div class="row"><button class="btn primary" data-open="'+show.n+'">'+t("openPost")+"</button>"
+       +(p?'<button class="btn" data-pub="'+show.n+'">'+(S.pub[show.n]?t("markUnpub"):t("markPub"))+"</button>"
+          :'<span class="eyebrow">'+(show.d-day)+" "+t("day").toLowerCase()+"</span>")+"</div></div>";
     }
   }
-  return '<section class="sec"><div class="today-grid">'+hero
-    +'<div class="stack"><div class="metrics">'
-    +'<div class="card metric"><div class="k">Day</div><div class="v">'+(day===null?"—":Math.max(0,day))+'<span style="font-size:15px;color:var(--ink-3)"> / 60</span></div></div>'
-    +'<div class="card metric"><div class="k">Published</div><div class="v">'+done+'<span style="font-size:15px;color:var(--ink-3)"> / 30</span></div></div>'
-    +'<div class="card metric"><div class="k">Post gaps</div><div class="v" style="color:'+(gaps?"var(--warn)":"var(--good)")+'">'+gaps+'</div></div>'
-    +'<div class="card metric"><div class="k">Cadence</div><div class="v">48<span style="font-size:15px;color:var(--ink-3)"> hrs</span></div></div>'
-    +'</div><div class="card setup"><label for="sd">Start date (Post 01 goes live)</label><input type="date" id="sd" value="'+(S.start||"")+'"></div>'
-    +'<div class="note"><b>The one rule:</b> nothing on this board contains an invented statistic. Every <span class="ph">[[BRACKET]]</span> is a slot for a real figure from your operation. Copying one out to LinkedIn is the only way this system can hurt you — so the copy button warns you first.</div>'
-    +'</div></div></section>';
+  return '<section class="sec"><div class="today-grid">'+hero+'<div class="stack"><div class="metrics">'
+   +'<div class="card metric"><div class="k">'+t("day")+'</div><div class="v">'+(day===null?"—":Math.max(0,day))+'<span style="font-size:15px;color:var(--ink-3)"> / 60</span></div></div>'
+   +'<div class="card metric"><div class="k">'+t("published")+'</div><div class="v">'+done+'<span style="font-size:15px;color:var(--ink-3)"> / 30</span></div></div>'
+   +'<div class="card metric"><div class="k">'+t("postGaps")+'</div><div class="v" style="color:'+(gaps?"var(--warn)":"var(--good)")+'">'+gaps+"</div></div>"
+   +'<div class="card metric"><div class="k">'+t("cadence")+'</div><div class="v">48<span style="font-size:15px;color:var(--ink-3)"> '+t("hrs")+"</span></div></div>"
+   +'</div><div class="card setup"><label for="sd">'+t("startDate")+'</label><input type="date" id="sd" value="'+(S.start||"")+'"></div>'
+   +'<div class="note"><b>'+t("oneRule")+"</b> "+t("oneRuleBody")+"</div></div></div></section>";
 }
 function card(p){
-  const g=phCount(fullText(p));
+  const g=phCount(txt("post:"+p.n+":caption","en")), both=S.lang==="both";
   return '<button class="card post'+(S.pub[p.n]?" done":"")+'" style="--pc:'+PILLARS[p.p].c+'" data-open="'+p.n+'">'
-   +'<div class="post-top"><span class="post-n">'+String(p.n).padStart(2,"0")+'</span>'
-   +(S.pub[p.n]?'<span class="eyebrow" style="color:var(--good)">published</span>':'')
-   +'<span class="post-day">Day '+p.d+'</span></div>'
-   +'<h4>'+esc(p.t)+'</h4>'
-   +'<div class="post-meta"><span style="color:'+PILLARS[p.p].c+'">'+PILLARS[p.p].n+'</span><i class="dot"></i><span>'+esc(p.f)+'</span>'
-   +'<span class="gaps'+(g?"":" zero")+'">'+(g?g+" gaps":"ready")+'</span></div></button>';
+   +'<div class="post-top"><span class="post-n">'+String(p.n).padStart(2,"0")+"</span>"
+   +(S.pub[p.n]?'<span class="eyebrow" style="color:var(--good)">'+t("published")+"</span>":"")
+   +'<span class="post-day">'+t("day")+" "+p.d+"</span></div>"
+   +"<h4>"+esc(titleOf(p))+"</h4>"
+   +(both&&txt("post:"+p.n+":title","ar")?'<h4 class="ar" dir="rtl" style="font-weight:500;color:var(--ink-2);margin-top:-4px">'+esc(txt("post:"+p.n+":title","ar"))+"</h4>":"")
+   +'<div class="post-meta"><span style="color:'+PILLARS[p.p].c+'">'+pil(p.p)+'</span><i class="dot"></i><span>'+esc(fmt(p.f))+"</span>"
+   +'<span class="gaps'+(g?"":" zero")+'">'+(g?gapLabel(g):t("ready"))+"</span></div></button>";
 }
 function detail(p,closable){
-  const txt=fullText(p), g=phCount(txt);
+  const g=phCount(txt("post:"+p.n+":caption","en"));
   return '<div class="card detail" style="--pc:'+PILLARS[p.p].c+'">'
-   +'<div class="detail-head"><div style="flex:1"><div class="eyebrow" style="color:'+PILLARS[p.p].c+'">Post '+String(p.n).padStart(2,"0")+' · Day '+p.d+' · '+PILLARS[p.p].n+' · '+AUD[p.a]+' · '+esc(p.f)+'</div>'
-   +'<h3 style="margin-top:6px">'+esc(p.t)+'</h3></div>'+(closable?'<button class="btn" data-close="1">Close</button>':'')+'</div>'
-   +'<div class="copyblock">'+mark(p.c)+'</div>'
-   +'<div class="row"><button class="btn primary" data-copy="'+p.n+'">Copy post</button>'
-   +'<button class="btn" data-pub="'+p.n+'">'+(S.pub[p.n]?"Mark unpublished":"Mark published")+'</button>'
-   +counter(txt.length,LIMIT)+'</div>'
-   +(g?'<div class="row"><span class="eyebrow" style="color:var(--warn)">'+g+' placeholder'+(g>1?"s":"")+' must be filled before this goes out</span></div>':'')
-   +'<dl class="kv"><dt>Hashtags</dt><dd class="tag">'+p.h.join(" ")+'</dd>'
-   +'<dt>Media</dt><dd>'+esc(p.m)+'</dd>'
-   +'<dt>Call to action</dt><dd>'+esc(p.q)+'</dd></dl>'
-   +(DRAFT_NOTES[p.n]?'<div class="rationale"><b>Why it is built this way.</b> '+DRAFT_NOTES[p.n]+'</div>':'')
-   +(p.n===3?'<div class="rationale"><b>Disclosure check before publishing.</b><br>'+DISCLOSURE.map(d=>"▪ "+esc(d)).join("<br>")+'</div>':'')
-   +'</div>';
+   +'<div class="detail-head"><div style="flex:1"><div class="eyebrow" style="color:'+PILLARS[p.p].c+'">'+t("post")+" "+String(p.n).padStart(2,"0")+" · "+t("day")+" "+p.d+" · "+pil(p.p)+" · "+aud(p.a)+" · "+esc(fmt(p.f))+"</div>"
+   +'<h3 style="margin-top:6px">'+esc(titleOf(p))+"</h3></div>"
+   +(closable?'<button class="btn" data-close="1">'+t("close")+"</button>":"")+"</div>"
+   +field("post:"+p.n+":caption",{limit:LIMIT,primary:true,copyLabel:t("copyPost")})
+   +'<div class="row"><button class="btn" data-pub="'+p.n+'">'+(S.pub[p.n]?t("markUnpub"):t("markPub"))+"</button>"
+   +(g?'<span class="eyebrow" style="color:var(--warn)">'+gapLabel(g)+" "+t("phMust")+"</span>":"")+"</div>"
+   +'<dl class="kv"><dt>'+t("hashtags")+'</dt><dd class="tag" dir="ltr">'+p.h.join(" ")+"</dd>"
+   +"<dt>"+t("media")+"</dt><dd>"+esc(p.m)+"</dd><dt>"+t("cta")+"</dt><dd>"+esc(p.q)+"</dd></dl>"
+   +(DRAFT_NOTES[p.n]?'<div class="rationale" dir="ltr"><b>'+T.why[0]+"</b> "+DRAFT_NOTES[p.n]+"</div>":"")
+   +(p.n===3?'<div class="rationale" dir="ltr"><b>'+T.disclosure[0]+"</b><br>"+DISCLOSURE.map(d=>"▪ "+esc(d)).join("<br>")+"</div>":"")+"</div>";
 }
 function vCalendar(){
-  const chips=[["all","All 30"]].concat(Object.keys(PILLARS).map(k=>[k,PILLARS[k].n]));
+  const chips=[["all",t("all30")]].concat(Object.keys(PILLARS).map(k=>[k,pil(k)]));
   const list=POSTS.filter(p=>(FILT==="all"||p.p===FILT)&&(!HIDE||!S.pub[p.n]));
-  return '<section class="sec"><div class="sec-head"><h2>Calendar</h2><p>Every other day for 60 days. No pillar or format repeats back-to-back — that variety is what keeps three audiences reading one profile.</p></div>'
-   +(SEL?detail(POSTS.find(p=>p.n===SEL),true):"")
-   +'<div class="filters">'+chips.map(([k,n])=>'<button class="chip" data-filt="'+k+'" aria-pressed="'+(FILT===k)+'">'+n+'</button>').join("")
-   +'<button class="chip" data-hide="1" aria-pressed="'+HIDE+'">Hide published</button></div>'
-   +'<div class="board">'+list.map(card).join("")+'</div>'
-   +(list.length?"":'<p style="color:var(--ink-3)">Nothing matches this filter.</p>')+'</section>';
+  return '<section class="sec"><div class="sec-head"><h2>'+t("calendar")+"</h2><p>"+t("calBlurb")+"</p></div>"
+   +(SEL?detail(byN(SEL),true):"")
+   +'<div class="filters">'+chips.map(c=>'<button class="chip" data-filt="'+c[0]+'" aria-pressed="'+(FILT===c[0])+'">'+c[1]+"</button>").join("")
+   +'<button class="chip" data-hide="1" aria-pressed="'+HIDE+'">'+t("hidePub")+"</button></div>"
+   +'<div class="board">'+list.map(card).join("")+"</div>"
+   +(list.length?"":'<p style="color:var(--ink-3)">'+t("noMatch")+"</p>")+"</section>";
 }
 function vDrafts(){
-  return '<section class="sec"><div class="sec-head"><h2>Ready to publish</h2><p>The first three posts in full, with the reasoning behind every structural choice. Fill the placeholders, copy, publish.</p></div>'
-   +'<div class="stack">'+POSTS.slice(0,3).map(p=>detail(p,false)).join("")+'</div></section>';
+  return '<section class="sec"><div class="sec-head"><h2>'+t("draftsH")+"</h2><p>"+t("draftsBlurb")+"</p></div>"
+   +'<div class="stack">'+POSTS.slice(0,3).map(p=>detail(p,false)).join("")+"</div></section>";
 }
 function vProfile(){
-  return '<section class="sec"><div class="sec-head"><h2>Profile</h2><p>Ordered by leverage. The headline is the highest-value field on LinkedIn — it appears in the feed, in search, in comments and on every connection request.</p></div>'
-  +'<h3 style="font-size:17px;margin-bottom:12px">Headline — five options</h3><div class="stack">'
-  +HEADLINES.map((h,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:8px"><span style="color:var(--accent-ink)">Option '+(i+1)+'</span><i class="dot"></i><span>'+h.n+'</span>'+(h.rec?'<span class="gaps">recommended</span>':"")+'</div>'
-    +'<div class="copyblock" style="font-size:15px">'+mark(h.t)+'</div>'
-    +'<div class="row"><button class="btn" data-copytext="hl'+i+'">Copy headline</button>'+counter(h.t.length,HL)+'</div>'
-    +'<div class="rationale">'+h.r+'</div></div>').join("")
-  +'</div><div class="note" style="margin-top:14px"><b>Verdict:</b> run Option 1 for the first 30 days while you build a body of work, then switch to Option 5 once you have ten posts of evidence behind it.</div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">About section</h3>'
-  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">Mobile truncates at roughly 250 characters behind a “…see more”. The first three lines are the only part most readers will see — they carry the whole strategy.</p>'
-  +'<div class="copyblock">'+mark(ABOUT)+'</div>'
-  +'<div class="row"><button class="btn primary" data-copytext="about">Copy About</button>'+counter(ABOUT.length,AB)+'</div></div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Experience bullets</h3>'
-  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">Seven is the ceiling — past that nobody reads. Order is deliberate: AI first (your differentiator), HR second (your category), fleet third (your proof), cost last (what an executive reader is scanning for).</p>'
-  +'<div class="copyblock" style="font-size:15px">'+mark(BULLETS)+'</div>'
-  +'<div class="row"><button class="btn" data-copytext="bullets">Copy bullets</button></div></div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Everything else, ranked by leverage</h3>'
-  +'<div class="card scroll"><table><thead><tr><th>Element</th><th>Action</th><th>Why it matters</th></tr></thead><tbody>'
-  +PROFILE_ROWS.map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td style="color:var(--ink-2)">'+r[2]+'</td></tr>').join("")
-  +'</tbody></table></div>'
-  +'<div class="note" style="margin-top:14px"><b>Do not change everything at once.</b> LinkedIn briefly suppresses reach on profiles with simultaneous large edits, and you lose the ability to attribute what worked. Day 0: headline, About, URL, photo, banner. Day 7: experience and skills. Day 14: Featured. Day 21: recommendations and services. Day 30: review the headline switch.</div></section>';
+  return '<section class="sec"><div class="sec-head"><h2>'+t("profile")+"</h2><p>"+t("profBlurb")+"</p></div>"
+  +'<h3 style="font-size:17px;margin-bottom:12px">'+t("headlines")+"</h3><div class=\"stack\">"
+  +HEADLINES.map((h,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:10px"><span style="color:var(--accent-ink)">'+t("option")+" "+(i+1)+'</span><i class="dot"></i><span dir="ltr">'+h.n+"</span>"+(h.rec?'<span class="gaps">'+t("recommended")+"</span>":"")+"</div>"
+    +field("headline:"+i,{short:true,limit:HL,copyLabel:t("copyHl")})
+    +'<div class="rationale" dir="ltr">'+h.r+"</div></div>").join("")
+  +'</div><div class="note" style="margin-top:14px"><b>'+t("verdict")+"</b> "+t("verdictBody")+"</div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("aboutH")+"</h3>"
+  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">'+t("aboutNote")+"</p>"
+  +field("about",{limit:AB,primary:true,copyLabel:t("copyAbout")})+"</div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("bulletsH")+"</h3>"
+  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">'+t("bulletsNote")+"</p>"
+  +field("bullets",{copyLabel:t("copyBullets")})+"</div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("restH")+"</h3>"
+  +'<div class="card scroll"><table dir="ltr"><thead><tr><th>'+T.element[0]+"</th><th>"+T.action[0]+"</th><th>"+T.whyMatters[0]+"</th></tr></thead><tbody>"
+  +PROFILE_ROWS.map(r=>"<tr><td><b>"+r[0]+"</b></td><td>"+r[1]+'</td><td style="color:var(--ink-2)">'+r[2]+"</td></tr>").join("")
+  +'</tbody></table></div><div class="note" style="margin-top:14px"><b>'+t("stageNote")+"</b> "+t("stageBody")+"</div></section>";
 }
 function vTemplates(){
-  return '<section class="sec"><div class="sec-head"><h2>Templates</h2><p>Four frameworks in your register. Each is a shape, not a script.</p></div>'
-  +'<div class="note" style="margin-bottom:16px"><b>Rules that apply to all four.</b> The first 210 characters are the entire post · one idea per post · single-line paragraphs · never open with a greeting · no external links in the body (first comment instead) · close with a question you actually want answered · numbers over adjectives.</div>'
-  +'<div class="stack">'+TEMPLATES.map((t,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:8px"><span style="color:var(--accent-ink)">'+esc(t.n)+'</span><i class="dot"></i><span>'+t.len+'</span></div>'
-   +'<p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">'+esc(t.use)+'</p>'
-   +'<div class="copyblock" style="font-size:15px">'+mark(t.s)+'</div>'
-   +'<div class="row"><button class="btn" data-copytext="tpl'+i+'">Copy skeleton</button></div>'
-   +'<div class="rationale">'+t.r+'</div></div>').join("")+'</div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Hook bank</h3>'
-  +'<div class="card scroll"><table><thead><tr><th>Shape</th><th>Opening</th></tr></thead><tbody>'
-  +HOOKS.map(h=>'<tr><td style="white-space:nowrap"><b>'+h[0]+'</b></td><td style="font-family:var(--read);font-size:15px">'+mark(h[1])+'</td></tr>').join("")
-  +'</tbody></table></div></section>';
+  return '<section class="sec"><div class="sec-head"><h2>'+t("templates")+"</h2><p>"+t("tplBlurb")+"</p></div>"
+  +'<div class="note" style="margin-bottom:16px"><b>'+t("tplRules")+"</b> "+t("tplRulesBody")+"</div>"
+  +'<div class="stack">'+TEMPLATES.map((tp,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:8px"><span style="color:var(--accent-ink)" dir="ltr">'+esc(tp.n)+'</span><i class="dot"></i><span dir="ltr">'+tp.len+"</span></div>"
+   +'<p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px" dir="ltr">'+esc(tp.use)+"</p>"
+   +field("tpl:"+i,{short:true,copyLabel:t("copySkel")})
+   +'<div class="rationale" dir="ltr">'+tp.r+"</div></div>").join("")+"</div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("hookBank")+"</h3>"
+  +'<div class="card scroll"><table dir="ltr"><thead><tr><th>'+T.shape[0]+"</th><th>"+T.opening[0]+"</th></tr></thead><tbody>"
+  +HOOKS.map(h=>'<tr><td style="white-space:nowrap"><b>'+h[0]+'</b></td><td style="font-family:var(--read);font-size:15px">'+mark(h[1])+"</td></tr>").join("")
+  +"</tbody></table></div></section>";
 }
 function vWorkflow(){
-  const groups=Object.keys(CHECKS).map(g=>'<div class="card pad"><h4>'+g+'</h4>'
-    +CHECKS[g].map((c,i)=>{const id=g+"-"+i;return '<label class="check'+(S.chk[id]?" on":"")+'"><input type="checkbox" data-chk="'+id+'"'+(S.chk[id]?" checked":"")+'><span>'+esc(c)+'</span></label>';}).join("")+'</div>').join("");
+  const groups=Object.keys(CHECKS).map(g=>'<div class="card pad"><h4 dir="ltr">'+g+"</h4>"
+    +CHECKS[g].map((c,i)=>{const id=g+"-"+i;return '<label class="check'+(S.chk[id]?" on":"")+'" dir="ltr"><input type="checkbox" data-chk="'+id+'"'+(S.chk[id]?" checked":"")+"><span>"+esc(c)+"</span></label>";}).join("")+"</div>").join("");
   const done=Object.values(S.chk).filter(Boolean).length, tot=Object.values(CHECKS).flat().length;
-  return '<section class="sec"><div class="sec-head"><h2>Workflow</h2><p>About 2.5 hours a week, concentrated into one batching session plus short daily engagement windows.</p></div>'
-  +'<div class="note" style="margin-bottom:16px"><b>Batch on Sunday, 90 minutes.</b> Pull the real numbers from your systems <i>first</i>, before writing — writing around a number you haven\'t checked produces a post you can\'t publish. Never write a post the morning it publishes; same-day writing is where the placeholder mistakes happen.</div>'
-  +'<div class="row" style="margin:0 0 12px"><span class="eyebrow">Pre-publish checklist — '+done+' / '+tot+' ticked</span><button class="btn" data-reset="1" style="margin-left:auto">Reset checklist</button></div>'
-  +'<div class="grid2">'+groups+'</div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Publish day</h3>'
-  +'<div class="card pad"><dl class="tl">'+TIMELINE.map(t=>'<dt>'+t[0]+'</dt><dd>'+t[1]+'</dd>').join("")+'</dl>'
-  +'<div class="rationale"><b>The golden hour is non-negotiable.</b> LinkedIn tests a post with a small audience in the first 60–90 minutes and expands distribution based on the engagement rate it observes. A post with ten comments in hour one and forty on day two reaches a fraction of the same post with those numbers reversed. If you cannot be present for the hour after publishing, publish on a different day.</div></div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Daily engagement — 20 minutes</h3>'
-  +'<div class="card pad"><p style="font-size:14px;color:var(--ink-2)">Roughly 40% of your growth comes from comments left on <i>other</i> people\'s posts — that is where a new audience discovers you.</p>'
-  +'<dl class="tl" style="margin-top:12px"><dt>5 / day</dt><dd>Comment on five posts from your target audiences.</dd>'
-  +'<dt>Rule</dt><dd>Every comment must add information the original post did not contain — a counter-example, a number, a distinction. Never “Great insight!”</dd>'
-  +'<dt>30–60 wd</dt><dd>Long enough to be substantive, short enough to be read.</dd>'
-  +'<dt>~30</dt><dd>Maintain a target list of about thirty accounts and engage with the same people repeatedly. Recognition compounds.</dd>'
-  +'<dt>24 hrs</dt><dd>Answer every DM within a day, even if the answer is “not right now”.</dd></dl>'
-  +'<div class="rationale">Your headline is doing marketing on every one of these comments. That is why the headline field matters more than it looks.</div></div>'
-  +'<h3 style="font-size:17px;margin:28px 0 12px">Analytics</h3>'
-  +'<div class="card scroll"><table><thead><tr><th>Metric</th><th>Target by day 60</th><th>Why</th></tr></thead><tbody>'
-  +METRICS.map(m=>'<tr'+(m[3]?"":' style="opacity:.6"')+'><td><b>'+m[0]+'</b>'+(m[3]?"":' <span class="eyebrow" style="color:var(--crit)">ignore</span>')+'</td><td class="num">'+m[1]+'</td><td style="color:var(--ink-2)">'+m[2]+'</td></tr>').join("")
-  +'</tbody></table></div>'
-  +'<div class="note" style="margin-top:14px"><b>Judge in blocks of ten, never one post at a time.</b> Weekly: which post got the most saves — write more in that shape. Every ten posts: which pillar is landing, and reweight what remains toward it. Day 30: full audit and the headline switch. Day 60: rebuild the next calendar from your top five by saves, not by reach.</div></section>';
+  return '<section class="sec"><div class="sec-head"><h2>'+t("workflow")+"</h2><p>"+t("wfBlurb")+"</p></div>"
+  +'<div class="note" style="margin-bottom:16px"><b>'+t("batch")+"</b> "+t("batchBody")+"</div>"
+  +'<div class="row" style="margin:0 0 12px"><span class="eyebrow" id="ckc">'+t("checklist")+" — "+done+" / "+tot+" "+t("ticked")+'</span><button class="btn" data-reset="1" style="margin-inline-start:auto">'+t("reset")+"</button></div>"
+  +'<div class="grid2">'+groups+"</div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("pubDay")+"</h3>"
+  +'<div class="card pad"><dl class="tl" dir="ltr">'+TIMELINE.map(x=>"<dt>"+x[0]+"</dt><dd>"+x[1]+"</dd>").join("")+"</dl>"
+  +'<div class="rationale"><b>'+t("golden")+"</b> "+t("goldenBody")+"</div></div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("dailyH")+"</h3>"
+  +'<div class="card pad"><p style="font-size:14px;color:var(--ink-2)">'+t("dailyBody")+"</p>"
+  +'<dl class="tl" style="margin-top:12px" dir="ltr"><dt>5 / day</dt><dd>Comment on five posts from your target audiences.</dd>'
+  +"<dt>Rule</dt><dd>Every comment must add information the original post did not contain — a counter-example, a number, a distinction. Never “Great insight!”</dd>"
+  +"<dt>30–60 wd</dt><dd>Long enough to be substantive, short enough to be read.</dd>"
+  +"<dt>~30</dt><dd>Maintain a target list of about thirty accounts and engage with the same people repeatedly. Recognition compounds.</dd>"
+  +"<dt>24 hrs</dt><dd>Answer every DM within a day, even if the answer is “not right now”.</dd></dl>"
+  +'<div class="rationale">'+t("headlineNote")+"</div></div>"
+  +'<h3 style="font-size:17px;margin:28px 0 12px">'+t("analytics")+"</h3>"
+  +'<div class="card scroll"><table dir="ltr"><thead><tr><th>'+T.metric[0]+"</th><th>"+T.target60[0]+"</th><th>"+T.whyCol[0]+"</th></tr></thead><tbody>"
+  +METRICS.map(m=>"<tr"+(m[3]?"":' style="opacity:.6"')+"><td><b>"+m[0]+"</b>"+(m[3]?"":' <span class="eyebrow" style="color:var(--crit)">'+T.ignore[0]+"</span>")+'</td><td class="num">'+m[1]+'</td><td style="color:var(--ink-2)">'+m[2]+"</td></tr>").join("")
+  +'</tbody></table></div><div class="note" style="margin-top:14px"><b>'+t("judge")+"</b> "+t("judgeBody")+"</div></section>";
 }
 
-const VIEWS={today:["Today",vToday],calendar:["Calendar",vCalendar],drafts:["Drafts",vDrafts],profile:["Profile",vProfile],templates:["Templates",vTemplates],workflow:["Workflow",vWorkflow]};
+const VIEWS={today:["today",vToday],calendar:["calendar",vCalendar],drafts:["drafts",vDrafts],profile:["profile",vProfile],templates:["templates",vTemplates],workflow:["workflow",vWorkflow]};
 function render(){
-  $("#tabs").innerHTML=Object.keys(VIEWS).map(k=>'<button class="tab" role="tab" data-tab="'+k+'" aria-selected="'+(TAB===k)+'">'+VIEWS[k][0]+'</button>').join("");
+  applyChrome();
+  $("#brandname").textContent=t("board");
+  $("#tabs").innerHTML=Object.keys(VIEWS).map(k=>'<button class="tab" role="tab" data-tab="'+k+'" aria-selected="'+(TAB===k)+'">'+t(VIEWS[k][0])+"</button>").join("")
+   +'<div class="lang" role="group">'+[["en","langEn"],["ar","langAr"],["both","langBoth"]].map(l=>'<button data-lang="'+l[0]+'" aria-pressed="'+(S.lang===l[0])+'">'+t(l[1])+"</button>").join("")+"</div>"
+   +'<div class="lang" role="group">'+[["auto","themeAuto"],["light","themeLight"],["dark","themeDark"]].map(l=>'<button data-th="'+l[0]+'" aria-pressed="'+((S.theme||"auto")===l[0])+'">'+t(l[1])+"</button>").join("")+"</div>";
   $("#app").innerHTML=VIEWS[TAB][1]();
   const day=dayNow();
-  $("#cadence").textContent=day===null?"30 posts · 60 days":"Day "+Math.max(0,day)+" · "+POSTS.filter(p=>S.pub[p.n]).length+"/30 published";
+  $("#cadence").textContent=day===null?t("posts60"):t("day")+" "+Math.max(0,day)+" · "+POSTS.filter(p=>S.pub[p.n]).length+"/30";
 }
 document.addEventListener("click",e=>{
-  const b=e.target.closest("[data-tab],[data-open],[data-close],[data-filt],[data-hide],[data-copy],[data-copytext],[data-pub],[data-reset]");
-  if(!b)return;
-  const d=b.dataset;
-  if(d.tab){TAB=d.tab;SEL=null;render();window.scrollTo({top:0,behavior:"smooth"});return;}
-  if(d.open){SEL=+d.open;TAB="calendar";render();const el=$(".detail");if(el)el.scrollIntoView({block:"start",behavior:"smooth"});return;}
+  const b=e.target.closest("[data-tab],[data-lang],[data-th],[data-open],[data-close],[data-filt],[data-hide],[data-copykey],[data-pub],[data-reset],[data-edit],[data-save],[data-canceledit],[data-tr]");
+  if(!b)return; const d=b.dataset;
+  if(d.tab){TAB=d.tab;SEL=null;EDIT=null;render();window.scrollTo({top:0,behavior:"smooth"});return;}
+  if(d.lang){S.lang=d.lang;EDIT=null;save();render();return;}
+  if(d.th){S.theme=d.th;save();render();return;}
+  if(d.open){SEL=+d.open;TAB="calendar";EDIT=null;render();const el=$(".detail");if(el)el.scrollIntoView({block:"start",behavior:"smooth"});return;}
   if(d.close){SEL=null;render();return;}
   if(d.filt){FILT=d.filt;SEL=null;render();return;}
   if(d.hide){HIDE=!HIDE;render();return;}
-  if(d.pub){S.pub[d.pub]=!S.pub[d.pub];save();render();toast(S.pub[d.pub]?"Post "+d.pub+" marked published":"Post "+d.pub+" reopened");return;}
-  if(d.reset){S.chk={};save();render();toast("Checklist reset");return;}
-  if(d.copy){const p=POSTS.find(x=>x.n==d.copy);copy(fullText(p),"Post "+String(p.n).padStart(2,"0"));return;}
-  if(d.copytext){
-    const k=d.copytext;
-    if(k==="about")copy(ABOUT,"About section");
-    else if(k==="bullets")copy(BULLETS,"Experience bullets");
-    else if(k.startsWith("hl"))copy(HEADLINES[+k.slice(2)].t,"Headline");
-    else if(k.startsWith("tpl"))copy(TEMPLATES[+k.slice(3)].s,"Skeleton");
-    return;
-  }
+  if(d.pub){S.pub[d.pub]=!S.pub[d.pub];save();render();return;}
+  if(d.reset){S.chk={};save();render();toast(t("reset"));return;}
+  if(d.edit){const[k,l]=d.edit.split("|");EDIT={key:k,lang:l};render();const ta=$('[data-ta="'+k+"|"+l+'"]');if(ta){ta.focus();ta.scrollIntoView({block:"center",behavior:"smooth"});}return;}
+  if(d.canceledit){EDIT=null;render();return;}
+  if(d.save){const[k,l,tr]=d.save.split("|");const ta=$('[data-ta="'+k+"|"+l+'"]');if(!ta)return;
+    S.txt[k]=S.txt[k]||{};S.txt[k][l]=ta.value;S.txt[k].src=l;save();EDIT=null;render();toast(t("saved"));
+    if(tr==="1")doTranslate(k,l,l==="ar"?"en":"ar");return;}
+  if(d.tr){const[k,l]=d.tr.split("|");doTranslate(k,l==="ar"?"en":"ar",l);return;}
+  if(d.copykey){const[k,l]=d.copykey.split("|");const v=txt(k,l);if(v)copyText(v+suffixOf(k),b.textContent.trim());return;}
 });
 document.addEventListener("change",e=>{
-  if(e.target.id==="sd"){S.start=e.target.value;save();render();toast(S.start?"Board armed — Day 1 is "+S.start:"Start date cleared");}
+  if(e.target.id==="sd"){S.start=e.target.value;save();render();return;}
   if(e.target.dataset.chk){S.chk[e.target.dataset.chk]=e.target.checked;save();
     e.target.closest(".check").classList.toggle("on",e.target.checked);
     const done=Object.values(S.chk).filter(Boolean).length,tot=Object.values(CHECKS).flat().length;
-    const lbl=$(".sec .eyebrow");if(lbl&&lbl.textContent.includes("ticked"))lbl.textContent="Pre-publish checklist — "+done+" / "+tot+" ticked";}
+    const el=$("#ckc");if(el)el.textContent=t("checklist")+" — "+done+" / "+tot+" "+t("ticked");}
 });
 render();
 </script>

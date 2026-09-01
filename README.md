@@ -50,4 +50,21 @@ It reads the same 30 posts as the calendar and adds the things a document can't 
 - **Progress that persists** — published posts and checklist ticks survive closing the
   tab, and sync across devices where the runtime allows it.
 
+### Bilingual and editable
+
+- **Three language modes** — `EN`, `AR`, `BOTH`. Arabic flips the whole interface to
+  RTL; `BOTH` shows English and Arabic side by side, each pane in its own direction.
+- **Everything is editable in place.** Post captions, the five headlines, the About
+  section, the experience bullets and the four template skeletons. Edits persist.
+- **Edit Arabic, get English automatically.** Save & translate sends the text to Claude
+  from inside the page and fills the other language. It works in both directions.
+- **The placeholder guard runs on translations too.** If a translation drops or mangles
+  a `[[BRACKET]]`, the page says so instead of quietly saving a broken post.
+- **Theme control** — `AUTO` follows the viewer's system setting; `LIGHT` and `DARK`
+  override it.
+
+Arabic is hand-authored (not machine-translated) for: the entire interface, all 30 post
+titles, the captions for posts 01–03, the About section, all five headlines and the
+experience bullets. Remaining captions translate on demand and are cached.
+
 To update it: edit `board/dispatch-board.html` and republish to the same URL.
