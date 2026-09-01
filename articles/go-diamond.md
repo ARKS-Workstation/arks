@@ -160,3 +160,51 @@ Use **`brand/arks-banner-c-index.png`** cropped to 1920×1080, or a real photogr
 driver's phone showing the Uber Pro tier screen, shot over the shoulder in a vehicle, face
 not identifiable. The second is far stronger if you can get consent for it — it is the
 exact object the whole article is about.
+
+---
+
+## COMPANION FEED POST
+
+Publish the morning after the article. Article link goes in your own first comment,
+never in the post body — links in the body suppress reach.
+
+---
+
+A driver at Diamond, the top Uber Pro tier, gets materially more trips than a driver below it. In what I could measure, roughly twenty percent more.
+
+The tier is not a badge. It is a dispatch advantage.
+
+Which means the gap between a Diamond driver and a Blue driver is not a fifty-dirham difference in rewards. It compounds every day, in volume, before either man has turned a wheel.
+
+Our drivers were losing that advantage without knowing the advantage existed.
+
+They were not lazy. These men work brutally long hours. They were uninformed — and uninformed is a completely different problem, because uninformed is fixable.
+
+A completed trip earns one point. The same trip inside a peak window earns three. So a driver grinding ten hours in dead time finishes the quarter behind one who worked six focused hours around the peaks.
+
+Almost none of ours knew that. It is published in the Driver app. It is simply never explained to the man whose income depends on it.
+
+So I stopped buying training days and built the system instead.
+
+I wrote up how we did it — link in the first comment.
+
+What does your fleet assume its drivers already know?
+
+#Dubai #FleetManagement #DriverTraining #UberPro #Mobility
+
+---
+
+**First comment (post it yourself, immediately):**
+
+> Full write-up here: [article link] — the tier mechanics, why the training market sells
+> attendance instead of behaviour change, and the four decisions that shaped what we built.
+
+## THREE-LINE ABSTRACT
+
+For a DM, an intro, a proposal cover note, or the Featured section description.
+
+> Uber Pro's top tier is worth roughly twenty percent more trips — a dispatch advantage,
+> not a badge. Our drivers were losing it because nobody had explained the scoring rules
+> to them. So I built GO DIAMOND: fourteen modules in five languages, tested at an eighty
+> percent pass mark, with exportable evidence of who passed what and what happened to
+> their rating afterwards. It runs across Ecosine Transports and Egari Luxury Cars.
