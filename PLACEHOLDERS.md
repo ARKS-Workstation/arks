@@ -29,10 +29,14 @@ grep -rno '\[\[[^]]*\]\]' . | sort
 | Current About section (paste as-is) | |
 
 ### Operation
+
+*Answered so far: fleet size **140 EVs**, electric fleet running **3 years**.
+Both propagated across the calendar, drafts, profile and board.*
+
 | Field | Value |
 |---|---|
 | Driver headcount | |
-| Fleet size (number of EVs) | |
+| Fleet size (number of EVs) | **140** ✅ |
 | Number of languages across the workforce | |
 | How long Max and Yulisa have been live | |
 | Years of accumulated operational knowledge in the manual | |

@@ -29,7 +29,7 @@ not accommodate a two-hour training webinar. And consequences that are physical 
 than reputational.
 
 I lead people and fleet operations at Ecosine Transports in Dubai. Our workforce is
-[[HEADCOUNT]] professional drivers running [[FLEET SIZE]] electric vehicles. Over the
+[[HEADCOUNT]] professional drivers running 140 electric vehicles. Over the
 last [[TIMEFRAME]] we have put two AI assistants into live operation with them. Not a
 pilot. Production, with real consequences when it goes wrong.
 
@@ -79,7 +79,7 @@ Because I promise it wasn't the model.
 ## Placeholders in this post
 
 1. `[[HEADCOUNT]]` — number of drivers
-2. `[[FLEET SIZE]]` — number of EVs
+2. `140` — number of EVs
 3. `[[TIMEFRAME]]` — how long the assistants have been live
 4. `[[TIMEFRAME]]` — years of accumulated operational knowledge
 5. `[[PROPORTION]]` — how much longer the content work took than the build

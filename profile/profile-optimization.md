@@ -88,7 +88,7 @@ at a desk.
 I work on the other ninety percent.
 
 I lead people and fleet operations at Ecosine Transports in Dubai, where our workforce
-is [[HEADCOUNT, e.g. 120]] professional drivers operating a fleet of [[FLEET SIZE]]
+is [[HEADCOUNT, e.g. 120]] professional drivers operating a fleet of 140
 electric vehicles. They do not have corporate email. They work across
 [[NUMBER]] languages. They operate in 45°C heat on schedules where a wrong answer is
 not an inconvenience — it is a safety event.
@@ -160,7 +160,7 @@ each bullet with a verb and ending it with a number.
 **One-line role summary (put this first, before the bullets):**
 
 > People and operations lead for an electric transport fleet — accountable for
-> [[HEADCOUNT]] drivers, [[FLEET SIZE]] vehicles, and the AI systems that support both.
+> [[HEADCOUNT]] drivers, 140 vehicles, and the AI systems that support both.
 
 **Bullets:**
 
@@ -176,7 +176,7 @@ each bullet with a verb and ending it with a number.
 ▪ Rebuilt the end-to-end hiring and onboarding pipeline for a non-desk, multilingual
   workforce, cutting time-to-productivity by [[FIGURE]] across [[NUMBER]] languages.
 
-▪ Own charging strategy and roster optimisation for a [[FLEET SIZE]]-vehicle EV fleet,
+▪ Own charging strategy and roster optimisation for a 140-vehicle EV fleet,
   improving [[UTILISATION / ENERGY PER KM / COST PER KM]] by [[FIGURE]].
 
 ▪ Introduced a driver-behaviour programme linking telematics data to coaching,

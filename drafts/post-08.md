@@ -3,10 +3,11 @@
 **Title:** Range anxiety is a management problem, not a battery problem
 **Format:** Native text + 1 photo (your vehicles on charge, at your depot)
 **Publish:** Day 15, 07:30 GST
-**Length:** ~1,790 characters (limit 3,000)
+**Length:** ~1,830 characters (limit 3,000)
 
-> **3 placeholders remain.** The three operational changes are written out in full —
-> confirm they match what you actually did before publishing. The figures are yours.
+> **2 placeholders remain**, both in the closing line: the incident counts before and
+> after. Everything else is filled. The three operational changes are written out in
+> full — confirm they match what you actually did before publishing.
 
 ---
 
@@ -18,8 +19,8 @@ Range anxiety is a management problem, not a battery problem.
 
 Every fleet electrification objection I hear starts with range.
 
-After [[TIMEFRAME]] of operating [[FLEET SIZE]] electric vehicles in Dubai, I can tell
-you that range has almost never been our constraint. Scheduling has.
+Three years into running an electric fleet — 140 vehicles today — I can tell you
+that range has almost never been our constraint. Scheduling has.
 
 The vehicle can do the distance. The question is whether your roster, your charging
 windows, and your dispatch logic were designed by someone who understands that an EV
@@ -43,7 +44,8 @@ schedule where a vehicle was already stationary — loading, breaks, shift chang
 put charging there, instead of treating it as a separate depot event that everything
 else had to be scheduled around.
 
-[[RESULT METRIC]]
+In the twelve months since, we have had [[N]] duties cut short for state of charge.
+In the twelve months before, it was [[N]].
 
 Range is where the conversation starts because it's the number on the spec sheet. It is
 rarely where the problem lives.
@@ -52,25 +54,25 @@ rarely where the problem lives.
 
 ---
 
-## The 3 figures still needed
+## What is filled, and what is left
 
-| Placeholder | What it needs | Example shape |
-|---|---|---|
-| `[[TIMEFRAME]]` | How long you have run the electric fleet | "eighteen months" |
-| `[[FLEET SIZE]]` | Number of EVs | "40" |
-| `[[RESULT METRIC]]` | One sentence, one number — see below | |
+| | |
+|---|---|
+| Fleet age | **Three years** — phrased as "three years into running an electric fleet" so it does not imply the fleet was 140 vehicles for all three years |
+| Fleet size | **140 vehicles today** |
+| Result line | Incidents shape, per your choice. **Two counts still needed.** |
 
-**Three shapes for the result line.** Pick whichever you can actually evidence:
+**The two numbers:**
 
-1. *Capacity* — "We now run the same schedule on [[N]] fewer charge points than our
-   original plan called for."
-2. *Utilisation* — "Vehicle utilisation moved from [[BEFORE]] to [[AFTER]] over
-   [[PERIOD]], on the same fleet."
-3. *Incidents* — "In [[PERIOD]] since, we have had [[N]] duties cut short for state of
-   charge. Before the change it was [[N]] a [[WEEK/MONTH]]."
+1. Duties cut short for state of charge **in the last twelve months**
+2. The same count **in the twelve months before** the three changes
 
-Option 3 is the strongest if you have it — it answers the objection in the headline
-directly, with the one number a sceptical fleet manager actually wants.
+The twelve-month window is my assumption. If your comparison sits more naturally at
+six months, or against a specific quarter, say so and the sentence changes with it.
+
+If you do not track this precisely, say so rather than estimating. The incidents line
+is the strongest close available to this post, but a soft version of a different metric
+beats a hard number you cannot produce when a fleet manager asks.
 
 ---
 
@@ -91,6 +93,6 @@ directly, with the one number a sceptical fleet manager actually wants.
       history, not opinion
 - [ ] The 80% charging practice is genuinely yours; if you charge to 100% for
       operational reasons, cut change 2 and replace it, or say why
-- [ ] `[[FLEET SIZE]]` and `[[TIMEFRAME]]` cleared for public disclosure
+- [ ] The 140-vehicle figure and the three-year history are cleared for public disclosure
 - [ ] The result metric is one you can produce data for if a fleet manager asks
 - [ ] Photo shows your own vehicles, no client livery, no identifiable driver

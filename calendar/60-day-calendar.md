@@ -231,17 +231,33 @@
 **Caption:**
 > Every fleet electrification objection I hear starts with range.
 >
-> After [[TIMEFRAME]] of operating [[FLEET SIZE]] electric vehicles, I can tell you that
-> range has almost never been our constraint. Scheduling has.
+> Three years into running an electric fleet — 140 vehicles today — I can tell you
+> that range has almost never been our constraint. Scheduling has.
 >
 > The vehicle can do the distance. The question is whether your roster, your charging
 > windows, and your dispatch logic were designed by someone who understands that an EV
 > refuels on a completely different curve to a diesel.
 >
 > We solved range anxiety by changing three things, none of which involved the vehicles:
-> [[CHANGE 1]] · [[CHANGE 2]] · [[CHANGE 3]]
 >
-> [[RESULT METRIC]]
+> → We rostered around state of charge, not distance. A diesel roster can treat every
+> vehicle as interchangeable, because refuelling takes five minutes. An electric one
+> cannot. We started matching the longest duties to the vehicles coming off a full
+> charge, and treating state of charge as a hard scheduling constraint — the same way
+> we treat driver hours.
+>
+> → We stopped charging to 100%. The last twenty percent of a battery charges far more
+> slowly than the first eighty. Holding a vehicle on a charger through that final
+> stretch was costing us depot throughput we could not spare. Charging to 80% and
+> building the roster around it freed capacity without adding a single charge point.
+>
+> → We moved charging into dwell time we already had. We mapped every point in the
+> schedule where a vehicle was already stationary — loading, breaks, shift change —
+> and put charging there, instead of treating it as a separate depot event that
+> everything else had to be scheduled around.
+>
+> In the twelve months since, we have had [[N]] duties cut short for state of charge.
+> In the twelve months before, it was [[N]].
 >
 > Range is where the conversation starts because it's the number on the spec sheet.
 > It is rarely where the problem lives.
@@ -512,7 +528,7 @@
 **Title:** Driver behaviour moves efficiency more than vehicle spec does
 
 **Caption:**
-> We run [[FLEET SIZE]] identical vehicles.
+> We run 140 identical vehicles.
 >
 > The gap between our most efficient and least efficient driver on the same route is
 > [[FIGURE]]%.

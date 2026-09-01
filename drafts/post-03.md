@@ -21,7 +21,7 @@ who has never stood in a Dubai depot in August.
 
 Ours was too.
 
-Here is [[TIMEFRAME]] of real operating data from [[FLEET SIZE]] electric vehicles —
+Here is [[TIMEFRAME]] of real operating data from 140 electric vehicles —
 including the three lines we completely failed to forecast.
 
 The short version:
@@ -60,7 +60,7 @@ WHAT A YEAR OF
 RUNNING AN EV FLEET
 IN 45°C ACTUALLY COSTS
 
-[[FLEET SIZE]] vehicles · [[TIMEFRAME]] · Dubai
+140 vehicles · [[TIMEFRAME]] · Dubai
 
 [[YOUR NAME]]
 ```
@@ -167,7 +167,7 @@ What did your model miss?
 
 ## Placeholders in this post
 
-Caption: `[[TIMEFRAME]]` · `[[FLEET SIZE]]` · 4 × `[[FIGURE]]` · `[[LINE ITEM]]`
+Caption: `[[TIMEFRAME]]` · `140` · 4 × `[[FIGURE]]` · `[[LINE ITEM]]`
 Slides: 8 further figures, `[[YOUR NAME]]`, `[[YOUR LINKEDIN HANDLE]]`
 
 ## Disclosure check before publishing
