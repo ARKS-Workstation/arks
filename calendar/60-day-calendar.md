@@ -14,35 +14,35 @@
 | # | Day | Pillar | Aud | Format | Title |
 |---|---|---|---|---|---|
 | 01 | 1 | P1 | A | Long-form POV | The 90% nobody is building AI for |
-| 02 | 3 | P3 | C | Project spotlight | Meet Max |
-| 03 | 5 | P2 | B | Carousel / data | What a year of EV operations in 45°C actually costs |
+| 02 | 3 | P3 | C | Project spotlight | Meet Max — the AI trainer we built for people who don't read manuals |
+| 03 | 5 | P2 | B | Carousel · 8 slides | What a year of running an EV fleet in 45°C actually costs |
 | 04 | 7 | P1 | A | Short-form | Onboarding is a retention lever wearing an admin disguise |
 | 05 | 9 | P4 | X | Poll | What's actually blocking AI in your HR function? |
 | 06 | 11 | P3 | C | Build note | We taught Yulisa to escalate before we taught her to answer |
-| 07 | 13 | P1 | A | Carousel | The 7-stage onboarding map for a non-desk workforce |
-| 08 | 15 | P2 | B | Long-form | Range anxiety is a management problem |
-| 09 | 17 | P1 | A | Short-form contrarian | "AI will replace recruiters" is the least interesting question |
-| 10 | 19 | P3 | C | Project spotlight | 30 days: Max vs. a human trainer |
-| 11 | 21 | P4 | X | Story | The driver who taught me more than any vendor demo |
-| 12 | 23 | P2 | B | Infographic | The 9 EV cost lines nobody models |
+| 07 | 13 | P1 | A | Carousel · 10 slides | The 7-stage onboarding map for a non-desk workforce |
+| 08 | 15 | P2 | B | Long-form | Range anxiety is a management problem, not a battery problem |
+| 09 | 17 | P1 | A | Contrarian short | "Will AI replace recruiters?" is the least interesting question in HR |
+| 10 | 19 | P3 | C | Project spotlight | We ran Max against a human trainer for 30 days |
+| 11 | 21 | P4 | X | Story | The driver who taught me more about AI adoption than any vendor demo |
+| 12 | 23 | P2 | B | Infographic | The 9 EV fleet cost lines nobody models |
 | 13 | 25 | P1 | A | Long-form | Your AI policy is unreadable to most of your workforce |
-| 14 | 27 | P1 | A | Carousel | 5 HR processes we automated — and 3 we refused to |
-| 15 | 29 | P3 | C | Build note | We gave our AI permission to say "I don't know" |
-| 16 | 31 | P2 | B | POV | Dubai's EV transition will be won in the depot |
-| 17 | 33 | P1 | A | Short-form | The competency gap you can't see on a CV |
-| 18 | 35 | P4 | X | Poll | How does your company measure frontline training? |
-| 19 | 37 | P3 | C | Long-form | What it costs to keep an AI assistant alive in production |
-| 20 | 39 | P2 | B | Data post | Driver behaviour beats vehicle spec |
-| 21 | 41 | P1 | A | Carousel | The frontline AI readiness audit — 12 questions |
-| 22 | 43 | P1 | A | Story | Four languages, one version that worked |
-| 23 | 45 | P2 | B | Long-form | Charging infrastructure is a rostering problem |
+| 14 | 27 | P3 | C | Build note | We gave our AI permission to say "I don't know" |
+| 15 | 29 | P1 | A | Carousel · 11 slides | 5 HR processes we automated — and 3 we deliberately didn't |
+| 16 | 31 | P2 | B | POV | Dubai's EV transition will be won in the depot, not the showroom |
+| 17 | 33 | P1 | A | Short-form | The competency gap you cannot see on a CV |
+| 18 | 35 | P4 | X | Poll | How does your organisation actually measure frontline training? |
+| 19 | 37 | P3 | C | Long-form | What it actually costs to keep an AI assistant alive in production |
+| 20 | 39 | P2 | B | Data post | Driver behaviour moves efficiency more than vehicle spec does |
+| 21 | 41 | P1 | A | Carousel · 14 slides | The frontline AI readiness audit — 12 questions |
+| 22 | 43 | P2 | B | Long-form | Charging infrastructure is a rostering problem |
+| 23 | 45 | P1 | A | Story | We ran the same training in four languages. Only one version worked. |
 | 24 | 47 | P3 | C | Project spotlight | The workflow behind Max and Yulisa |
-| 25 | 49 | P1 | A | Contrarian | Stop hiring "AI-savvy". Hire process-literate. |
-| 26 | 51 | P1 | A | Infographic | The full cost of a bad frontline hire |
-| 27 | 53 | P2 | B | Short-form | Sustainability reporting a fleet manager can actually produce |
-| 28 | 55 | P1 | A | Long-form | The HR operating system we run |
-| 29 | 57 | P2 | B | Long-form | The heat tax on an electric fleet |
-| 30 | 59 | P4 | X | Recap + CTA | 30 posts, 60 days, and what changed |
+| 25 | 49 | P1 | A | Long-form | The HR operating system we run — six systems, one dashboard |
+| 26 | 51 | P2 | B | Short-form | Sustainability reporting a fleet manager can actually produce |
+| 27 | 53 | P1 | A | Infographic | The full cost of a bad frontline hire |
+| 28 | 55 | P2 | B | Long-form | The heat tax on an electric fleet |
+| 29 | 57 | P1 | A | Contrarian | Stop hiring for "AI-savvy". Hire for process-literate. |
+| 30 | 59 | P4 | X | Recap + CTA | 30 posts, 60 days — what changed |
 
 ---
 
@@ -105,7 +105,7 @@
 
 ---
 
-## P03 · Day 5 · P2 · Audience B · Carousel / data
+## P03 · Day 5 · P2 · Audience B · Carousel · 8 slides
 
 **Title:** What a year of running an EV fleet in 45°C actually costs
 
@@ -203,7 +203,7 @@
 
 ---
 
-## P07 · Day 13 · P1 · Audience A · Carousel
+## P07 · Day 13 · P1 · Audience A · Carousel · 10 slides
 
 **Title:** The 7-stage onboarding map for a non-desk workforce
 
@@ -252,7 +252,7 @@
 
 ---
 
-## P09 · Day 17 · P1 · Audience A · Short-form contrarian
+## P09 · Day 17 · P1 · Audience A · Contrarian short
 
 **Title:** "Will AI replace recruiters?" is the least interesting question in HR
 
@@ -370,26 +370,7 @@
 
 ---
 
-## P14 · Day 27 · P1 · Audience A · Carousel
-
-**Title:** 5 HR processes we automated — and 3 we deliberately didn't
-
-**Caption:**
-> The automation question is never "can we?" It is "should we, and what do we lose?"
->
-> Five things we handed to a system, three we kept human on purpose, and the reasoning
-> behind each call.
->
-> The three we kept are the more useful half of this post.
-
-**Carousel outline:** 1 Title · 2 The test we apply · 3–7 The five automated (one per slide, with the metric) · 8–10 The three we kept human, and why · 11 CTA
-**Hashtags:** `#HRAutomation` `#PeopleOperations` `#HumanResources` `#AIImplementation` `#HRStrategy`
-**Media:** 11-slide carousel PDF.
-**CTA:** *"What's the process you'd never automate, no matter how good the tool gets?"*
-
----
-
-## P15 · Day 29 · P3 · Audience C · Build note
+## P14 · Day 27 · P3 · Audience C · Build note
 
 **Title:** We gave our AI permission to say "I don't know"
 
@@ -409,6 +390,25 @@
 **Hashtags:** `#AIImplementation` `#AIAssistants` `#TrustAndSafety` `#ProductDesign`
 **Media:** Screenshot of Yulisa declining a question and escalating. Redacted.
 **CTA:** *"Does your internal AI tool have a way to admit uncertainty? If not, that's the next thing to build."*
+
+---
+
+## P15 · Day 29 · P1 · Audience A · Carousel · 11 slides
+
+**Title:** 5 HR processes we automated — and 3 we deliberately didn't
+
+**Caption:**
+> The automation question is never "can we?" It is "should we, and what do we lose?"
+>
+> Five things we handed to a system, three we kept human on purpose, and the reasoning
+> behind each call.
+>
+> The three we kept are the more useful half of this post.
+
+**Carousel outline:** 1 Title · 2 The test we apply · 3–7 The five automated (one per slide, with the metric) · 8–10 The three we kept human, and why · 11 CTA
+**Hashtags:** `#HRAutomation` `#PeopleOperations` `#HumanResources` `#AIImplementation` `#HRStrategy`
+**Media:** 11-slide carousel PDF.
+**CTA:** *"What's the process you'd never automate, no matter how good the tool gets?"*
 
 ---
 
@@ -534,7 +534,7 @@
 
 ---
 
-## P21 · Day 41 · P1 · Audience A · Carousel
+## P21 · Day 41 · P1 · Audience A · Carousel · 14 slides
 
 **Title:** The frontline AI readiness audit — 12 questions
 
@@ -555,7 +555,33 @@
 
 ---
 
-## P22 · Day 43 · P1 · Audience A · Story
+## P22 · Day 43 · P2 · Audience B · Long-form
+
+**Title:** Charging infrastructure is a rostering problem
+
+**Caption:**
+> When we planned our charging, we asked the wrong question: how many chargers do we need?
+>
+> The right question was: what does our roster look like if energy, not distance, is the
+> binding constraint?
+>
+> Those produce completely different answers. The first gets you a capex number. The
+> second gets you an operating model.
+>
+> What changed once we reframed it: [[CHANGE 1]] · [[CHANGE 2]] · [[CHANGE 3]]
+>
+> Result: [[METRIC]] on [[FIGURE]] fewer charge points than our original plan called for.
+>
+> The cheapest charger is the one you didn't need to install because the roster was
+> designed properly.
+
+**Hashtags:** `#EVFleet` `#ChargingInfrastructure` `#FleetManagement` `#OperationsManagement` `#SustainableTransport`
+**Media:** Before/after roster or charge-utilisation diagram.
+**CTA:** *"Fleet operators: did you size your charging off vehicle count, or off your roster?"*
+
+---
+
+## P23 · Day 45 · P1 · Audience A · Story
 
 **Title:** We ran the same training in four languages. Only one version worked.
 
@@ -579,32 +605,6 @@
 **Hashtags:** `#Localisation` `#LearningAndDevelopment` `#DiversityAndInclusion` `#FrontlineWorkers` `#HumanResources`
 **Media:** Bar chart of completion or competency by language group, anonymised.
 **CTA:** *"If you train a multilingual workforce — have you ever segmented your training data by language? Do it this week."*
-
----
-
-## P23 · Day 45 · P2 · Audience B · Long-form
-
-**Title:** Charging infrastructure is a rostering problem
-
-**Caption:**
-> When we planned our charging, we asked the wrong question: how many chargers do we need?
->
-> The right question was: what does our roster look like if energy, not distance, is the
-> binding constraint?
->
-> Those produce completely different answers. The first gets you a capex number. The
-> second gets you an operating model.
->
-> What changed once we reframed it: [[CHANGE 1]] · [[CHANGE 2]] · [[CHANGE 3]]
->
-> Result: [[METRIC]] on [[FIGURE]] fewer charge points than our original plan called for.
->
-> The cheapest charger is the one you didn't need to install because the roster was
-> designed properly.
-
-**Hashtags:** `#EVFleet` `#ChargingInfrastructure` `#FleetManagement` `#OperationsManagement` `#SustainableTransport`
-**Media:** Before/after roster or charge-utilisation diagram.
-**CTA:** *"Fleet operators: did you size your charging off vehicle count, or off your roster?"*
 
 ---
 
@@ -636,81 +636,7 @@
 
 ---
 
-## P25 · Day 49 · P1 · Audience A · Contrarian
-
-**Title:** Stop hiring for "AI-savvy". Hire for process-literate.
-
-**Caption:**
-> Every people-team job spec now asks for AI literacy. Most of them are asking for the
-> wrong thing.
->
-> The people who have made AI work in our operation were not the ones who arrived
-> knowing the tools. They were the ones who could describe an existing process precisely
-> enough that it could be automated at all.
->
-> Tool knowledge has a half-life measured in months. The ability to decompose a messy
-> operational process into steps, decisions, exceptions and owners does not expire.
->
-> If you cannot document the process, you cannot automate it. And most organisations
-> discover this only after they have bought the licence.
-
-**Hashtags:** `#Hiring` `#TalentAcquisition` `#HumanResources` `#AIImplementation` `#FutureOfWork`
-**Media:** None.
-**CTA:** *"What are you actually screening for when you say 'AI literacy'?"*
-
----
-
-## P26 · Day 51 · P1 · Audience A · Infographic
-
-**Title:** The full cost of a bad frontline hire
-
-**Caption:**
-> Most organisations count the recruitment fee and stop there.
->
-> Here is the complete stack, using our real numbers:
->
-> → Sourcing and screening: [[FIGURE]]
-> → Documentation, visa and compliance: [[FIGURE]]
-> → Training and certification: [[FIGURE]]
-> → Supervised ramp — the productivity cost of the person supervising: [[FIGURE]]
-> → Lost productivity to exit: [[FIGURE]]
-> → Replacement cycle: [[FIGURE]]
-> → **Total: [[FIGURE]]**
->
-> That total is why we invested in onboarding and competency systems before we invested
-> in anything else. The business case wasn't ideological. It was arithmetic.
-
-**Hashtags:** `#HumanResources` `#CostOfHiring` `#PeopleAnalytics` `#Recruitment` `#Retention`
-**Media:** Stacked-cost infographic, 1080×1350. Build the total visually so the final number lands.
-**CTA:** *"Do you know your fully-loaded cost per bad hire? Most teams know only the first line."*
-
----
-
-## P27 · Day 53 · P2 · Audience B · Short-form
-
-**Title:** Sustainability reporting a fleet manager can actually produce
-
-**Caption:**
-> Most sustainability frameworks were written for people with a reporting team.
->
-> Fleet operators do not have a reporting team. They have a fleet manager with an
-> already-full week.
->
-> So we built the smallest version that is still defensible: [[NUMBER]] metrics,
-> [[FREQUENCY]], pulled automatically from [[SOURCE]]. It takes [[TIME]] to produce.
->
-> The metrics: [[METRIC 1]] · [[METRIC 2]] · [[METRIC 3]]
->
-> A defensible report you actually publish every month beats a comprehensive framework
-> you abandon in quarter two.
-
-**Hashtags:** `#Sustainability` `#ESG` `#FleetManagement` `#EVFleet` `#Reporting`
-**Media:** Screenshot of your actual monthly report, redacted.
-**CTA:** *"What's the minimum viable sustainability report in your operation?"*
-
----
-
-## P28 · Day 55 · P1 · Audience A · Long-form
+## P25 · Day 49 · P1 · Audience A · Long-form
 
 **Title:** The HR operating system we run — six systems, one dashboard
 
@@ -736,7 +662,57 @@
 
 ---
 
-## P29 · Day 57 · P2 · Audience B · Long-form
+## P26 · Day 51 · P2 · Audience B · Short-form
+
+**Title:** Sustainability reporting a fleet manager can actually produce
+
+**Caption:**
+> Most sustainability frameworks were written for people with a reporting team.
+>
+> Fleet operators do not have a reporting team. They have a fleet manager with an
+> already-full week.
+>
+> So we built the smallest version that is still defensible: [[NUMBER]] metrics,
+> [[FREQUENCY]], pulled automatically from [[SOURCE]]. It takes [[TIME]] to produce.
+>
+> The metrics: [[METRIC 1]] · [[METRIC 2]] · [[METRIC 3]]
+>
+> A defensible report you actually publish every month beats a comprehensive framework
+> you abandon in quarter two.
+
+**Hashtags:** `#Sustainability` `#ESG` `#FleetManagement` `#EVFleet` `#Reporting`
+**Media:** Screenshot of your actual monthly report, redacted.
+**CTA:** *"What's the minimum viable sustainability report in your operation?"*
+
+---
+
+## P27 · Day 53 · P1 · Audience A · Infographic
+
+**Title:** The full cost of a bad frontline hire
+
+**Caption:**
+> Most organisations count the recruitment fee and stop there.
+>
+> Here is the complete stack, using our real numbers:
+>
+> → Sourcing and screening: [[FIGURE]]
+> → Documentation, visa and compliance: [[FIGURE]]
+> → Training and certification: [[FIGURE]]
+> → Supervised ramp — the productivity cost of the person supervising: [[FIGURE]]
+> → Lost productivity to exit: [[FIGURE]]
+> → Replacement cycle: [[FIGURE]]
+> → **Total: [[FIGURE]]**
+>
+> That total is why we invested in onboarding and competency systems before we invested
+> in anything else. The business case wasn't ideological. It was arithmetic.
+
+**Hashtags:** `#HumanResources` `#CostOfHiring` `#PeopleAnalytics` `#Recruitment` `#Retention`
+**Media:** Stacked-cost infographic, 1080×1350. Build the total visually so the final number lands.
+**CTA:** *"Do you know your fully-loaded cost per bad hire? Most teams know only the first line."*
+
+---
+
+## P28 · Day 55 · P2 · Audience B · Long-form
 
 **Title:** The heat tax on an electric fleet
 
@@ -760,6 +736,30 @@
 **Hashtags:** `#EVFleet` `#Electrification` `#UAE` `#FleetManagement` `#SustainableTransport`
 **Media:** Seasonal comparison chart — range or efficiency by month across a full year.
 **CTA:** *"Operating EVs in extreme heat anywhere? I'd like to compare baselines."*
+
+---
+
+## P29 · Day 57 · P1 · Audience A · Contrarian
+
+**Title:** Stop hiring for "AI-savvy". Hire for process-literate.
+
+**Caption:**
+> Every people-team job spec now asks for AI literacy. Most of them are asking for the
+> wrong thing.
+>
+> The people who have made AI work in our operation were not the ones who arrived
+> knowing the tools. They were the ones who could describe an existing process precisely
+> enough that it could be automated at all.
+>
+> Tool knowledge has a half-life measured in months. The ability to decompose a messy
+> operational process into steps, decisions, exceptions and owners does not expire.
+>
+> If you cannot document the process, you cannot automate it. And most organisations
+> discover this only after they have bought the licence.
+
+**Hashtags:** `#Hiring` `#TalentAcquisition` `#HumanResources` `#AIImplementation` `#FutureOfWork`
+**Media:** None.
+**CTA:** *"What are you actually screening for when you say 'AI literacy'?"*
 
 ---
 

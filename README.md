@@ -35,3 +35,19 @@ Find them all:
 ```
 grep -rno '\[\[[^]]*\]\]' . | sort
 ```
+
+## The board
+
+`board/dispatch-board.html` is the working console — published as a private web page.
+It reads the same 30 posts as the calendar and adds the things a document can't do:
+
+- **Today** — set your start date once; it computes which post is due and how many
+  placeholders that post still has open.
+- **Placeholder guard** — every `[[BRACKET]]` renders in red, and the Copy button warns
+  before it hands you copy that still contains one.
+- **Live character counters** — against LinkedIn's real caps: 3,000 post body,
+  220 headline, 2,600 About.
+- **Progress that persists** — published posts and checklist ticks survive closing the
+  tab, and sync across devices where the runtime allows it.
+
+To update it: edit `board/dispatch-board.html` and republish to the same URL.

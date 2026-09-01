@@ -1,0 +1,524 @@
+<title>Frontline Dispatch Board</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap">
+<style>
+:root{
+  --ground:#EEF2F0; --surface:#FFF; --surface-2:#E4EAE8; --sunk:#F6F8F7;
+  --ink:#101E24; --ink-2:#3D545D; --ink-3:#6E8489; --line:#D2DCD9; --line-2:#BECBC7;
+  --accent:#0E4C5A; --accent-ink:#0E4C5A; --accent-soft:#DAE9EB;
+  --good:#2A7355; --warn:#976008; --crit:#A2382A;
+  --p1:#0E4C5A; --p2:#2A7355; --p3:#9E4E2B; --p4:#76642A;
+  --shadow:0 1px 2px rgba(16,30,36,.06),0 6px 18px -8px rgba(16,30,36,.14);
+  --display:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --ui:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --read:"Newsreader",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ground:#0B1417; --surface:#131F23; --surface-2:#1A272C; --sunk:#0F1A1E;
+  --ink:#E3ECEA; --ink-2:#A2B7BB; --ink-3:#728A90; --line:#243439; --line-2:#31454B;
+  --accent:#5DB4C4; --accent-ink:#8FD0DB; --accent-soft:#14313A;
+  --good:#5CBC8F; --warn:#D3993D; --crit:#DE6E5C;
+  --p1:#5DB4C4; --p2:#5CBC8F; --p3:#D08A62; --p4:#C2AF5E;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px -10px rgba(0,0,0,.6);
+}}
+:root[data-theme="dark"]{
+  --ground:#0B1417; --surface:#131F23; --surface-2:#1A272C; --sunk:#0F1A1E;
+  --ink:#E3ECEA; --ink-2:#A2B7BB; --ink-3:#728A90; --line:#243439; --line-2:#31454B;
+  --accent:#5DB4C4; --accent-ink:#8FD0DB; --accent-soft:#14313A;
+  --good:#5CBC8F; --warn:#D3993D; --crit:#DE6E5C;
+  --p1:#5DB4C4; --p2:#5CBC8F; --p3:#D08A62; --p4:#C2AF5E;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 22px -10px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{background:var(--ground);color:var(--ink);font-family:var(--ui);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:var(--display);font-weight:700;letter-spacing:-.018em;text-wrap:balance;margin:0}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- shell ---------- */
+.wrap{max-width:1220px;margin:0 auto;padding:0 24px 96px}
+.top{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1220px;margin:0 auto;padding:14px 24px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.brand{display:flex;align-items:baseline;gap:10px;margin-right:auto}
+.brand b{font-family:var(--display);font-size:17px;letter-spacing:-.02em}
+.brand span{font-family:var(--mono);font-size:11px;color:var(--ink-3);letter-spacing:.06em;text-transform:uppercase}
+.tabs{display:flex;gap:2px;flex-wrap:wrap}
+.tab{font-size:13px;font-weight:500;padding:6px 11px;border-radius:6px;color:var(--ink-2)}
+.tab:hover{background:var(--surface-2)}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--surface)}
+:root[data-theme="dark"] .tab[aria-selected="true"],
+:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0B1417}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .tab[aria-selected="true"]{color:#fff}}
+
+/* ---------- generic ---------- */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+.sec{padding-top:34px}
+.sec-head{display:flex;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.sec-head h2{font-size:24px}
+.sec-head p{color:var(--ink-2);font-size:14px;max-width:62ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;box-shadow:var(--shadow)}
+.hidden{display:none!important}
+.mono{font-family:var(--mono)}
+.stack{display:flex;flex-direction:column;gap:14px}
+
+/* ---------- today ---------- */
+.today-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:18px;align-items:start}
+@media(max-width:820px){.today-grid{grid-template-columns:1fr}}
+.hero{padding:26px 28px;position:relative;overflow:hidden}
+.hero .day-badge{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-ink)}
+.hero h3{font-size:30px;line-height:1.15;margin:10px 0 12px}
+.meterbox{display:flex;flex-direction:column;gap:6px;margin-top:18px}
+.meter{height:7px;border-radius:4px;background:var(--surface-2);overflow:hidden}
+.meter i{display:block;height:100%;background:var(--good);border-radius:4px}
+.ticks{display:flex;gap:3px;flex-wrap:wrap}
+.ticks i{width:15px;height:7px;border-radius:2px;background:var(--warn)}
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.metric{padding:16px 18px}
+.metric .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.metric .v{font-family:var(--display);font-size:28px;line-height:1.1;margin-top:6px;font-variant-numeric:tabular-nums}
+.setup{padding:16px 18px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.setup label{font-size:13px;color:var(--ink-2)}
+input[type=date]{font:inherit;font-family:var(--mono);font-size:13px;padding:7px 10px;border:1px solid var(--line-2);border-radius:6px;background:var(--sunk);color:var(--ink)}
+
+/* ---------- post cards ---------- */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line-2);border-radius:20px;color:var(--ink-2)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--ground);border-color:var(--ink)}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;align-items:start}
+.post{border-left:3px solid var(--pc);padding:14px 16px;text-align:left;width:100%;display:block;transition:border-color .15s,transform .12s}
+.post:hover{transform:translateY(-1px)}
+.post.done{opacity:.62}
+.post-top{display:flex;gap:10px;align-items:baseline;margin-bottom:7px}
+.post-n{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--pc);font-variant-numeric:tabular-nums}
+.post-day{font-family:var(--mono);font-size:11px;color:var(--ink-3);margin-left:auto}
+.post h4{font-size:15.5px;line-height:1.3;letter-spacing:-.012em;margin-bottom:9px}
+.post-meta{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--line-2)}
+.gaps{margin-left:auto;padding:2px 7px;border-radius:4px;font-family:var(--mono);font-size:10.5px;background:var(--accent-soft);color:var(--accent-ink)}
+.gaps.zero{background:transparent;color:var(--good)}
+
+/* ---------- detail ---------- */
+.detail{padding:22px 24px;margin-bottom:14px;border-left:3px solid var(--pc)}
+.detail-head{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+.detail h3{font-size:21px;line-height:1.22;flex:1}
+.copyblock{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:18px 20px;font-family:var(--read);font-size:16.5px;line-height:1.62;white-space:pre-wrap;color:var(--ink)}
+.copyblock .ph{background:color-mix(in srgb,var(--crit) 15%,transparent);color:var(--crit);border-radius:3px;padding:0 3px;font-family:var(--mono);font-size:.82em;font-weight:500}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}
+.btn{font-size:13px;font-weight:500;padding:7px 14px;border-radius:6px;border:1px solid var(--line-2);background:var(--surface);color:var(--ink)}
+.btn:hover{border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+:root[data-theme="dark"] .btn.primary,:root:not([data-theme="light"]) .btn.primary{color:#0B1417}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]) .btn.primary{color:#fff}}
+.btn.primary:hover{opacity:.88;color:var(--surface)}
+:root[data-theme="dark"] .btn.primary:hover{color:#0B1417}
+.count{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;margin-left:auto}
+.count.warn{color:var(--warn)}.count.over{color:var(--crit);font-weight:500}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:6px 14px;margin-top:14px;font-size:13.5px;align-items:start}
+.kv dt{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.kv dd{margin:0;color:var(--ink-2)}
+.tag{font-family:var(--mono);font-size:12px;color:var(--accent-ink)}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(8px);background:var(--ink);color:var(--ground);padding:9px 18px;border-radius:7px;font-size:13.5px;box-shadow:var(--shadow);opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;z-index:90}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ---------- checklist ---------- */
+.check{display:flex;gap:11px;align-items:flex-start;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;font-size:14px}
+.check:last-child{border-bottom:0}
+.check input{margin:4px 0 0;accent-color:var(--accent);width:15px;height:15px;flex:none}
+.check.on span{color:var(--ink-3);text-decoration:line-through}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px;align-items:start}
+.pad{padding:20px 22px}
+.pad h4{font-size:16px;margin-bottom:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:400}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.scroll{overflow-x:auto}
+.note{font-size:13px;color:var(--ink-2);background:var(--accent-soft);border-radius:7px;padding:12px 15px;border-left:3px solid var(--accent)}
+.rationale{font-size:13.5px;color:var(--ink-2);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.rationale b{color:var(--ink);font-weight:600}
+.tl{display:grid;grid-template-columns:74px 1fr;gap:0 16px}
+.tl dt{font-family:var(--mono);font-size:12px;color:var(--accent-ink);padding:9px 0;border-top:1px solid var(--line);font-variant-numeric:tabular-nums}
+.tl dd{margin:0;padding:9px 0;border-top:1px solid var(--line);font-size:13.5px}
+.tl dt:first-of-type,.tl dd:first-of-type{border-top:0}
+</style>
+
+<div class="top"><div class="top-in">
+  <div class="brand"><b>Dispatch Board</b><span id="cadence">30 posts · 60 days</span></div>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</div></div>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const PILLARS={P1:{n:"Frontline AI",c:"var(--p1)"},P2:{n:"Electric Fleet",c:"var(--p2)"},P3:{n:"Build Notes",c:"var(--p3)"},P4:{n:"Operator's Desk",c:"var(--p4)"}};
+const AUD={A:"HR & People",B:"Fleet & Mobility",C:"Founders & Ops",X:"Cross-cutting"};
+const POSTS=[{"n":1,"d":1,"p":"P1","a":"A","f":"Long-form POV","t":"The 90% nobody is building AI for","c":"Most organisations are running their AI pilot in the finance team.\n\nIt makes sense. Finance has laptops, corporate email, one working language, and a manager who can absorb a bad output without anyone getting hurt. It is the easiest possible place to succeed.\n\nIt is also about ten percent of the working world.\n\nThe other ninety percent are on a shop floor, in a warehouse, on a ward — or, in my case, behind a wheel. No corporate email. Several first languages. A shift pattern that does not accommodate a two-hour training webinar. And consequences that are physical rather than reputational.\n\nI lead people and fleet operations at Ecosine Transports in Dubai. Our workforce is [[HEADCOUNT]] professional drivers running [[FLEET SIZE]] electric vehicles. Over the last [[TIMEFRAME]] we have put two AI assistants into live operation with them. Not a pilot. Production, with real consequences when it goes wrong.\n\nThree things that environment taught me, none of which appear in a vendor deck:\n\n→ The model was never the hard part. Rewriting [[TIMEFRAME]] of accumulated operational knowledge into something a system could actually reason over took [[PROPORTION]] longer than the build.\n\n→ Adoption is a trust problem, not a training problem. Our usage went up after we made the assistant less capable — because we gave it permission to say \"I don't know\" and route to a human.\n\n→ A confidently wrong answer to someone operating a vehicle is not a bug report. We designed the escalation path before we designed a single answer.\n\nNone of this is theoretical for me. It is what my week consists of.\n\nSo starting today I am going to publish it — every other day, for the next sixty days. What worked, what it cost, and the parts that failed twice before they worked once.\n\nIf you are deploying AI to a workforce that does not sit at a desk, I would genuinely like to know what broke first for you.\n\nBecause I promise it wasn't the model.","h":["#FrontlineAI","#HumanResources","#ArtificialIntelligence","#FutureOfWork","#Dubai"],"m":"Native text post, no image. Post 1 should look like a person thinking, not a brand launching.","q":"If you're deploying AI to a workforce that doesn't sit at a desk, I'd like to hear what broke first."},{"n":2,"d":3,"p":"P3","a":"C","f":"Project spotlight","t":"Meet Max — the AI trainer we built for people who don't read manuals","c":"Our drivers were handed a [[PAGE COUNT]]-page operations manual on day one.\n\nNobody read it. I wouldn't have read it either.\n\nSo we built Max — an AI assistant that delivers the same material as a conversation, in the driver's own language, on the phone already in their pocket, in the ten minutes they have between runs.\n\nOnboarding went from [[BEFORE]] to [[AFTER]].\n\nThat is the headline. Here is the part that actually matters if you're thinking of building something similar.\n\nTHE MODEL WAS THE EASY BIT.\n\nBefore Max was useful to anyone, we had to rewrite every piece of source material it drew on. Our manual had been written over [[TIMEFRAME]] by [[NUMBER]] different people, with contradictions nobody had ever reconciled — because no human trainer had ever read it end to end either. They just knew which parts to ignore.\n\nMax didn't know which parts to ignore. It answered from all of it, with equal confidence.\n\nThat rewrite was [[PROPORTION]] of the total effort. It is not in any implementation plan I have ever seen.\n\nWHAT WE GOT WRONG.\n\n[[SPECIFIC FAILURE — what Max said, and how wrong it was]]\n\n[[HOW YOU CAUGHT IT — be honest if it was luck]]\n\nThat is when we built [[WHAT YOU BUILT AS A RESULT]].\n\nTHE LESSON, IF YOU TAKE ONE THING:\n\nAn AI assistant does not fix a documentation problem. It exposes one — instantly, at scale, to the people least equipped to spot the error.\n\nFix the source material first. The assistant is the last step, not the first.\n\nIf you're building an internal assistant: what did you discover about your own documentation once a system started reading it?","h":["#AIAssistants","#LearningAndDevelopment","#HRTech","#AIImplementation","#FrontlineAI"],"m":"Redacted screenshot of a real Max conversation, cropped to phone width. No stock robot graphics — they would undercut every credibility signal in the copy.","q":"What's the training material everyone is issued and nobody reads?"},{"n":3,"d":5,"p":"P2","a":"B","f":"Carousel · 8 slides","t":"What a year of running an EV fleet in 45°C actually costs","c":"The business case for fleet electrification is usually built in a spreadsheet, by someone who has never stood in a Dubai depot in August.\n\nOurs was too.\n\nHere is [[TIMEFRAME]] of real operating data from [[FLEET SIZE]] electric vehicles — including the three lines we completely failed to forecast.\n\nThe short version:\n\n→ Energy cost per km came in [[FIGURE]] against our model\n→ Maintenance against our previous ICE fleet: [[FIGURE]]\n→ The heat penalty on effective range in peak summer: [[FIGURE]]\n→ The line item we never modelled at all: [[LINE ITEM]]\n\nTwo of those surprises were larger than our entire projected maintenance saving.\n\nThe wider point for anyone planning a transition in this region: the models circulating in the market were built on European and North American operating data. The physics do not travel. Ambient temperature affects range, charging efficiency, and battery thermal management simultaneously — and none of the imported models price all three.\n\nBuild your own baseline, in your own climate, before you commit capital.\n\nFull breakdown in the carousel.\n\nIf you're modelling a fleet transition in the GCC and want to pressure-test your assumptions against real operating numbers — my DMs are open.","h":["#EVFleet","#FleetManagement","#SustainableTransport","#UAE","#Electrification"],"m":"8-slide carousel PDF, 1080×1350. One figure per slide, slide 7 is the synthesis (make it the best-designed one — it's the screenshot slide), slide 8 signs it with your handle.","q":"If you're modelling a fleet transition in the GCC, my DMs are open."},{"n":4,"d":7,"p":"P1","a":"A","f":"Short-form","t":"Onboarding is a retention lever wearing an admin disguise","c":"We used to treat onboarding as paperwork with a safety briefing attached.\n\nThen we looked at when people actually leave.\n\n[[FIGURE]]% of our departures happened in the first [[PERIOD]]. Not because of pay. Because in week one, nobody could tell them what good looked like.\n\nWe rebuilt onboarding as a competency ramp instead of a compliance checklist. [[RETENTION METRIC]] moved [[FIGURE]].\n\nOnboarding is not an HR administrative function. It is the cheapest retention intervention available to you, and it is almost always owned by whoever has the least time.","h":["#PeopleOperations","#EmployeeRetention","#HumanResources","#Onboarding"],"m":"None. Short-form text posts outperform unaccompanied — an image competes with the idea.","q":"When does your attrition actually spike? Most teams have never looked."},{"n":5,"d":9,"p":"P4","a":"X","f":"Poll","t":"What's actually blocking AI in your HR function?","c":"Every AI-in-HR conversation I have eventually arrives at the same moment: the real blocker is never the one in the strategy deck.\n\nI'd like to know what it is for you.\n\nI'll share what our answer was — and what it cost us to get past it — in the comments.\n\nPOLL OPTIONS: Budget · Data quality · Leadership buy-in · Nobody owns it","h":["#HRTech","#ArtificialIntelligence","#PeopleOperations","#FutureOfWork"],"m":"Native LinkedIn poll, 7-day duration.","q":"Vote, then tell me what your organisation's real blocker was — I'm collecting these."},{"n":6,"d":11,"p":"P3","a":"C","f":"Build note","t":"We taught Yulisa to escalate before we taught her to answer","c":"The first version of Yulisa answered everything. That was the problem.\n\nWhen a driver asks about a route, a wrong answer costs you time. When a driver asks about [[SAFETY-RELEVANT SCENARIO]], a wrong answer costs you something you cannot get back.\n\nSo we inverted the build. Before Yulisa could answer a single question, we defined the categories she must never answer — and routed every one of them to a named human, immediately, with context attached.\n\nConfidence is the default failure mode of these systems. They are built to produce an answer, and they will produce one whether or not they should.\n\nDesigning the escalation path first is not a limitation on the system. It is the thing that makes the system deployable at all.","h":["#AIImplementation","#AISafety","#OperationalExcellence","#AIAssistants"],"m":"Simple flow diagram: query → classifier → answer / escalate. Hand-drawn or clean vector, not corporate clipart.","q":"If you're building an internal assistant: what's on your never-answer list?"},{"n":7,"d":13,"p":"P1","a":"A","f":"Carousel · 10 slides","t":"The 7-stage onboarding map for a non-desk workforce","c":"Standard onboarding assumes a desk, a laptop, an inbox, and eight uninterrupted hours.\n\nOur people have none of those.\n\nThis is the seven-stage map we run instead — built for a workforce that is mobile, multilingual, and available in ten-minute windows.\n\nSwipe through. Steal any of it.\n\nSLIDES: 1 Title · 2 Why standard onboarding fails frontline teams · 3 Pre-arrival · 4 Day one & documentation · 5 Language-matched training · 6 Supervised competency · 7 30-day checkpoint · 8 90-day certification · 9 The metric that tells you it worked · 10 CTA","h":["#Onboarding","#PeopleOperations","#FrontlineWorkers","#HumanResources","#HRStrategy"],"m":"10-slide carousel PDF, 1080×1350.","q":"Which stage does your organisation skip? It's almost always stage 6."},{"n":8,"d":15,"p":"P2","a":"B","f":"Long-form","t":"Range anxiety is a management problem, not a battery problem","c":"Every fleet electrification objection I hear starts with range.\n\nAfter [[TIMEFRAME]] of operating [[FLEET SIZE]] electric vehicles, I can tell you that range has almost never been our constraint. Scheduling has.\n\nThe vehicle can do the distance. The question is whether your roster, your charging windows, and your dispatch logic were designed by someone who understands that an EV refuels on a completely different curve to a diesel.\n\nWe solved range anxiety by changing three things, none of which involved the vehicles:\n\n→ [[CHANGE 1]]\n→ [[CHANGE 2]]\n→ [[CHANGE 3]]\n\n[[RESULT METRIC]]\n\nRange is where the conversation starts because it's the number on the spec sheet. It is rarely where the problem lives.","h":["#EVFleet","#FleetManagement","#Electrification","#Logistics","#SustainableTransport"],"m":"Single photo — your vehicles at a charging point at your depot. Real, not stock.","q":"Fleet managers: what was your actual constraint, once you got past range?"},{"n":9,"d":17,"p":"P1","a":"A","f":"Contrarian short","t":"\"Will AI replace recruiters?\" is the least interesting question in HR","c":"It gets asked at every conference. It generates every headline. And it is a distraction.\n\nThe interesting question is the one underneath it: which parts of the people function currently fail because a human simply cannot be present often enough?\n\nNobody is short of recruiters. Organisations are short of the thing that happens after the hire — the coaching conversation in week three, the competency check in month two, the answer to a question at 11pm on a Thursday.\n\nThat is where AI has earned its place in our operation. Not replacing the people we have. Covering the ground they were never able to cover.","h":["#HumanResources","#ArtificialIntelligence","#FutureOfWork","#Recruitment"],"m":"None.","q":"Where does presence fail in your organisation? That's your AI use case."},{"n":10,"d":19,"p":"P3","a":"C","f":"Project spotlight","t":"We ran Max against a human trainer for 30 days","c":"Building an AI assistant is easy to justify with a feeling. We wanted a number.\n\nSo for 30 days we ran two cohorts: [[N]] drivers trained by Max, [[N]] trained by our most experienced human trainer. Same content. Same assessment at the end.\n\nResults:\n→ [[FINDING 1]]\n→ [[FINDING 2]]\n→ [[FINDING 3]]\n\nThe honest summary: Max won on [[DIMENSION]] and lost on [[DIMENSION]].\n\n[[WHAT YOU DID WITH THAT FINDING]]\n\nIf you are evaluating an AI system and you don't have a human baseline to compare against, you don't have an evaluation. You have a demo.","h":["#AIImplementation","#LearningAndDevelopment","#HRTech","#DataDriven"],"m":"Two-column comparison graphic. Show the dimension where the human won — that single choice is what makes the whole post credible.","q":"Has anyone else run a controlled comparison like this? I'd like to compare methodology."},{"n":11,"d":21,"p":"P4","a":"X","f":"Story","t":"The driver who taught me more about AI adoption than any vendor demo","c":"[[ANONYMISED DRIVER]] refused to use Max for the first [[PERIOD]].\n\nNot loudly. He simply didn't open it.\n\nWhen I finally asked him why, he said something I have not been able to forget:\n\n[[HIS ACTUAL OBJECTION]]\n\nHe was right. [[WHAT YOU CHANGED AS A RESULT]]\n\nAdoption is not a training problem. It is a trust problem, and trust is earned by changing the product, not by running another briefing.","h":["#ChangeManagement","#Leadership","#AIAdoption","#PeopleFirst"],"m":"None, or a wide depot shot with no identifiable faces. Never photograph the person in the story.","q":"Who was the person in your rollout who was right to resist?"},{"n":12,"d":23,"p":"P2","a":"B","f":"Infographic","t":"The 9 EV fleet cost lines nobody models","c":"Every EV fleet business case I have reviewed models the same four things: vehicle capex, energy, maintenance, and residual value.\n\nHere are nine more that we learned about the expensive way.\n\n[[LINE 1]] · [[LINE 2]] · [[LINE 3]] · [[LINE 4]] · [[LINE 5]] · [[LINE 6]] · [[LINE 7]] · [[LINE 8]] · [[LINE 9]]\n\nThree of these were larger than our maintenance saving. If your model doesn't have them, your model is optimistic.","h":["#FleetManagement","#EVFleet","#TCO","#Logistics","#UAE"],"m":"Single-image infographic, 1080×1350. Nine rows, one column of figures. Legibility over design.","q":"What was the line item your business case missed?"},{"n":13,"d":25,"p":"P1","a":"A","f":"Long-form","t":"Your AI policy is unreadable to most of your workforce","c":"I read our own AI usage policy back in [[LANGUAGE]] — one of the [[NUMBER]] languages our drivers actually speak.\n\nIt was incomprehensible. Not because of the translation. Because the original was written at a reading level our workforce was never going to meet, by people who assumed the reader had time, context, and a laptop.\n\nA policy that cannot be understood is not a policy. It is documentation of an intention.\n\nHere is what we replaced it with: [[APPROACH]]\n\nIf you have a frontline workforce and your AI governance lives in a PDF on an intranet, you do not have AI governance. You have exposure.","h":["#AIGovernance","#HumanResources","#Compliance","#FrontlineAI","#PeopleOperations"],"m":"Side-by-side: dense policy paragraph vs. your rewritten version. The visual contrast carries the argument.","q":"Read your own policy in your second language. Tell me how it goes."},{"n":14,"d":27,"p":"P3","a":"C","f":"Build note","t":"We gave our AI permission to say \"I don't know\"","c":"The single highest-value change we made to Yulisa was teaching her to decline.\n\nBefore: every question received an answer, delivered with total confidence.\nAfter: [[FIGURE]]% of queries return \"I don't have a reliable answer — I'm routing this to [[HUMAN ROLE]].\"\n\nOur resolution rate went down. Trust went up, and it went up sharply.\n\nThe counterintuitive part: driver usage increased after we made the assistant less capable. People will use a system that is honest about its limits. They abandon one that has misled them once.","h":["#AIImplementation","#AIAssistants","#TrustAndSafety","#ProductDesign"],"m":"Redacted screenshot of Yulisa declining a question and escalating.","q":"Does your internal AI tool have a way to admit uncertainty? If not, that's the next thing to build."},{"n":15,"d":29,"p":"P1","a":"A","f":"Carousel · 11 slides","t":"5 HR processes we automated — and 3 we deliberately didn't","c":"The automation question is never \"can we?\" It is \"should we, and what do we lose?\"\n\nFive things we handed to a system, three we kept human on purpose, and the reasoning behind each call.\n\nThe three we kept are the more useful half of this post.\n\nSLIDES: 1 Title · 2 The test we apply · 3–7 The five automated, one per slide with its metric · 8–10 The three we kept human, and why · 11 CTA","h":["#HRAutomation","#PeopleOperations","#HumanResources","#AIImplementation","#HRStrategy"],"m":"11-slide carousel PDF, 1080×1350.","q":"What's the process you'd never automate, no matter how good the tool gets?"},{"n":16,"d":31,"p":"P2","a":"B","f":"POV","t":"Dubai's EV transition will be won in the depot, not the showroom","c":"The coverage is all about vehicles. Range, charging speed, new models, launch events.\n\nAlmost none of it is about the depot — which is where every fleet transition in this region will actually succeed or fail.\n\nThe depot is where you discover that your charging capacity is a function of your grid connection, not your charger count. That your roster has to be rebuilt around energy, not distance. That [[SPECIFIC DEPOT-LEVEL CONSTRAINT YOU HIT]].\n\nThe UAE has the policy ambition and the capital. What is genuinely scarce is operators who have run the depot side at scale and can tell you what it takes.\n\n[[YOUR VIEW ON WHAT THE REGION NEEDS NEXT]]","h":["#EVFleet","#UAE","#Dubai","#SustainableTransport","#Infrastructure"],"m":"Depot photograph, wide, showing scale.","q":"If you're running or planning a depot transition in the GCC — I'd like to connect."},{"n":17,"d":33,"p":"P1","a":"A","f":"Short-form","t":"The competency gap you cannot see on a CV","c":"Two drivers arrive with identical licences, identical years of experience, identical paperwork.\n\nThree months in, one is in the top decile on [[METRIC]] and the other is in the bottom.\n\nNothing on the CV predicted it. What predicted it was [[ACTUAL PREDICTOR]] — something we only started measuring after we built the systems to measure it.\n\nMost hiring for frontline roles is credential-matching. The credentials are table stakes. The variance sits entirely in things a CV was never designed to capture.","h":["#Recruitment","#HumanResources","#TalentAcquisition","#PeopleAnalytics"],"m":"None.","q":"What predicts performance in your frontline roles — that isn't on the CV?"},{"n":18,"d":35,"p":"P4","a":"X","f":"Poll","t":"How does your organisation actually measure frontline training?","c":"I ask this in every conversation with another operator, and the answer is almost always the first option.\n\nWhich is how you end up with a fully-trained workforce on paper and a competency problem in practice.\n\nCurious where this community sits.\n\nPOLL OPTIONS: Completion rate · Assessment score · On-the-job performance · We don't, really","h":["#LearningAndDevelopment","#PeopleOperations","#Training","#HumanResources"],"m":"Native poll, 7 days.","q":"If you picked option 3 — tell me how. That's the hard one and I want to learn from it."},{"n":19,"d":37,"p":"P3","a":"C","f":"Long-form","t":"What it actually costs to keep an AI assistant alive in production","c":"The build was the cheap part. Nobody tells you this.\n\nHere is the honest ongoing cost of running two AI assistants in live operations for [[TIMEFRAME]]:\n\n→ Inference / API: [[FIGURE]]\n→ Content maintenance — the source material goes stale: [[FIGURE]]\n→ Human review of escalations: [[FIGURE]]\n→ Evaluation and regression testing after every model change: [[FIGURE]]\n→ [[YOUR FOURTH COST LINE]]\n\nThe largest line is [[LARGEST LINE]], and it is not the one anyone budgets for.\n\nAn AI assistant is not a project you finish. It is a system you staff. Budget it like a system, or it will quietly degrade until people stop trusting it — and re-earning that trust costs more than the original build.","h":["#AIImplementation","#AIOps","#OperationalExcellence","#TechnologyLeadership"],"m":"Simple cost-breakdown bar chart.","q":"Founders and ops leads: what's your real run-cost line that nobody warned you about?"},{"n":20,"d":39,"p":"P2","a":"B","f":"Data post","t":"Driver behaviour moves efficiency more than vehicle spec does","c":"We run [[FLEET SIZE]] identical vehicles.\n\nThe gap between our most efficient and least efficient driver on the same route is [[FIGURE]]%.\n\nSame vehicle. Same road. Same load. The variable is the person.\n\nWhich means the highest-return investment in an electric fleet is not the next generation of battery. It is a coaching programme built on telematics that drivers actually accept.\n\nWe built ours around [[APPROACH]]. Fleet-wide [[EFFICIENCY METRIC]] moved [[FIGURE]] in [[TIMEFRAME]].\n\nProcurement gets the attention. Behaviour gets the result.","h":["#FleetManagement","#Telematics","#EVFleet","#DriverBehaviour","#Efficiency"],"m":"Distribution chart — efficiency spread across drivers, anonymised. This visual is the post.","q":"What's the efficiency spread across your fleet? Most operators have never plotted it."},{"n":21,"d":41,"p":"P1","a":"A","f":"Carousel · 14 slides","t":"The frontline AI readiness audit — 12 questions","c":"Before you buy anything, answer these twelve questions about your own organisation.\n\nIf you cannot answer nine of them, the tool is not your problem.\n\nThis is the audit I wish someone had handed me [[TIMEFRAME]] ago. It would have saved us [[WHAT IT WOULD HAVE SAVED]].\n\nSwipe through, save it, run it with your team.\n\nSLIDES: 1 Title · 2 Why most frontline AI projects fail before procurement · 3–6 Your data · 7–9 Your people · 10–12 Your operations · 13 How to score it · 14 CTA","h":["#AIImplementation","#HRTech","#FrontlineAI","#DigitalTransformation","#PeopleOperations"],"m":"14-slide carousel PDF. Highest save-rate format on the calendar — design this one properly.","q":"Run it and tell me your score. I'll tell you ours."},{"n":22,"d":43,"p":"P2","a":"B","f":"Long-form","t":"Charging infrastructure is a rostering problem","c":"When we planned our charging, we asked the wrong question: how many chargers do we need?\n\nThe right question was: what does our roster look like if energy, not distance, is the binding constraint?\n\nThose produce completely different answers. The first gets you a capex number. The second gets you an operating model.\n\nWhat changed once we reframed it:\n→ [[CHANGE 1]]\n→ [[CHANGE 2]]\n→ [[CHANGE 3]]\n\nResult: [[METRIC]] on [[FIGURE]] fewer charge points than our original plan called for.\n\nThe cheapest charger is the one you didn't need to install because the roster was designed properly.","h":["#EVFleet","#ChargingInfrastructure","#FleetManagement","#OperationsManagement","#SustainableTransport"],"m":"Before/after roster or charge-utilisation diagram.","q":"Fleet operators: did you size your charging off vehicle count, or off your roster?"},{"n":23,"d":45,"p":"P1","a":"A","f":"Story","t":"We ran the same training in four languages. Only one version worked.","c":"We translated our driver training into [[NUMBER]] languages and congratulated ourselves on inclusion.\n\nThen we looked at the completion and competency data by language group.\n\n[[WHAT THE DATA SHOWED]]\n\nThe problem was not translation quality. It was that we had translated the words and kept the structure — a structure built around [[CULTURAL ASSUMPTION]] that did not hold for most of our workforce.\n\n[[WHAT YOU REBUILT]]\n\nTranslation is not localisation. And localisation is not a language exercise — it is a redesign exercise that happens to involve language.","h":["#Localisation","#LearningAndDevelopment","#DiversityAndInclusion","#FrontlineWorkers","#HumanResources"],"m":"Bar chart of completion or competency by language group, anonymised.","q":"If you train a multilingual workforce — have you ever segmented your training data by language? Do it this week."},{"n":24,"d":47,"p":"P3","a":"C","f":"Project spotlight","t":"The workflow behind Max and Yulisa","c":"People ask what the architecture looks like. Honestly, the architecture is the least interesting part.\n\nHere is the actual workflow — end to end — for what happens when a driver asks a question:\n\n[[STEP 1]] → [[STEP 2]] → [[STEP 3]] → [[STEP 4]] → [[STEP 5]]\n\nTwo things in there that took us longest to get right, and that I'd build first if I started again:\n\n1. [[HARD-WON DESIGN DECISION 1]]\n2. [[HARD-WON DESIGN DECISION 2]]\n\nTogether, Max and Yulisa now handle [[VOLUME]] interactions per [[PERIOD]]. Roughly [[FIGURE]]% still reach a human — and that number is deliberate, not a shortfall.","h":["#AIAssistants","#AIImplementation","#SystemDesign","#OperationalExcellence","#HRTech"],"m":"Clean end-to-end workflow diagram. This is your most-shared asset if it's legible — invest in it.","q":"Building something similar? Tell me where your workflow differs — I'm collecting patterns."},{"n":25,"d":49,"p":"P1","a":"A","f":"Long-form","t":"The HR operating system we run — six systems, one dashboard","c":"A people function is not a set of policies. It is a set of systems that either talk to each other or don't.\n\nOurs: [[SYSTEM 1]] · [[SYSTEM 2]] · [[SYSTEM 3]] · [[SYSTEM 4]] · [[SYSTEM 5]] · [[SYSTEM 6]] — feeding one operational dashboard that [[WHO]] reviews [[FREQUENCY]].\n\nThe dashboard was the last thing we built and the thing that changed the most. Before it, every conversation with the leadership team was a narrative. After it, every conversation was about a number and a trend.\n\nWhat I would do differently: [[HONEST LESSON]]\n\nIf your people function cannot produce its own operating numbers on demand, it will always be a cost centre in the room where budget is decided.","h":["#PeopleOperations","#HRStrategy","#PeopleAnalytics","#HumanResources","#OperationalExcellence"],"m":"Dashboard screenshot, fully redacted, or a clean systems-map diagram.","q":"What's in your people-ops stack — and what's still living in a spreadsheet?"},{"n":26,"d":51,"p":"P2","a":"B","f":"Short-form","t":"Sustainability reporting a fleet manager can actually produce","c":"Most sustainability frameworks were written for people with a reporting team.\n\nFleet operators do not have a reporting team. They have a fleet manager with an already-full week.\n\nSo we built the smallest version that is still defensible: [[NUMBER]] metrics, [[FREQUENCY]], pulled automatically from [[SOURCE]]. It takes [[TIME]] to produce.\n\nThe metrics: [[METRIC 1]] · [[METRIC 2]] · [[METRIC 3]]\n\nA defensible report you actually publish every month beats a comprehensive framework you abandon in quarter two.","h":["#Sustainability","#ESG","#FleetManagement","#EVFleet","#Reporting"],"m":"Screenshot of your actual monthly report, redacted.","q":"What's the minimum viable sustainability report in your operation?"},{"n":27,"d":53,"p":"P1","a":"A","f":"Infographic","t":"The full cost of a bad frontline hire","c":"Most organisations count the recruitment fee and stop there.\n\nHere is the complete stack, using our real numbers:\n\n→ Sourcing and screening: [[FIGURE]]\n→ Documentation, visa and compliance: [[FIGURE]]\n→ Training and certification: [[FIGURE]]\n→ Supervised ramp — the productivity cost of the supervisor: [[FIGURE]]\n→ Lost productivity to exit: [[FIGURE]]\n→ Replacement cycle: [[FIGURE]]\n→ TOTAL: [[FIGURE]]\n\nThat total is why we invested in onboarding and competency systems before we invested in anything else. The business case wasn't ideological. It was arithmetic.","h":["#HumanResources","#CostOfHiring","#PeopleAnalytics","#Recruitment","#Retention"],"m":"Stacked-cost infographic, 1080×1350. Build the total visually so the final number lands.","q":"Do you know your fully-loaded cost per bad hire? Most teams know only the first line."},{"n":28,"d":55,"p":"P2","a":"B","f":"Long-form","t":"The heat tax on an electric fleet","c":"Nobody's EV model includes a line for August in the Gulf. Ours does now.\n\nWhat [[SUMMER PERIOD]] costs us, measured against our [[WINTER PERIOD]] baseline:\n\n→ Effective range: [[FIGURE]]\n→ Charging efficiency: [[FIGURE]]\n→ Battery thermal management draw: [[FIGURE]]\n→ Cabin cooling: [[FIGURE]]\n→ [[YOUR FIFTH FINDING]]\n\nHow we operate around it: [[MITIGATION 1]] · [[MITIGATION 2]] · [[MITIGATION 3]]\n\nThis is the number one thing I would tell any operator importing a European or North American fleet model into this region. The physics do not travel. Build your own baseline in your own climate before you commit capital.","h":["#EVFleet","#Electrification","#UAE","#FleetManagement","#SustainableTransport"],"m":"Seasonal comparison chart — range or efficiency by month across a full year.","q":"Operating EVs in extreme heat anywhere? I'd like to compare baselines."},{"n":29,"d":57,"p":"P1","a":"A","f":"Contrarian","t":"Stop hiring for \"AI-savvy\". Hire for process-literate.","c":"Every people-team job spec now asks for AI literacy. Most of them are asking for the wrong thing.\n\nThe people who have made AI work in our operation were not the ones who arrived knowing the tools. They were the ones who could describe an existing process precisely enough that it could be automated at all.\n\nTool knowledge has a half-life measured in months. The ability to decompose a messy operational process into steps, decisions, exceptions and owners does not expire.\n\nIf you cannot document the process, you cannot automate it. And most organisations discover this only after they have bought the licence.","h":["#Hiring","#TalentAcquisition","#HumanResources","#AIImplementation","#FutureOfWork"],"m":"None.","q":"What are you actually screening for when you say 'AI literacy'?"},{"n":30,"d":59,"p":"P4","a":"X","f":"Recap + CTA","t":"30 posts, 60 days — what changed","c":"Two months ago I decided to publish what we have learned running AI systems for a frontline workforce, instead of keeping it in internal documents nobody outside the company would ever read.\n\nWhat happened:\n→ [[FOLLOWER GROWTH]]\n→ [[MOST-READ POST + WHY IT SURPRISED YOU]]\n→ [[NUMBER]] conversations with operators facing the same problems\n→ [[ANY TANGIBLE OUTCOME — partnership, hire, speaking invitation]]\n\nWhat I got wrong: [[HONEST REFLECTION]]\n\nThe most valuable thing was not the reach. It was that writing this down forced me to examine decisions I had been making on instinct. Several of them did not survive being written out.\n\nNext 60 days, I'm going deeper on [[NEXT FOCUS]].\n\nIf you have been reading — thank you. If you're working on any of this, my DMs are open.","h":["#FrontlineAI","#PeopleOperations","#EVFleet","#Leadership","#BuildingInPublic"],"m":"None. This post should be plain text.","q":"Tell me what you'd like me to cover next — I'll build the next calendar around the replies."}];
+</script>
+<script>
+const HEADLINES=[
+ {t:"Head of People & Operations at Ecosine Transports | Deploying AI assistants to a frontline EV fleet workforce in Dubai | HR × AI × Sustainable Mobility",
+  n:"Role + proof + category", rec:true,
+  r:"Leads with a verifiable role, states the thing others can't claim, closes with three searchable keyword clusters. <b>\"Frontline EV fleet workforce\"</b> signals to all three audiences at once without reading as a list. Run this for the first 30 days."},
+ {t:"I build AI systems that train and support drivers, not desk workers | People & Fleet Operations, Ecosine Transports | EV fleets, Dubai",
+  n:"Outcome-led",
+  r:"First person in a headline is unusual and stops the scroll. <b>\"not desk workers\"</b> is the whole positioning in three words. Weaker on search: \"HR\" never appears, costing you recruiter and People-leader search traffic."},
+ {t:"Frontline AI, not office AI | HR & EV Fleet Operations Leader, Dubai | Built Max and Yulisa — AI assistants for driver training and operational support",
+  n:"Category claim",
+  r:"Strongest if you intend to commercialise Max and Yulisa — naming them builds recall, and people start referring to \"the Max guy\". Risk: reads slightly promotional, just outside the executive register."},
+ {t:"HR & People Operations | AI Implementation | EV Fleet Management | Sustainable Transport | Dubai, UAE",
+  n:"Maximum search coverage",
+  r:"Pure keyword density. Use this only if inbound recruiter and procurement search matters more than thought leadership. It ranks well and says nothing memorable."},
+ {t:"Most AI pilots serve the 10% of the workforce with a laptop. I work on the other 90%. | People & Fleet Ops, Ecosine Transports | Dubai",
+  n:"Provocative",
+  r:"Highest stopping power. Every time you comment anywhere on LinkedIn, this argument appears under your name — your headline does content marketing for you across the platform. Switch to it around day 30, once you have evidence behind it."}
+];
+const ABOUT=`Most organisations are piloting AI for the ten percent of their workforce that sits at a desk.
+
+I work on the other ninety percent.
+
+I lead people and fleet operations at Ecosine Transports in Dubai, where our workforce is [[HEADCOUNT]] professional drivers operating a fleet of [[FLEET SIZE]] electric vehicles. They do not have corporate email. They work across [[NUMBER]] languages. They operate in 45°C heat on schedules where a wrong answer is not an inconvenience — it is a safety event.
+
+That environment does not tolerate AI theatre. It is the reason the systems we build have to be genuinely good.
+
+Over the past [[TIMEFRAME]] I have designed and deployed two AI assistants into live operations:
+
+→ Max — driver training and competency development. Onboarding time moved from [[BEFORE]] to [[AFTER]], and [[METRIC]] improved by [[FIGURE]].
+
+→ Yulisa — real-time operational support for drivers and dispatch. Now handles [[VOLUME]] queries per [[PERIOD]], with a deliberate escalation path to a human for anything safety-related.
+
+Alongside that, I run the operating side of an electric fleet: charging strategy, route and roster optimisation, driver behaviour programmes, and the sustainability reporting that comes with it. Over [[TIMEFRAME]] we have moved [[CORE METRIC]] by [[FIGURE]].
+
+WHAT I WRITE ABOUT HERE
+
+▪ Deploying AI to frontline, non-desk, multilingual workforces — including what fails
+▪ The real unit economics of running an EV fleet in the Gulf
+▪ Building AI assistants that survive contact with live operations
+▪ Building HR systems that operations teams will actually use
+
+I publish every other day. Everything I share comes from systems I have personally run, with the costs included — not from a vendor deck.
+
+If you are deploying AI into a frontline workforce, electrifying a fleet in the region, or building operational AI and want to compare notes on what breaks — my DMs are open.
+
+[[EMAIL]] · Dubai, UAE`;
+const BULLETS=`▪ Designed and deployed Max, an AI-driven driver training and competency system, reducing onboarding time from [[BEFORE]] to [[AFTER]] and improving [[RETENTION METRIC]] by [[FIGURE]].
+
+▪ Built and operationalised Yulisa, an AI operational support assistant handling [[VOLUME]] driver and dispatch queries per [[PERIOD]], with defined human escalation for all safety-critical cases.
+
+▪ Rebuilt the end-to-end hiring and onboarding pipeline for a non-desk, multilingual workforce, cutting time-to-productivity by [[FIGURE]] across [[NUMBER]] languages.
+
+▪ Own charging strategy and roster optimisation for a [[FLEET SIZE]]-vehicle EV fleet, improving [[UTILISATION / COST PER KM]] by [[FIGURE]].
+
+▪ Introduced a driver-behaviour programme linking telematics data to coaching, delivering [[FIGURE]] improvement in [[EFFICIENCY / INCIDENT RATE]].
+
+▪ Established the fleet's sustainability reporting baseline, producing [[REPORT TYPE]] for [[STAKEHOLDER]].
+
+▪ Reduced [[COST CENTRE]] by [[FIGURE]] through [[LEVER]] while headcount grew [[FIGURE]].`;
+const PROFILE_ROWS=[
+ ["Featured","Pin 3: best long-form post, a Max/Yulisa case study, one EV data post. Refresh every 30 days.","The only part of the profile you fully control below the fold. Converts visitors into followers."],
+ ["Banner","1584×396. Real depot photography, one overlaid line: <i>\"AI for the workforce that doesn't sit at a desk.\"</i>","A stock gradient signals a profile nobody maintains. Real operational photography signals the opposite."],
+ ["Photo","Head and shoulders, neutral background, natural light, no vehicle in frame.","It renders at 40px in the feed. Anything busy becomes noise."],
+ ["Custom URL","linkedin.com/in/firstname-lastname — remove the trailing digits.","Free credibility on every business card, signature and CV."],
+ ["Skills","Pin exactly these three: Artificial Intelligence (AI) · Human Resources (HR) · Fleet Management","The top 3 pinned skills are weighted in LinkedIn search. Pin what you want to be found for, not what you're best at."],
+ ["Creator topics","#FrontlineAI #HRTech #EVFleet #PeopleOperations #SustainableTransport","Tells the algorithm which feed to surface you in, and unlocks the Follow-first button."],
+ ["Recommendations","Request 3 in week 2: an operations peer, a direct report, an external partner. Give each a sentence to anchor on.","Three specific recommendations beat thirty generic endorsements."],
+ ["Open to","Providing services → HR Consulting, Business Consulting, Training.","Adds a services page and puts you in LinkedIn services search — a channel almost nobody in your space uses."]
+];
+const TEMPLATES=[
+ {n:"Short-form Insight", len:"200–400 characters", use:"Highest frequency, lowest effort, strong for comment volume.",
+  s:`We [[DECISION YOU MADE]].
+
+[[WHAT WAS TRUE BEFORE — the situation everyone recognises]].
+[[THE MOMENT IT STOPPED WORKING]].
+
+[[METRIC]] moved from [[BEFORE]] to [[AFTER]].
+
+[[THE PRINCIPLE — stated as a general truth, not a boast]].
+
+[[QUESTION ABOUT THE READER'S OWN OPERATION]]`,
+  r:"The flat opening claim does the stopping. Context earns the right to the claim. The number makes it defensible. The principle is what gets screenshotted. The question converts a reader into a commenter — and comment velocity in the first hour is the strongest single input to LinkedIn's distribution decision."},
+ {n:"Long-form Narrative", len:"1,300–1,900 characters", use:"Two to three per month. This is what builds authority.",
+  s:`[[CLAIM THAT CONTRADICTS THE CONVENTIONAL VIEW]].
+
+[[WHY THIS MATTERS TO THE READER'S P&L OR RISK]].
+
+[[TIMEFRAME]] ago we [[WHAT YOU SET OUT TO DO]]. [[THE OBVIOUS APPROACH EVERYONE TAKES]].
+
+Then [[THE THING THAT DIDN'T WORK]].
+
+What the data showed:
+→ [[DATA POINT 1]]
+→ [[DATA POINT 2]]
+→ [[DATA POINT 3]]
+
+[[WHAT YOU CHANGED]]. [[WHAT IT COST]].
+
+[[WHAT YOU'D DO DIFFERENTLY IF YOU STARTED AGAIN]].
+
+[[THE PRINCIPLE]].
+
+[[QUESTION INVITING PEERS TO COMPARE]]`,
+  r:"Executive long-form fails in one specific way: it stays abstract. The <b>turn</b> and <b>cost</b> sections are the antidote. Disclosing what you got wrong is what separates an operator writing from a consultant writing — and it's the cheapest credibility available, because nobody fabricates their own failures."},
+ {n:"Carousel / Infographic", len:"8–14 slides", use:"Highest save rate on the platform. One to two per month.",
+  s:`Slide 1:   [[NUMBER]] [[THINGS]] [[THAT PRODUCE THE OUTCOME]]
+Slide 2:   Most [[AUDIENCE]] [[DO THE WRONG THING]]. Here's what we run instead.
+Slide 3:   01 · [[POINT]] — [[ONE NUMBER]] — [[ONE LINE]]
+   …       one idea per slide; if it needs a paragraph, it's two slides
+Slide N:   What this adds up to: [[SYNTHESIS]]
+Slide N+1: [[QUESTION]] · [[YOUR NAME]] · [[YOUR HANDLE]]
+
+CAPTION (four lines, its only job is to get the tap):
+[[THE PROBLEM, IN ONE LINE]].
+[[WHAT'S IN THE CAROUSEL]].
+[[WHY THIS ONE IS WORTH SAVING]].
+Swipe through. [[QUESTION]]`,
+  r:"<b>1080×1350, exported as PDF</b> — square wastes 25% of mobile screen height, and image carousels are deprecated. Minimum 24pt type: the most common carousel failure is unreadability at phone size, not weak content. Number your slides — progress indication measurably increases completion, and completion is what LinkedIn weights."},
+ {n:"Project Spotlight", len:"600–1,100 characters", use:"Your differentiator. Once or twice per month, no more.",
+  s:`[[THE HUMAN PROBLEM — someone couldn't do something they needed to do]].
+
+So we built [[NAME]] — [[ONE SENTENCE, PLAIN LANGUAGE]].
+
+[[HEADLINE METRIC: from [[BEFORE]] to [[AFTER]]]].
+
+The part nobody warns you about: [[THE UNGLAMOROUS WORK — data cleaning, content rewriting, process documentation]]. That was [[PROPORTION]] of the effort.
+
+We also got [[SPECIFIC THING]] wrong. [[WHAT HAPPENED]]. [[HOW YOU FOUND OUT]]. [[WHAT YOU CHANGED]].
+
+If you're building something similar: [[THE ONE PIECE OF ADVICE]].
+
+[[QUESTION]]`,
+  r:"<b>The failure section is mandatory.</b> A spotlight without a disclosed failure reads as marketing, and the audience you want is unusually good at detecting marketing. It is also what makes the post safe to publish about your own products — you are reporting, not selling. Describe a process gap, never a named person's mistake."}
+];
+const HOOKS=[["Flat contrarian claim","Range anxiety is a management problem, not a battery problem."],["Confession of an error","We spent [[FIGURE]] on the wrong thing. Here's how we found out."],["The number alone","[[FIGURE]]% of our departures happen in the first [[PERIOD]]."],["Reframed question","'Will AI replace recruiters' is the least interesting question in HR."],["The thing nobody models","Nobody's EV business case has a line for August in the Gulf."],["Before / after","Onboarding: [[BEFORE]]. Today: [[AFTER]]. What changed wasn't the software."],["Overheard","A driver told me something [[TIMEFRAME]] ago that I still think about."],["The refusal","We automated five HR processes and deliberately refused to automate three."],["Cost disclosure","The build was the cheap part. Nobody tells you this."],["Regional specificity","European fleet models do not survive contact with a Gulf summer."],["The uncomfortable audit","Read your own AI policy in your workforce's second language."],["Inverted priority","We taught our AI to escalate before we taught it to answer."]];
+const CHECKS={
+ "Substance":["Zero [[BRACKETS]] remain","Every number is one you can defend if challenged publicly","No client, contract value or individual is identifiable","Any failure story describes a process gap, not a named person","If it could read as a pitch for Max or Yulisa, it discloses a cost or failure"],
+ "Craft":["First 210 characters work standalone — paste them alone and reread","Opening is not a greeting, an announcement, or \"In today's world\"","One idea only","Single-line paragraphs, generous white space","Closes with a question you actually want answered","Read it aloud once — cut anything you'd never say out loud"],
+ "Mechanics":["3–5 hashtags, #FrontlineAI included","No external link in the body (put it in the first comment)","Media attached: carousel is PDF at 1080×1350, screenshots redacted","Alt text written for every image","Spellcheck run — a typo in the first line is disproportionately costly","Anyone tagged has been asked first"]};
+const TIMELINE=[["07:30","Publish. Tue–Thu strongest; avoid Friday entirely."],["+0 min","Post the first comment yourself — an extra data point, a caveat, or the link. Never leave your own comment section empty."],["+5 min","Notify 5–10 peers directly. Ask for disagreement, not support: <i>\"I made a claim about X here — think I'm wrong?\"</i>"],["+0–60 min","Reply to <b>every</b> comment, each reply ending in a question. Match reply length to comment length."],["+60 min","Stop. Do not edit the post — editing resets distribution."],["+4 hrs","Second sweep: new comments, then 20 minutes commenting substantively on other people's posts."],["+24 hrs","Final reply sweep. Log metrics."]];
+const METRICS=[["Profile views from target titles","Steady week-on-week rise","The truest signal. Ten Heads of People beats a thousand anonymous views.",1],
+["Saves per post","2%+ of impressions","Strongest indicator of durable value. Saves tell you what to write more of.",1],
+["Reposts / shares","1%+ of impressions","The only metric that reaches genuinely new audiences.",1],
+["Comment depth","3+ comments over 40 words","A long comment from a senior operator outweighs 200 reactions.",1],
+["Qualified DMs","4+ per month","The commercial outcome. This is why you're doing it.",1],
+["Follower quality","Rising share of HR / fleet / founder titles","Growth in the wrong titles is worse than no growth.",1],
+["Post-to-profile rate","1%+","Measures whether your posts make people curious about you.",1],
+["Impressions","—","Volatile, mostly a function of when you posted, uncorrelated with outcomes.",0],
+["Reactions","—","Free to give, therefore near-worthless as signal.",0],
+["Total followers","—","A vanity number that will tempt you into writing blander posts.",0],
+["Any single post","—","Judge in blocks of ten. Individual post variance is enormous and mostly noise.",0]];
+</script>
+<script>
+const DRAFT_NOTES={
+1:"<b>Opening line</b> is a flat observation about other people's behaviour — testable against the reader's own organisation, and not \"excited to share\". <b>\"It makes sense\"</b> concedes the opposing view before dismantling it, which buys credibility in an executive register. Credentials land fourth, not first: you earn the right to speak before stating the qualification. <b>\"Not a pilot. Production.\"</b> is your most differentiating claim, so it gets its own beat. The three arrows each seed a later post. The closing punch — <i>\"Because I promise it wasn't the model\"</i> — is contestable, and contestable statements get replies where open questions get none.",
+2:"<b>\"I wouldn't have read it either\"</b> removes any hint of blaming the workforce — the difference between empathy and condescension. The metric appears early and is then explicitly set aside (<i>\"here is the part that actually matters\"</i>); refusing to dwell on your own result is a strong authority signal. <b>\"They just knew which parts to ignore\"</b> is the best line in the post: it reframes a documentation problem as an institutional-knowledge problem. The failure section is mandatory and must be specific, with the detection method — vague failures read as false modesty. The closing principle is written to stand alone as a screenshot.",
+3:"<b>\"Ours was too\"</b> on line three removes the consultant-lecturing-you reading: you made the same mistake as the reader. The caption gives the answers away before the swipe prompt — counterintuitive, but caption-as-summary out-taps caption-as-teaser, because the reader now trusts there is more. <b>\"Two of those surprises were larger than our entire projected maintenance saving\"</b> is the sentence that survives a reshare. <b>\"The physics do not travel\"</b> is a five-word version of the whole post. The DM call-to-action is the first commercial ask in the sequence — and it comes only after two posts of pure value."};
+const DISCLOSURE=["Every figure cleared for public disclosure","No client, route or contract identifiable from the data","Commercially sensitive absolutes converted to percentages or indexed to a baseline","Figures reconcile with each other — a reader will check","You can produce the underlying data if a journalist or partner asks"];
+
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const phRe=/\[\[[^\]]*\]\]/g;
+const phCount=s=>(String(s).match(phRe)||[]).length;
+const mark=s=>esc(s).replace(/\[\[([^\]]*)\]\]/g,'<span class="ph">[[$1]]</span>');
+const fullText=p=>p.c+"\n\n"+p.h.join(" ");
+const LIMIT=3000, HL=220, AB=2600;
+
+let S={start:"",pub:{},chk:{},updatedAt:0}, TAB="today", SEL=null, FILT="all", HIDE=false, DOC=null;
+const LS="fdb.state.v1";
+try{const r=localStorage.getItem(LS); if(r)S=Object.assign(S,JSON.parse(r));}catch(e){}
+function save(){S.updatedAt=Date.now();try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){} if(DOC)DOC.set(JSON.parse(JSON.stringify(S))).catch(()=>{});}
+(async()=>{ let db=null; try{ db=await claude.use("db"); }catch(e){}
+  if(!db) return;
+  DOC=db.doc("state/console");
+  try{ const snap=await DOC.get(); const rem=snap&&snap.data?snap.data():null;
+    if(rem&&(rem.updatedAt||0)>(S.updatedAt||0)){S=Object.assign(S,rem);try{localStorage.setItem(LS,JSON.stringify(S));}catch(e){} render();}
+    else if(S.updatedAt){ await DOC.set(JSON.parse(JSON.stringify(S))); }
+  }catch(e){}
+})();
+
+let tT; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tT);tT=setTimeout(()=>t.classList.remove("on"),2600);}
+async function copy(text,label){
+  const n=phCount(text);
+  if(n&&!confirm(n+" placeholder"+(n>1?"s":"")+" still unfilled in this copy.\n\nCopy anyway?"))return;
+  try{await navigator.clipboard.writeText(text);toast(label+" copied"+(n?" — "+n+" placeholder"+(n>1?"s":"")+" still in it":""));}
+  catch(e){toast("Copy blocked by the browser — select the text and copy manually");}
+}
+function counter(len,lim){const pct=len/lim;const cls=pct>1?"over":pct>.9?"warn":"";return '<span class="count '+cls+'">'+len.toLocaleString()+" / "+lim.toLocaleString()+" chars</span>";}
+function dayNow(){ if(!S.start)return null; const a=new Date(S.start+"T00:00:00"), b=new Date(); b.setHours(0,0,0,0);
+  return Math.floor((b-a)/86400000)+1; }
+function postFor(day){ return POSTS.find(p=>p.d===day)||null; }
+function nextPost(day){ return POSTS.find(p=>p.d>=day)||null; }
+
+/* ---------- sections ---------- */
+function vToday(){
+  const day=dayNow(), gaps=POSTS.filter(p=>!S.pub[p.n]).reduce((a,p)=>a+phCount(fullText(p)),0);
+  const done=POSTS.filter(p=>S.pub[p.n]).length;
+  let hero;
+  if(day===null){
+    hero='<div class="card hero"><div class="day-badge">Not started</div><h3>Set your start date to arm the board</h3>'
+      +'<p style="color:var(--ink-2);max-width:56ch">Pick the day Post 01 goes live. Everything else — which post is due, how many days remain, what still needs filling in — is computed from it.</p></div>';
+  } else {
+    const p=postFor(day), np=nextPost(day), show=p||np;
+    if(!show){ hero='<div class="card hero"><div class="day-badge">Day '+day+' · complete</div><h3>All 30 posts dispatched.</h3><p style="color:var(--ink-2)">Rebuild the next calendar from your top five posts by <b>saves</b>, not by reach.</p></div>'; }
+    else{
+      const g=phCount(fullText(show));
+      const bar=g?`<div class="ticks">${Array.from({length:Math.min(g,26)},()=>"<i></i>").join("")}</div>`:`<div class="meter"><i style="width:100%"></i></div>`;
+      hero='<div class="card hero" style="--pc:'+PILLARS[show.p].c+';border-left:3px solid '+PILLARS[show.p].c+'">'
+        +'<div class="day-badge">'+(p?"Due today":"Next up")+' · Day '+show.d+' of 60 · Post '+String(show.n).padStart(2,"0")+'</div>'
+        +'<h3>'+esc(show.t)+'</h3>'
+        +'<div class="post-meta"><span>'+PILLARS[show.p].n+'</span><i class="dot"></i><span>'+AUD[show.a]+'</span><i class="dot"></i><span>'+esc(show.f)+'</span></div>'
+        +'<div class="meterbox">'+bar
+        +'<div class="eyebrow" style="color:'+(g?"var(--warn)":"var(--good)")+'">'+(g?g+" placeholder"+(g>1?"s":"")+" left to fill":"Ready to publish")+'</div></div>'
+        +'<div class="row"><button class="btn primary" data-open="'+show.n+'">Open this post</button>'
+        +(p?'<button class="btn" data-pub="'+show.n+'">'+(S.pub[show.n]?"Mark unpublished":"Mark published")+'</button>':'<span class="eyebrow">publishes in '+(show.d-day)+' day'+((show.d-day)>1?"s":"")+'</span>')+'</div></div>';
+    }
+  }
+  return '<section class="sec"><div class="today-grid">'+hero
+    +'<div class="stack"><div class="metrics">'
+    +'<div class="card metric"><div class="k">Day</div><div class="v">'+(day===null?"—":Math.max(0,day))+'<span style="font-size:15px;color:var(--ink-3)"> / 60</span></div></div>'
+    +'<div class="card metric"><div class="k">Published</div><div class="v">'+done+'<span style="font-size:15px;color:var(--ink-3)"> / 30</span></div></div>'
+    +'<div class="card metric"><div class="k">Post gaps</div><div class="v" style="color:'+(gaps?"var(--warn)":"var(--good)")+'">'+gaps+'</div></div>'
+    +'<div class="card metric"><div class="k">Cadence</div><div class="v">48<span style="font-size:15px;color:var(--ink-3)"> hrs</span></div></div>'
+    +'</div><div class="card setup"><label for="sd">Start date (Post 01 goes live)</label><input type="date" id="sd" value="'+(S.start||"")+'"></div>'
+    +'<div class="note"><b>The one rule:</b> nothing on this board contains an invented statistic. Every <span class="ph">[[BRACKET]]</span> is a slot for a real figure from your operation. Copying one out to LinkedIn is the only way this system can hurt you — so the copy button warns you first.</div>'
+    +'</div></div></section>';
+}
+function card(p){
+  const g=phCount(fullText(p));
+  return '<button class="card post'+(S.pub[p.n]?" done":"")+'" style="--pc:'+PILLARS[p.p].c+'" data-open="'+p.n+'">'
+   +'<div class="post-top"><span class="post-n">'+String(p.n).padStart(2,"0")+'</span>'
+   +(S.pub[p.n]?'<span class="eyebrow" style="color:var(--good)">published</span>':'')
+   +'<span class="post-day">Day '+p.d+'</span></div>'
+   +'<h4>'+esc(p.t)+'</h4>'
+   +'<div class="post-meta"><span style="color:'+PILLARS[p.p].c+'">'+PILLARS[p.p].n+'</span><i class="dot"></i><span>'+esc(p.f)+'</span>'
+   +'<span class="gaps'+(g?"":" zero")+'">'+(g?g+" gaps":"ready")+'</span></div></button>';
+}
+function detail(p,closable){
+  const txt=fullText(p), g=phCount(txt);
+  return '<div class="card detail" style="--pc:'+PILLARS[p.p].c+'">'
+   +'<div class="detail-head"><div style="flex:1"><div class="eyebrow" style="color:'+PILLARS[p.p].c+'">Post '+String(p.n).padStart(2,"0")+' · Day '+p.d+' · '+PILLARS[p.p].n+' · '+AUD[p.a]+' · '+esc(p.f)+'</div>'
+   +'<h3 style="margin-top:6px">'+esc(p.t)+'</h3></div>'+(closable?'<button class="btn" data-close="1">Close</button>':'')+'</div>'
+   +'<div class="copyblock">'+mark(p.c)+'</div>'
+   +'<div class="row"><button class="btn primary" data-copy="'+p.n+'">Copy post</button>'
+   +'<button class="btn" data-pub="'+p.n+'">'+(S.pub[p.n]?"Mark unpublished":"Mark published")+'</button>'
+   +counter(txt.length,LIMIT)+'</div>'
+   +(g?'<div class="row"><span class="eyebrow" style="color:var(--warn)">'+g+' placeholder'+(g>1?"s":"")+' must be filled before this goes out</span></div>':'')
+   +'<dl class="kv"><dt>Hashtags</dt><dd class="tag">'+p.h.join(" ")+'</dd>'
+   +'<dt>Media</dt><dd>'+esc(p.m)+'</dd>'
+   +'<dt>Call to action</dt><dd>'+esc(p.q)+'</dd></dl>'
+   +(DRAFT_NOTES[p.n]?'<div class="rationale"><b>Why it is built this way.</b> '+DRAFT_NOTES[p.n]+'</div>':'')
+   +(p.n===3?'<div class="rationale"><b>Disclosure check before publishing.</b><br>'+DISCLOSURE.map(d=>"▪ "+esc(d)).join("<br>")+'</div>':'')
+   +'</div>';
+}
+function vCalendar(){
+  const chips=[["all","All 30"]].concat(Object.keys(PILLARS).map(k=>[k,PILLARS[k].n]));
+  const list=POSTS.filter(p=>(FILT==="all"||p.p===FILT)&&(!HIDE||!S.pub[p.n]));
+  return '<section class="sec"><div class="sec-head"><h2>Calendar</h2><p>Every other day for 60 days. No pillar or format repeats back-to-back — that variety is what keeps three audiences reading one profile.</p></div>'
+   +(SEL?detail(POSTS.find(p=>p.n===SEL),true):"")
+   +'<div class="filters">'+chips.map(([k,n])=>'<button class="chip" data-filt="'+k+'" aria-pressed="'+(FILT===k)+'">'+n+'</button>').join("")
+   +'<button class="chip" data-hide="1" aria-pressed="'+HIDE+'">Hide published</button></div>'
+   +'<div class="board">'+list.map(card).join("")+'</div>'
+   +(list.length?"":'<p style="color:var(--ink-3)">Nothing matches this filter.</p>')+'</section>';
+}
+function vDrafts(){
+  return '<section class="sec"><div class="sec-head"><h2>Ready to publish</h2><p>The first three posts in full, with the reasoning behind every structural choice. Fill the placeholders, copy, publish.</p></div>'
+   +'<div class="stack">'+POSTS.slice(0,3).map(p=>detail(p,false)).join("")+'</div></section>';
+}
+function vProfile(){
+  return '<section class="sec"><div class="sec-head"><h2>Profile</h2><p>Ordered by leverage. The headline is the highest-value field on LinkedIn — it appears in the feed, in search, in comments and on every connection request.</p></div>'
+  +'<h3 style="font-size:17px;margin-bottom:12px">Headline — five options</h3><div class="stack">'
+  +HEADLINES.map((h,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:8px"><span style="color:var(--accent-ink)">Option '+(i+1)+'</span><i class="dot"></i><span>'+h.n+'</span>'+(h.rec?'<span class="gaps">recommended</span>':"")+'</div>'
+    +'<div class="copyblock" style="font-size:15px">'+mark(h.t)+'</div>'
+    +'<div class="row"><button class="btn" data-copytext="hl'+i+'">Copy headline</button>'+counter(h.t.length,HL)+'</div>'
+    +'<div class="rationale">'+h.r+'</div></div>').join("")
+  +'</div><div class="note" style="margin-top:14px"><b>Verdict:</b> run Option 1 for the first 30 days while you build a body of work, then switch to Option 5 once you have ten posts of evidence behind it.</div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">About section</h3>'
+  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">Mobile truncates at roughly 250 characters behind a “…see more”. The first three lines are the only part most readers will see — they carry the whole strategy.</p>'
+  +'<div class="copyblock">'+mark(ABOUT)+'</div>'
+  +'<div class="row"><button class="btn primary" data-copytext="about">Copy About</button>'+counter(ABOUT.length,AB)+'</div></div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Experience bullets</h3>'
+  +'<div class="card pad"><p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">Seven is the ceiling — past that nobody reads. Order is deliberate: AI first (your differentiator), HR second (your category), fleet third (your proof), cost last (what an executive reader is scanning for).</p>'
+  +'<div class="copyblock" style="font-size:15px">'+mark(BULLETS)+'</div>'
+  +'<div class="row"><button class="btn" data-copytext="bullets">Copy bullets</button></div></div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Everything else, ranked by leverage</h3>'
+  +'<div class="card scroll"><table><thead><tr><th>Element</th><th>Action</th><th>Why it matters</th></tr></thead><tbody>'
+  +PROFILE_ROWS.map(r=>'<tr><td><b>'+r[0]+'</b></td><td>'+r[1]+'</td><td style="color:var(--ink-2)">'+r[2]+'</td></tr>').join("")
+  +'</tbody></table></div>'
+  +'<div class="note" style="margin-top:14px"><b>Do not change everything at once.</b> LinkedIn briefly suppresses reach on profiles with simultaneous large edits, and you lose the ability to attribute what worked. Day 0: headline, About, URL, photo, banner. Day 7: experience and skills. Day 14: Featured. Day 21: recommendations and services. Day 30: review the headline switch.</div></section>';
+}
+function vTemplates(){
+  return '<section class="sec"><div class="sec-head"><h2>Templates</h2><p>Four frameworks in your register. Each is a shape, not a script.</p></div>'
+  +'<div class="note" style="margin-bottom:16px"><b>Rules that apply to all four.</b> The first 210 characters are the entire post · one idea per post · single-line paragraphs · never open with a greeting · no external links in the body (first comment instead) · close with a question you actually want answered · numbers over adjectives.</div>'
+  +'<div class="stack">'+TEMPLATES.map((t,i)=>'<div class="card pad"><div class="post-meta" style="margin-bottom:8px"><span style="color:var(--accent-ink)">'+esc(t.n)+'</span><i class="dot"></i><span>'+t.len+'</span></div>'
+   +'<p style="color:var(--ink-2);font-size:13.5px;margin-bottom:12px">'+esc(t.use)+'</p>'
+   +'<div class="copyblock" style="font-size:15px">'+mark(t.s)+'</div>'
+   +'<div class="row"><button class="btn" data-copytext="tpl'+i+'">Copy skeleton</button></div>'
+   +'<div class="rationale">'+t.r+'</div></div>').join("")+'</div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Hook bank</h3>'
+  +'<div class="card scroll"><table><thead><tr><th>Shape</th><th>Opening</th></tr></thead><tbody>'
+  +HOOKS.map(h=>'<tr><td style="white-space:nowrap"><b>'+h[0]+'</b></td><td style="font-family:var(--read);font-size:15px">'+mark(h[1])+'</td></tr>').join("")
+  +'</tbody></table></div></section>';
+}
+function vWorkflow(){
+  const groups=Object.keys(CHECKS).map(g=>'<div class="card pad"><h4>'+g+'</h4>'
+    +CHECKS[g].map((c,i)=>{const id=g+"-"+i;return '<label class="check'+(S.chk[id]?" on":"")+'"><input type="checkbox" data-chk="'+id+'"'+(S.chk[id]?" checked":"")+'><span>'+esc(c)+'</span></label>';}).join("")+'</div>').join("");
+  const done=Object.values(S.chk).filter(Boolean).length, tot=Object.values(CHECKS).flat().length;
+  return '<section class="sec"><div class="sec-head"><h2>Workflow</h2><p>About 2.5 hours a week, concentrated into one batching session plus short daily engagement windows.</p></div>'
+  +'<div class="note" style="margin-bottom:16px"><b>Batch on Sunday, 90 minutes.</b> Pull the real numbers from your systems <i>first</i>, before writing — writing around a number you haven\'t checked produces a post you can\'t publish. Never write a post the morning it publishes; same-day writing is where the placeholder mistakes happen.</div>'
+  +'<div class="row" style="margin:0 0 12px"><span class="eyebrow">Pre-publish checklist — '+done+' / '+tot+' ticked</span><button class="btn" data-reset="1" style="margin-left:auto">Reset checklist</button></div>'
+  +'<div class="grid2">'+groups+'</div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Publish day</h3>'
+  +'<div class="card pad"><dl class="tl">'+TIMELINE.map(t=>'<dt>'+t[0]+'</dt><dd>'+t[1]+'</dd>').join("")+'</dl>'
+  +'<div class="rationale"><b>The golden hour is non-negotiable.</b> LinkedIn tests a post with a small audience in the first 60–90 minutes and expands distribution based on the engagement rate it observes. A post with ten comments in hour one and forty on day two reaches a fraction of the same post with those numbers reversed. If you cannot be present for the hour after publishing, publish on a different day.</div></div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Daily engagement — 20 minutes</h3>'
+  +'<div class="card pad"><p style="font-size:14px;color:var(--ink-2)">Roughly 40% of your growth comes from comments left on <i>other</i> people\'s posts — that is where a new audience discovers you.</p>'
+  +'<dl class="tl" style="margin-top:12px"><dt>5 / day</dt><dd>Comment on five posts from your target audiences.</dd>'
+  +'<dt>Rule</dt><dd>Every comment must add information the original post did not contain — a counter-example, a number, a distinction. Never “Great insight!”</dd>'
+  +'<dt>30–60 wd</dt><dd>Long enough to be substantive, short enough to be read.</dd>'
+  +'<dt>~30</dt><dd>Maintain a target list of about thirty accounts and engage with the same people repeatedly. Recognition compounds.</dd>'
+  +'<dt>24 hrs</dt><dd>Answer every DM within a day, even if the answer is “not right now”.</dd></dl>'
+  +'<div class="rationale">Your headline is doing marketing on every one of these comments. That is why the headline field matters more than it looks.</div></div>'
+  +'<h3 style="font-size:17px;margin:28px 0 12px">Analytics</h3>'
+  +'<div class="card scroll"><table><thead><tr><th>Metric</th><th>Target by day 60</th><th>Why</th></tr></thead><tbody>'
+  +METRICS.map(m=>'<tr'+(m[3]?"":' style="opacity:.6"')+'><td><b>'+m[0]+'</b>'+(m[3]?"":' <span class="eyebrow" style="color:var(--crit)">ignore</span>')+'</td><td class="num">'+m[1]+'</td><td style="color:var(--ink-2)">'+m[2]+'</td></tr>').join("")
+  +'</tbody></table></div>'
+  +'<div class="note" style="margin-top:14px"><b>Judge in blocks of ten, never one post at a time.</b> Weekly: which post got the most saves — write more in that shape. Every ten posts: which pillar is landing, and reweight what remains toward it. Day 30: full audit and the headline switch. Day 60: rebuild the next calendar from your top five by saves, not by reach.</div></section>';
+}
+
+const VIEWS={today:["Today",vToday],calendar:["Calendar",vCalendar],drafts:["Drafts",vDrafts],profile:["Profile",vProfile],templates:["Templates",vTemplates],workflow:["Workflow",vWorkflow]};
+function render(){
+  $("#tabs").innerHTML=Object.keys(VIEWS).map(k=>'<button class="tab" role="tab" data-tab="'+k+'" aria-selected="'+(TAB===k)+'">'+VIEWS[k][0]+'</button>').join("");
+  $("#app").innerHTML=VIEWS[TAB][1]();
+  const day=dayNow();
+  $("#cadence").textContent=day===null?"30 posts · 60 days":"Day "+Math.max(0,day)+" · "+POSTS.filter(p=>S.pub[p.n]).length+"/30 published";
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest("[data-tab],[data-open],[data-close],[data-filt],[data-hide],[data-copy],[data-copytext],[data-pub],[data-reset]");
+  if(!b)return;
+  const d=b.dataset;
+  if(d.tab){TAB=d.tab;SEL=null;render();window.scrollTo({top:0,behavior:"smooth"});return;}
+  if(d.open){SEL=+d.open;TAB="calendar";render();const el=$(".detail");if(el)el.scrollIntoView({block:"start",behavior:"smooth"});return;}
+  if(d.close){SEL=null;render();return;}
+  if(d.filt){FILT=d.filt;SEL=null;render();return;}
+  if(d.hide){HIDE=!HIDE;render();return;}
+  if(d.pub){S.pub[d.pub]=!S.pub[d.pub];save();render();toast(S.pub[d.pub]?"Post "+d.pub+" marked published":"Post "+d.pub+" reopened");return;}
+  if(d.reset){S.chk={};save();render();toast("Checklist reset");return;}
+  if(d.copy){const p=POSTS.find(x=>x.n==d.copy);copy(fullText(p),"Post "+String(p.n).padStart(2,"0"));return;}
+  if(d.copytext){
+    const k=d.copytext;
+    if(k==="about")copy(ABOUT,"About section");
+    else if(k==="bullets")copy(BULLETS,"Experience bullets");
+    else if(k.startsWith("hl"))copy(HEADLINES[+k.slice(2)].t,"Headline");
+    else if(k.startsWith("tpl"))copy(TEMPLATES[+k.slice(3)].s,"Skeleton");
+    return;
+  }
+});
+document.addEventListener("change",e=>{
+  if(e.target.id==="sd"){S.start=e.target.value;save();render();toast(S.start?"Board armed — Day 1 is "+S.start:"Start date cleared");}
+  if(e.target.dataset.chk){S.chk[e.target.dataset.chk]=e.target.checked;save();
+    e.target.closest(".check").classList.toggle("on",e.target.checked);
+    const done=Object.values(S.chk).filter(Boolean).length,tot=Object.values(CHECKS).flat().length;
+    const lbl=$(".sec .eyebrow");if(lbl&&lbl.textContent.includes("ticked"))lbl.textContent="Pre-publish checklist — "+done+" / "+tot+" ticked";}
+});
+render();
+</script>

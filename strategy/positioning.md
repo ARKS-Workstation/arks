@@ -39,7 +39,7 @@ other two reading. The three never share a post equally.
 | B | GCC fleet, mobility & sustainability operators | Unit economics, real operating data, regional reality | Connect, partnership inbound |
 | C | Founders & ops leaders buying/building AI | Build notes, failure modes, what production actually demands | Follow, advisory/consulting inbound |
 
-**Rotation weighting across 30 posts:** A = 12 · B = 9 · C = 6 · Cross-cutting = 3.
+**Rotation weighting across 30 posts:** A = 12 · B = 8 · C = 6 · Cross-cutting = 4.
 
 Audience A carries the majority because it is the largest engagement pool on LinkedIn
 and matches your stated goal. B and C convert at higher intent but reach fewer people —
@@ -51,7 +51,7 @@ they are your commercial layer, not your growth layer.
 AI adoption for people without laptops. Onboarding, training, compliance, retention,
 language, trust. Your flagship pillar.
 
-### Pillar 2 — The Electric Fleet *(Audience B · 9 posts)*
+### Pillar 2 — The Electric Fleet *(Audience B · 8 posts)*
 EV fleet unit economics, charging as a rostering problem, driver behaviour vs. vehicle
 spec, heat, TCO, GCC policy and sustainability reporting.
 
@@ -59,7 +59,7 @@ spec, heat, TCO, GCC policy and sustainability reporting.
 What it takes to ship an AI assistant into live operations and keep it alive. Failure
 modes, escalation design, cost of ownership, measurement against a human baseline.
 
-### Pillar 4 — The Operator's Desk *(Cross-cutting · 3 posts)*
+### Pillar 4 — The Operator's Desk *(Cross-cutting · 4 posts)*
 Leadership POV, hiring philosophy, contrarian takes, and the periodic reflection post.
 Low volume by design — this pillar earns trust, it does not build it.
 
