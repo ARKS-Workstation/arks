@@ -350,11 +350,20 @@
 >
 > Here are nine more that we learned about the expensive way.
 >
-> [[LINE 1]] · [[LINE 2]] · [[LINE 3]] … through [[LINE 9]]
+> → Grid connection. Not the chargers — the supply behind them.
+> → Peak demand charges. Your utility bills on your highest simultaneous draw.
+> → Civil works. Trenching, ducting, drainage, fire separation.
+> → Charger maintenance and downtime. The cost is the bay you cannot roster.
+> → Thermal management. Never appears in the kWh-per-km spec figure.
+> → Charging losses. Metered energy and delivered energy are different numbers.
+> → Parts lead time. Two days for a diesel can be weeks for an EV.
+> → Retraining. High-voltage certification, and it recurs with turnover.
+> → Warranty conditions. Charging constraints that land on your roster.
 >
 > Three of these were larger than our maintenance saving. If your model doesn't have
 > them, your model is optimistic.
 
+**Full draft:** `drafts/post-12.md`
 **Hashtags:** `#FleetManagement` `#EVFleet` `#TCO` `#Logistics` `#UAE`
 **Media:** Single-image infographic, 1080×1350. Nine rows, one column of figures. Legibility over design.
 **CTA:** *"What was the line item your business case missed?"*
