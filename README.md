@@ -1,0 +1,37 @@
+# LinkedIn Growth Engine — HR × AI × Sustainable Mobility
+
+Operating system for building authority as a practitioner-operator in HR, AI deployment,
+and EV fleet management (Dubai / GCC).
+
+## Configuration (locked in)
+
+| Setting | Value |
+|---|---|
+| Cadence | Every other day — 30 posts across 60 days |
+| Audience | Rotating: HR/People leaders · GCC fleet & mobility · AI-buying founders/ops |
+| Voice | Polished executive thought leadership |
+| Anchor projects | Ecosine Transports · EV fleet ops · AI assistants "Max" & "Yulisa" |
+
+## Files
+
+| Path | What it is |
+|---|---|
+| `strategy/positioning.md` | Thesis, content pillars, audience map, rotation logic |
+| `profile/profile-optimization.md` | Headline options, About rewrite, experience bullets, Featured, banner |
+| `calendar/60-day-calendar.md` | All 30 posts: title, type, pillar, caption, hashtags, media |
+| `templates/post-templates.md` | 4 reusable frameworks + worked examples |
+| `drafts/` | Ready-to-publish copy, batch by batch |
+| `workflow/publishing-workflow.md` | Pre/post-publish checklists, engagement, analytics |
+| `PLACEHOLDERS.md` | Every `[[BRACKET]]` that needs a real number before publishing |
+
+## The one rule
+
+Nothing in this repo contains an invented statistic. Anything in `[[DOUBLE BRACKETS]]`
+is a slot for a real figure from your operation. Publishing a placeholder as-is is the
+only way this system can hurt you.
+
+Find them all:
+
+```
+grep -rno '\[\[[^]]*\]\]' . | sort
+```
